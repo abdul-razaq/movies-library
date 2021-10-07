@@ -1,0 +1,30 @@
+@mixin theme($theme: light) {
+	@if $theme == light {
+		color: var(--text-color-light);
+		background-color: var(--color-light-primary);
+	} @else {
+		color: var(--text-color-dark);
+		background-color: var(--color-dark-primary);
+	}
+}
+
+// MEDIA QUERY MANAGER
+@mixin respond($breakpoint) {
+	@if $breakpoint == big-screen {
+		@media only screen and (min-width: 112.5em) {
+			@content;
+		}
+	} @else if $breakpoint == tab-land {
+		@media only screen and (max-width: 75em) {
+			@content;
+		}
+	} @else if $breakpoint == tab-port {
+		@media only screen and (max-width: 56.25em) {
+			@content;
+		}
+	} @else if $breakpoint == phone {
+		@media only screen and (max-width: 37.5em) {
+			@content;
+		}
+	}
+}

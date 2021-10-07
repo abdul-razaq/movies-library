@@ -1,0 +1,73 @@
+@import "./mixins";
+
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	border: none;
+	outline: none;
+	text-decoration: none;
+	list-style: none;
+	list-style-type: none;
+	box-sizing: inherit;
+}
+
+:root {
+	// COLORS
+	// Dark Mode
+	--color-dark-primary: #202c37;
+	--color-dark-secondary: #2b3945;
+	--text-color-dark: #fff;
+	// Light Mode
+	--color-light-primary: #fafafa;
+	--color-light-secondary: #ffffff;
+	--text-color-light: #111517;
+	--color-input-light: #858585;
+	// Neutral Colors
+	--color-white: #fff;
+	--color-dark-grey-primary: #858585;
+	--color-dark-grey-secondary: #4b4b4b;
+
+	// FONTS
+	--root-font-family: 'Fira Sans', sans-serif;
+	--root-font-size: 1.6rem;
+	--font-weight-light: 300;
+	--font-weight-normal: 400;
+	--font-weight-semi-bold: 500;
+	--font-weight-bold: 600;
+
+	// SHADOWS
+	--vertical-box-shadow-light: 0 2px 5px rgba(0, 0, 0, 0.15);
+	--horizontal-box-shadow-light: 2px 0 5px rgba(0, 0, 0, 0.15);
+	--box-shadow-light: 2px 2px 5px rgba(0, 0, 0, 0.15);
+
+  // MISCELLANEOUS
+}
+
+html {
+	font-size: 62.5%;
+
+  @include respond(big-screen) {
+    font-size: 75%;
+  }
+
+  @include respond(tab-land) {
+    font-size: 56.25%;
+  }
+
+  @include respond(tab-port) {
+    font-size: 50%;
+  }
+
+  @include respond(phone) {
+    font-size: 43.75%;
+  }
+}
+
+body {
+	font-family: var(--root-font-family);
+	font-size: var(--root-font-size);
+	font-weight: var(--font-weight-normal);
+	box-sizing: border-box;
+}
