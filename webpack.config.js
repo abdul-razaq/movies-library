@@ -53,9 +53,6 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: './public/index.html',
 		}),
-		new webpack.EnvironmentPlugin({
-			NODE_ENV: 'production',
-		}),
 		new MiniCSSExtractPlugin({
 			filename: isDevelopment ? '[name].css' : '[name].[fullhash].css',
 			chunkFilename: isDevelopment ? '[id].css' : '[id].[fullhash].css',
@@ -64,5 +61,8 @@ module.exports = {
 	mode: isDevelopment ? 'development' : 'production',
 	resolve: {
 		extensions: ['.jsx', '.js', '.scss', '.sass'],
+	},
+	performance: {
+		hints: false,
 	},
 };
