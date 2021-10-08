@@ -10,6 +10,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 module.exports = {
 	entry: ['babel-polyfill', './src/index.js'],
 	output: {
+		publicPath: '/',
 		path: path.resolve(__dirname, 'dist'),
 		filename: 'index_build.js',
 	},
@@ -53,10 +54,14 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: './public/index.html',
 		}),
+		new webpack.EnvironmentPlugin({
+			mode: isDevelopment ? 'development' : 'production',
+		}),
 		new MiniCSSExtractPlugin({
 			filename: isDevelopment ? '[name].css' : '[name].[fullhash].css',
 			chunkFilename: isDevelopment ? '[id].css' : '[id].[fullhash].css',
 		}),
+		new webpack.HotModuleReplacementPlugin(),
 	],
 	mode: isDevelopment ? 'development' : 'production',
 	resolve: {
@@ -64,5 +69,12 @@ module.exports = {
 	},
 	performance: {
 		hints: false,
+	},
+	devServer: {
+		port: 8080,
+		open: true,
+		hot: 'only',
+		compress: true,
+		historyApiFallback: true,
 	},
 };

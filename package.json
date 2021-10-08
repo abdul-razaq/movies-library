@@ -15,8 +15,8 @@
 		]
 	},
 	"scripts": {
-		"dev": "SET NODE_ENV=development && webpack-dev-server --open",
-		"build": "SET NODE_ENV=production && webpack"
+		"dev": "SET NODE_ENV=development && webpack-dev-server --mode development",
+		"build": "SET NODE_ENV=production && webpack --mode production"
 	},
 	"dependencies": {
 		"axios": "^0.22.0",
