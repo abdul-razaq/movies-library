@@ -1,5 +1,23 @@
 .appbar {
-  height: 6rem;
-  background-color: purple;
-  box-shadow: var(--vertical-box-shadow-light);
+	max-width: 100%;
+	padding: 2rem 3rem;
+	background: inherit;
+	color: inherit;
+	box-shadow: var(--vertical-box-shadow-light);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	.themeToggler {
+		background: none;
+		color: inherit;
+		display: flex;
+		align-items: stretch;
+		cursor: pointer;
+		font-size: inherit;
+
+		& svg {
+			margin-right: 5px;
+		}
+	}
 }
