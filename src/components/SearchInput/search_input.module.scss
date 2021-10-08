@@ -1,0 +1,36 @@
+.search {
+  display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--color-white);
+
+  &__button {
+    background: none;
+		color: inherit;
+		font-size: 1.6rem;
+		cursor: pointer;
+		transform: translateX(3.6rem);
+		margin-top: 3px;
+		border-radius: 50%;
+		padding: 6px;
+  }
+
+  &__input {
+    padding: 1.2rem 2.1rem;
+		border-radius: 20rem;
+		transition: all .4s ease-in;
+		font-size: inherit;
+		color: inherit;
+		background-color: var(--color-dark-secondary);
+		box-shadow: var(--box-shadow-light);
+
+		&::placeholder {
+			color: inherit;
+		}
+
+		&::selection {
+			background-color: var(--color-dark-primary);
+			color: var(--color-white);
+		}
+  }
+}
