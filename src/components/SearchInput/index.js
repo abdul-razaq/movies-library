@@ -5,10 +5,15 @@ import PropTypes from 'prop-types';
 import classes from './search_input.module';
 
 export default function SearchInput({ width = 35 }) {
+	const [searchValue, setSearchValue] = React.useState('');
 	const [searchActive, setSearchActive] = React.useState(false);
 
 	function toggleSearch() {
 		setSearchActive(searchValue => !searchValue);
+	}
+
+	function handleSearchChange(event) {
+		setSearchValue(event.target.value);
 	}
 
 	return (
@@ -23,15 +28,17 @@ export default function SearchInput({ width = 35 }) {
 			<input
 				style={{
 					width: searchActive ? `${width}rem` : 0,
-					paddingLeft: searchActive && '4.5rem'
+					paddingLeft: searchActive && '4.5rem',
 				}}
 				className={classes.search__input}
 				type="search"
 				name="search"
 				id="search"
-        placeholder="Search for movie..."
-        minLength={3}
-        maxLength={20}
+				placeholder="Search for movie..."
+				minLength={3}
+				maxLength={20}
+				value={searchValue}
+				onChange={handleSearchChange}
 			/>
 		</form>
 	);

@@ -18,11 +18,11 @@
   &__input {
     padding: 1.2rem 2.1rem;
 		border-radius: 20rem;
-		transition: all .4s ease-in;
 		font-size: inherit;
 		color: inherit;
 		background-color: var(--color-dark-secondary);
 		box-shadow: var(--box-shadow-light);
+		transition: all .4s ease-in;
 
 		&::placeholder {
 			color: inherit;
