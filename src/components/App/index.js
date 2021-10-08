@@ -6,6 +6,8 @@ import { ThemeProvider } from '../../contexts/theme';
 import AllMovies from '../../screens/AllMovies';
 import FourOhFour from '../../screens/FourOhFour';
 
+import Layout from '../Layout';
+
 import classes from './app.module';
 
 export default function App({}) {
@@ -17,29 +19,31 @@ export default function App({}) {
 
 	return (
 		<Router>
-			<main className={classes[theme]}>
+			<div className={classes[theme]}>
 				<ThemeProvider
 					value={{
 						theme,
 						toggleTheme,
 					}}
 				>
-					<Switch>
-						<Route exact path="/">
-							<AllMovies />
-						</Route>
-						<Route path="/discover/:category">
-							<AllMovies />
-						</Route>
-						<Route path="/genres/:genre">
-							<AllMovies />
-						</Route>
-						<Route path="*">
-							<FourOhFour />
-						</Route>
-					</Switch>
+					<Layout>
+						<Switch>
+							<Route exact path="/">
+								<AllMovies />
+							</Route>
+							<Route path="/discover/:category">
+								<AllMovies />
+							</Route>
+							<Route path="/genres/:genre">
+								<AllMovies />
+							</Route>
+							<Route path="*">
+								<FourOhFour />
+							</Route>
+						</Switch>
+					</Layout>
 				</ThemeProvider>
-			</main>
+			</div>
 		</Router>
 	);
 }
