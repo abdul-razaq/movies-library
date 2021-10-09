@@ -6,5 +6,5 @@ import classes from './all_movies.module';
 export default function AllMovies({}) {
   const params = useParams();
 
-	return <h1>All Movies Screen - { params.category } movies!</h1>;
+	return <h1>All Movies Screen - { params.genre } movies!</h1>;
 }

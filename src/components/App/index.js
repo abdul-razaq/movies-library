@@ -37,6 +37,12 @@ export default function App({}) {
 							<Route path="/genres/:genre">
 								<AllMovies />
 							</Route>
+							<Route path="/shelf/:type">
+								<AllMovies />
+							</Route>
+							<Route path="/shelf/:type">
+								<AllMovies />
+							</Route>
 							<Route path="*">
 								<FourOhFour />
 							</Route>

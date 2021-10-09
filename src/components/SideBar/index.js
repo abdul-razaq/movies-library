@@ -1,6 +1,13 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { FaHeart, FaChartBar, FaTruckLoading } from 'react-icons/fa';
+import {
+	FaHeart,
+	FaChartBar,
+	FaTruckLoading,
+	FaFilm,
+	FaEye,
+	FaStar,
+} from 'react-icons/fa';
 
 import classes from './sidebar.module';
 
@@ -20,7 +27,6 @@ export default function SideBar({}) {
 			try {
 				const genres = await getMovieGenres();
 				setGenres(genres);
-				console.log(genres);
 			} catch (error) {
 				setError('unable to fetch movie genres!');
 			} finally {
@@ -29,10 +35,22 @@ export default function SideBar({}) {
 		})();
 	}, []);
 
-	let genresContent = <pre>{JSON.stringify(genres, null, 2)}</pre>;
+	let genresContent = genres.map(({ id, name }) => {
+		return (
+			<NavLink
+				key={id}
+				to={`/genres/${name.toLowerCase()}`}
+				activeClassName={classes.active}
+				className={classes.link}
+			>
+				<FaFilm />
+				<span>{name}</span>
+			</NavLink>
+		);
+	});
 
-	if (loading) genresContent = <p>Loading Genres...</p>;
-	if (error) genresContent = error;
+	if (loading) genresContent = <p style={styles.center}>Loading Genres...</p>;
+	if (error) genresContent = <p style={styles.center}>{error}</p>;
 
 	return (
 		<aside className={classes.sidebar}>
@@ -48,7 +66,7 @@ export default function SideBar({}) {
 					activeClassName={classes.active}
 					className={classes.link}
 				>
-					<FaHeart />
+					<FaStar />
 					<span>Popular</span>
 				</NavLink>
 				<NavLink
@@ -68,10 +86,38 @@ export default function SideBar({}) {
 					<span>Upcoming</span>
 				</NavLink>
 			</nav>
-			<nav>
+			<nav className={classes.navigation}>
 				<h4 className={classes.navigation__title}>Genres</h4>
 				{genresContent}
+			</nav>
+			<nav className={classes.navigation}>
+				<h4 className={classes.navigation__title}>Shelf</h4>
+				<NavLink
+					to="/shelf/favorites"
+					activeClassName={classes.active}
+					className={classes.link}
+				>
+					<FaHeart />
+					<span>Favorites</span>
+				</NavLink>
+				<NavLink
+					to="/shelf/watching"
+					activeClassName={classes.active}
+					className={classes.link}
+				>
+					<FaEye />
+					<span>Watching</span>
+				</NavLink>
 			</nav>
 		</aside>
 	);
 }
+
+const styles = {
+	center: {
+		color: 'currentColor',
+		textAlign: 'center',
+		fontSize: '1.2rem',
+		fontWeight: 'var(--font-weight-bold)',
+	},
+};
