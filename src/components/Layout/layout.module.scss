@@ -4,21 +4,6 @@
 	width: 100vw;
 }
 
-.sidebar {
-	max-width: 15%;
-	background: inherit;
-	box-shadow: var(--horizontal-box-shadow-light);
-
-  .logo {
-    & img {
-      height: 55%;
-      width: 55%;
-      display: block;
-      margin: 3rem auto;
-    }
-  }
-}
-
 .main {
 	flex: 1;
 	background-color: inherit;
