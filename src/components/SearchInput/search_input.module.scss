@@ -1,3 +1,5 @@
+@import '../../../sass/mixins';
+
 .search {
   display: flex;
 	align-items: center;
@@ -13,6 +15,15 @@
 		margin-top: 3px;
 		border-radius: 50%;
 		padding: 6px;
+
+		@include respond(big-screen) {
+			transform: translateX(3.35rem);
+			margin-top: 5px;
+		}
+
+		@include respond(tab-port) {
+			transform: translateX(3.6rem);
+		}
   }
 
   &__input {
