@@ -3,6 +3,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
+const DotEnv = require('dotenv-webpack');
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 const isProduction = process.env.NODE_ENV === 'production';
@@ -50,12 +51,12 @@ module.exports = {
 			{
 				test: /\.svg$/,
 				// use: ['@svgr/webpack', 'url-loader'],
-				type: 'asset/resource'
+				type: 'asset/resource',
 			},
 			{
 				test: /\.png$/,
-				type: 'asset/resource'
-			}
+				type: 'asset/resource',
+			},
 		],
 	},
 	plugins: [
@@ -70,10 +71,19 @@ module.exports = {
 			chunkFilename: isDevelopment ? '[id].css' : '[id].[fullhash].css',
 		}),
 		new webpack.HotModuleReplacementPlugin(),
+		new webpack.ProvidePlugin({
+			process: 'process/browser',
+		}),
+		new DotEnv(),
 	],
 	mode: isDevelopment ? 'development' : 'production',
 	resolve: {
 		extensions: ['.jsx', '.js', '.scss', '.sass'],
+		fallback: {
+			fs: false,
+			os: false,
+			path: false,
+		},
 	},
 	performance: {
 		hints: false,
