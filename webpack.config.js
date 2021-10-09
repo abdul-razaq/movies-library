@@ -17,7 +17,6 @@ module.exports = {
 	module: {
 		rules: [
 			{ test: /\.(js)$/, use: 'babel-loader' },
-			{ test: /\.svg$/, use: 'svg-inline-loader' },
 			{
 				test: /\.module\.s(a|c)ss$/,
 				use: [
@@ -48,6 +47,15 @@ module.exports = {
 					},
 				],
 			},
+			{
+				test: /\.svg$/,
+				// use: ['@svgr/webpack', 'url-loader'],
+				type: 'asset/resource'
+			},
+			{
+				test: /\.png$/,
+				type: 'asset/resource'
+			}
 		],
 	},
 	plugins: [

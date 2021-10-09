@@ -1,16 +1,26 @@
 .layout {
-  display: flex;
-  height: 100vh;
-  width: 100vw;
+	display: flex;
+	height: 100vh;
+	width: 100vw;
 }
 
 .sidebar {
-  flex-basis: 15%;
-  background-color: orangered;
+	max-width: 15%;
+	background: inherit;
+	box-shadow: var(--horizontal-box-shadow-light);
+
+  .logo {
+    & img {
+      height: 55%;
+      width: 55%;
+      display: block;
+      margin: 3rem auto;
+    }
+  }
 }
 
 .main {
-  flex: 1;
-  background-color: inherit;
-  color: inherit;
+	flex: 1;
+	background-color: inherit;
+	color: inherit;
 }
