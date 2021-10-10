@@ -1,0 +1,33 @@
+@import '../../../../sass/mixins';
+
+.appbar {
+	max-width: 100%;
+	padding: 1rem 3rem;
+	background: inherit;
+	color: inherit;
+	box-shadow: var(--vertical-box-shadow-light);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	.themeToggler {
+		background: none;
+		color: inherit;
+		display: flex;
+		align-items: stretch;
+		cursor: pointer;
+		font-size: inherit;
+		font-weight: var(--font-weight-bold);
+
+		& svg {
+			margin-right: 5px;
+		}
+
+		@include respond(phone) {
+			& {
+				align-items: center;
+				font-size: 2rem;
+			}
+		}
+	}
+}

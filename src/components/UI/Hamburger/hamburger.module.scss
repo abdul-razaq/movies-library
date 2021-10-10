@@ -1,0 +1,28 @@
+.hamburger {
+	background-color: currentColor;
+  cursor: pointer;
+
+	& > div {
+		position: relative;
+		height: 0.4rem;
+		width: 4.5rem;
+
+		&::before {
+			content: '';
+			height: 100%;
+			width: 100%;
+			position: absolute;
+			bottom: 1.3rem;
+			background-color: currentColor;
+		}
+
+		&::after {
+			content: '';
+			height: 100%;
+			width: 100%;
+			position: absolute;
+			top: 1.3rem;
+			background-color: currentColor;
+		}
+	}
+}
