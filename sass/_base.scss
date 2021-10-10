@@ -1,4 +1,4 @@
-@import "./mixins";
+@import './mixins';
 
 *,
 *::before,
@@ -40,31 +40,33 @@
 
 	// SHADOWS
 	--vertical-box-shadow-light: 0 2px 5px rgba(0, 0, 0, 0.15);
+	--vertical-box-shadow-dark: 0 4px 5px rgba(0, 0, 0, 0.15);
 	--horizontal-box-shadow-light: 2px 0 5px rgba(0, 0, 0, 0.15);
+	--horizontal-box-shadow-dark: 4px 0 5px rgba(0, 0, 0, 0.15);
 	--box-shadow-light: 2px 2px 5px rgba(0, 0, 0, 0.15);
 	--box-shadow-dark: 4px 4px 5px rgba(0, 0, 0, 0.15);
 
-  // MISCELLANEOUS
+	// MISCELLANEOUS
 }
 
 html {
 	font-size: 62.5%;
 
-  @include respond(big-screen) {
-    font-size: 75%;
-  }
+	@include respond(big-screen) {
+		font-size: 75%;
+	}
 
-  @include respond(tab-land) {
-    font-size: 56.25%;
-  }
+	@include respond(tab-land) {
+		font-size: 56.25%;
+	}
 
-  @include respond(tab-port) {
-    font-size: 50%;
-  }
+	@include respond(tab-port) {
+		font-size: 50%;
+	}
 
-  @include respond(phone) {
-    font-size: 43.75%;
-  }
+	@include respond(phone) {
+		font-size: 43.75%;
+	}
 }
 
 body {
