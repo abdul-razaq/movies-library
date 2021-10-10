@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import {
 	FaHeart,
 	FaChartBar,
@@ -11,7 +11,7 @@ import {
 
 import classes from './sidebar.module';
 
-import logo from '../../../../public/assets/images/logo.svg';
+import Logo from '../Logo';
 
 import { getMovieGenres } from '../../../api/themoviedb';
 
@@ -54,11 +54,7 @@ export default function SideBar({}) {
 
 	return (
 		<aside className={classes.sidebar}>
-			<div className={classes.logo}>
-				<Link to="/discover/popular">
-					<img src={logo} alt="movie logo" />
-				</Link>
-			</div>
+			<Logo />
 			<nav className={classes.navigation}>
 				<h4 className={classes.navigation__title}>Discover</h4>
 				<NavLink

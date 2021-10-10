@@ -3,6 +3,9 @@ import axios from 'axios';
 const basePath = 'https://api.themoviedb.org/3/';
 const API_KEY = process.env.THE_MOVIE_DB_API_KEY;
 
+/**
+ * function to get movie genres
+ */
 export async function getMovieGenres() {
 	try {
 		const { data: { genres }, request } = await axios.get(
