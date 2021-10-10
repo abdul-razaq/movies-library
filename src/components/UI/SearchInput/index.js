@@ -17,7 +17,7 @@ export default function SearchInput({ width = 35 }) {
 	}
 
 	return (
-		<form className={classes.search}>
+		<form className={classes.search} onClick={event => event.stopPropagation()}>
 			<button
 				className={classes.search__button}
 				type="button"

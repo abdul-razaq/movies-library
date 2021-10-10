@@ -5,20 +5,7 @@
 	background: inherit;
 	box-shadow: var(--horizontal-box-shadow-light);
 	overflow-y: scroll;
-
-	&::-webkit-scrollbar {
-		width: 0.8rem;
-	}
-
-	&::-webkit-scrollbar-track {
-		border-radius: 1rem;
-	}
-
-	&::-webkit-scrollbar-thumb {
-		border-radius: 1rem;
-		background: linear-gradient(to bottom, orangered, purple, orange);
-		box-shadow: var(--box-shadow-light);
-	}
+	@include scrollbar-ui;
 
 	@include respond(tab-land) {
 		max-width: 20%;

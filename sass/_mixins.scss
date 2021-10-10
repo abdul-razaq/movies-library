@@ -8,6 +8,22 @@
 	}
 }
 
+@mixin scrollbar-ui {
+	&::-webkit-scrollbar {
+		width: 0.8rem;
+	}
+
+	&::-webkit-scrollbar-track {
+		border-radius: 1rem;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		border-radius: 1rem;
+		background: linear-gradient(to bottom, orangered, purple, orange);
+		box-shadow: var(--box-shadow-light);
+	}
+}
+
 // MEDIA QUERY MANAGER
 @mixin respond($breakpoint) {
 	@if $breakpoint == big-screen {
