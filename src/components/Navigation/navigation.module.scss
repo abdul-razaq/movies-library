@@ -1,3 +1,5 @@
+@import '../../../sass/mixins';
+
 .navigation {
 	padding: 2rem;
 
@@ -5,6 +7,10 @@
 		font-weight: var(--font-weight-bold);
 		text-transform: uppercase;
 		font-size: 1.4rem;
+
+		@include respond(phone) {
+			font-size: 2rem;
+		}
 	}
 
 	.link {
@@ -20,11 +26,19 @@
 			font-size: 1.2rem;
 			margin-right: 1rem;
 			margin-top: -1px;
+
+			@include respond(phone) {
+				font-size: 1.8rem;
+			}
 		}
 
 		& span {
 			font-size: 1.3rem;
 			font-weight: var(--font-weight-semi-bold);
+
+			@include respond(phone) {
+				font-size: 1.8rem;
+			}
 		}
 	}
 

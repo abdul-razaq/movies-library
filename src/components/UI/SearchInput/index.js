@@ -8,8 +8,11 @@ export default function SearchInput({ width = 35 }) {
 	const [searchValue, setSearchValue] = React.useState('');
 	const [searchActive, setSearchActive] = React.useState(false);
 
-	function toggleSearch() {
+	function handleSearchSubmit(event) {
+		event.preventDefault();
 		setSearchActive(searchValue => !searchValue);
+		searchActive && searchValue.trim() && console.log(searchValue);
+		setSearchValue('');
 	}
 
 	function handleSearchChange(event) {
@@ -17,12 +20,12 @@ export default function SearchInput({ width = 35 }) {
 	}
 
 	return (
-		<form className={classes.search} onClick={event => event.stopPropagation()}>
-			<button
-				className={classes.search__button}
-				type="button"
-				onClick={toggleSearch}
-			>
+		<form
+			className={classes.search}
+			onClick={event => event.stopPropagation()}
+			onSubmit={handleSearchSubmit}
+		>
+			<button className={classes.search__button}>
 				<FaSearch />
 			</button>
 			<input
