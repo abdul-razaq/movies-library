@@ -17,7 +17,7 @@ export default function SideDrawer({ onDismissSideDrawer }) {
 		<BackDrop onClick={onDismissSideDrawer}>
 			<aside
 				className={classes.sidedrawer}
-				style={styles.sidebarBackground(theme)}
+				style={styles.background(theme)}
 			>
 				<Logo />
 				<SearchInput />
@@ -32,7 +32,7 @@ SideDrawer.propTypes = {
 };
 
 const styles = {
-	sidebarBackground: theme => ({
+	background: theme => ({
 		background:
 			theme === 'light'
 				? 'var(--color-light-secondary)'
