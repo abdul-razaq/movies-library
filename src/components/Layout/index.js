@@ -8,6 +8,8 @@ import AppBar from '../UI/AppBar';
 import SideBar from '../UI/SideBar';
 import SideDrawer from '../UI/SideDrawer';
 
+import { SideDrawerProvider } from '../../contexts/sidedrawer';
+
 export default function Layout({ children }) {
 	const [showSideDrawer, setShowSideDrawer] = React.useState(false);
 
@@ -26,7 +28,14 @@ export default function Layout({ children }) {
 			{!isMobile && <SideBar />}
 			{showSideDrawer &&
 				ReactDOM.createPortal(
-					<SideDrawer onDismissSideDrawer={handleSideDrawerDismiss} />,
+					<SideDrawerProvider
+						value={{
+							showSideDrawer,
+							dismissSideDrawer: handleSideDrawerDismiss,
+						}}
+					>
+						<SideDrawer onDismissSideDrawer={handleSideDrawerDismiss} />
+					</SideDrawerProvider>,
 					document.getElementById('root'),
 				)}
 			<main className={classes.main}>

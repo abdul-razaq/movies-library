@@ -4,15 +4,23 @@ import PropTypes from 'prop-types';
 
 import classes from './search_input.module';
 
+import SideDrawerContext from '../../../contexts/sidedrawer';
+
 export default function SearchInput({ width = 35 }) {
 	const [searchValue, setSearchValue] = React.useState('');
 	const [searchActive, setSearchActive] = React.useState(false);
 
+	const { dismissSideDrawer } =
+		React.useContext(SideDrawerContext);
+
 	function handleSearchSubmit(event) {
 		event.preventDefault();
 		setSearchActive(searchValue => !searchValue);
-		searchActive && searchValue.trim() && console.log(searchValue);
-		setSearchValue('');
+		if (searchActive && searchValue.trim()) {
+			console.log(searchValue);
+			setSearchValue('');
+			dismissSideDrawer();
+		}
 	}
 
 	function handleSearchChange(event) {
