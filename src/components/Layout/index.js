@@ -40,7 +40,6 @@ export default function Layout({ children }) {
 				)}
 			<main className={classes.main}>
 				<AppBar onOpenHamburger={openHamburger} />
-				<h1>MAIN CONTENT</h1>
 				{children}
 			</main>
 		</section>
