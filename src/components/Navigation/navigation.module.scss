@@ -21,6 +21,12 @@
 		align-items: center;
 		color: inherit;
 		border: 1.5px solid transparent;
+		transition: all .2s ease-out;
+
+		&:hover {
+			border: 1.5px solid currentColor;
+			border-radius: 5rem;
+		}
 
 		& svg {
 			font-size: 1.2rem;
@@ -45,11 +51,5 @@
 	.active {
 		border: 1.5px solid currentColor;
 		border-radius: 5rem;
-
-		& svg {
-		}
-
-		& span {
-		}
 	}
 }
