@@ -2,14 +2,19 @@
 @import '../../../../sass/mixins';
 
 .sidedrawer {
-  height: 100%;
-  width: 65%;
-  box-shadow: var(--horizontal-box-shadow-dark);
-  animation: moveInFromLeft .3s ease-in 1 backwards;
-  overflow-y: scroll;
-  @include scrollbar-ui;
+	height: 100%;
+	width: 65%;
+	box-shadow: var(--horizontal-box-shadow-dark);
+	animation: moveInFromLeft 0.3s ease-in 1 backwards;
+	overflow-y: scroll;
+	@include scrollbar-ui;
+
+	& form {
+		transform: translateX(-1.5rem);
+		margin-bottom: 2rem;
+	}
 }
 
 .sideDrawerDismiss {
-  animation: moveInFromRight .3s ease-in 1 backwards;
+	animation: moveInFromRight 0.3s ease-in 1 backwards;
 }
