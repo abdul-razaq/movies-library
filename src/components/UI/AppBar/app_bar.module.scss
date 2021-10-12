@@ -2,13 +2,18 @@
 
 .appbar {
 	max-width: 100%;
-	padding: 1rem 3rem;
+	height: 7rem;
+	padding: 0 3rem;
 	background: inherit;
 	color: inherit;
 	box-shadow: var(--vertical-box-shadow-light);
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+
+	@include respond(phone) {
+		height: 8rem;
+	}
 
 	.themeToggler {
 		background: none;
