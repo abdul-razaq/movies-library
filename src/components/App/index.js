@@ -3,8 +3,14 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import { ThemeProvider } from '../../contexts/theme';
 
-import AllMovies from '../../screens/AllMovies';
-import FourOhFour from '../../screens/FourOhFour';
+// SCREENS
+import CastScreen from '../../screens/Cast';
+import DiscoverScreen from '../../screens/Discover';
+import GenresScreen from '../../screens/Genres';
+import MovieScreen from '../../screens/Movie';
+import SearchScreen from '../../screens/Search';
+import ShelfScreen from '../../screens/Shelf';
+import FourOhFourScreen from '../../screens/FourOhFour';
 
 import Layout from '../Layout';
 
@@ -29,22 +35,28 @@ export default function App({}) {
 					<Layout>
 						<Switch>
 							<Route exact path="/">
-								<AllMovies />
+								<DiscoverScreen />
 							</Route>
 							<Route path="/discover/:category">
-								<AllMovies />
+								<DiscoverScreen />
 							</Route>
 							<Route path="/genres/:genre">
-								<AllMovies />
+								<GenresScreen />
 							</Route>
 							<Route path="/shelf/:type">
-								<AllMovies />
+								<ShelfScreen />
 							</Route>
-							<Route path="/shelf/:type">
-								<AllMovies />
+							<Route path="/search">
+								<SearchScreen />
+							</Route>
+							<Route path="/cast/:castID">
+								<CastScreen />
+							</Route>
+							<Route path="/movie/:movieID">
+								<MovieScreen />
 							</Route>
 							<Route path="*">
-								<FourOhFour />
+								<FourOhFourScreen />
 							</Route>
 						</Switch>
 					</Layout>

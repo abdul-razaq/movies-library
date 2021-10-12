@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { FaSearch } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 
@@ -10,14 +11,15 @@ export default function SearchInput({ width = 35 }) {
 	const [searchValue, setSearchValue] = React.useState('');
 	const [searchActive, setSearchActive] = React.useState(false);
 
-	const { dismissSideDrawer } =
-		React.useContext(SideDrawerContext);
+	const { dismissSideDrawer } = React.useContext(SideDrawerContext);
+
+	const history = useHistory();
 
 	function handleSearchSubmit(event) {
 		event.preventDefault();
 		setSearchActive(searchValue => !searchValue);
 		if (searchActive && searchValue.trim()) {
-			console.log(searchValue);
+			history.push(`/search?query=${searchValue}`);
 			setSearchValue('');
 			dismissSideDrawer();
 		}
