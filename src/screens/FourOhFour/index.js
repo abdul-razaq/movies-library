@@ -14,7 +14,7 @@ export default function FourOhFour({}) {
 				<figure className={classes.image}>
 					<img src={FourOhFourImage} alt="four-oh-four image"></img>
 				</figure>
-				<h1>Oops! Sorry, you have taken the wrong path.</h1>
+				<h1>Oops! Sorry, you took the wrong path.</h1>
 				<PrimaryButton to="/discover/popular" icon={<FaHome />} text={'home'} />
 			</div>
 		</section>
