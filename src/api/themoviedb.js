@@ -8,11 +8,12 @@ const API_KEY = process.env.THE_MOVIE_DB_API_KEY;
  */
 export async function getMovieGenres() {
 	try {
-		const { data: { genres }, request } = await axios.get(
-			`${basePath}/genre/movie/list?api_key=${API_KEY}`,
-		);
+		const {
+			data: { genres },
+			request,
+		} = await axios.get(`${basePath}/genre/movie/list?api_key=${API_KEY}`);
 		if (request.status !== 200) throw new Error('error fetching genres');
-    return genres;
+		return genres;
 	} catch (error) {
 		throw error;
 	}
@@ -24,7 +25,7 @@ export async function getPopularMovies() {
 		const { data, status } = await axios.get(path);
 		if (status !== 200) throw new Error('error fetching popular movies');
 		return data;
-	} catch(error) {
+	} catch (error) {
 		throw error;
 	}
 }

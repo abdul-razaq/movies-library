@@ -1,13 +1,20 @@
 import { getPopularMovies } from '../../../api/themoviedb';
 
 export const actionTypes = {
-	GET_POPULAR_MOVIES: 'GET_POPULAR_MOVIES',
+	SET_LOADING: 'SET_LOADING',
 	SET_ERROR: 'SET_ERROR',
+	GET_POPULAR_MOVIES: 'GET_POPULAR_MOVIES',
 };
 
-function fetchPopularMovies() {
+export default function fetchPopularMovies(category) {
 	return async function (dispatch, getState) {
 		try {
+			dispatch({
+				type: actionTypes.SET_LOADING,
+				payload: {
+					loading: true,
+				},
+			});
 			const popularMovies = await getPopularMovies();
 			dispatch({
 				type: actionTypes.GET_POPULAR_MOVIES,
@@ -19,13 +26,16 @@ function fetchPopularMovies() {
 			dispatch({
 				type: actionTypes.SET_ERROR,
 				payload: {
-					error: error.message,
+					error: `unable to fetch ${category ? category : 'popular'} movies. check internet connection.`,
+				},
+			});
+		} finally {
+			dispatch({
+				type: actionTypes.SET_LOADING,
+				payload: {
+					loading: false,
 				},
 			});
 		}
 	};
 }
-
-export default {
-	fetchPopularMovies,
-};
