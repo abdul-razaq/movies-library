@@ -1,15 +1,9 @@
 @import '../../../sass/mixins';
 
 .fourOhfour {
-	height: calc(100% - 7rem);
-	max-width: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-
-	@include respond(phone) {
-		height: calc(100% - 8rem);
-	}
 
 	& div {
 		width: 50%;
