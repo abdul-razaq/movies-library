@@ -3,13 +3,11 @@ import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { BounceLoader } from 'react-spinners';
 
+import classes from './discover.module';
+
 import fetchPopularMovies from '../../store/actions/movies';
 
-import errorImage from '../../../public/assets/images/error.svg';
-
-import PrimaryText from '../../components/customs/PrimaryText';
-
-import classes from './discover.module';
+import NoData from '../../components/UI/NoData';
 
 export default function DiscoverScreen({}) {
 	const { category } = useParams();
@@ -21,8 +19,7 @@ export default function DiscoverScreen({}) {
 	const dispatch = useDispatch();
 
 	React.useEffect(() => {
-		// if (!movies.length) dispatch(fetchPopularMovies(category));
-		dispatch(fetchPopularMovies(category));
+		if (!movies.length) dispatch(fetchPopularMovies(category));
 	}, [category]);
 
 	let content = (
@@ -41,14 +38,6 @@ export default function DiscoverScreen({}) {
 			</div>
 		);
 
-	if (error)
-		content = (
-			<div className={classes.error}>
-				<div className={classes.image}>
-					<img src={errorImage} alt="error image" />
-				</div>
-				<PrimaryText>{error}</PrimaryText>
-			</div>
-		);
+	if (error) content = <NoData text={error} />;
 	return <section className={classes.discover}>{content}</section>;
 }

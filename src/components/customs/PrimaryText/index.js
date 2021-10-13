@@ -7,4 +7,6 @@ export default function PrimaryText({ size = 1.8, children}) {
 	return <h1 style={{ fontSize: `${size}rem` }} className={classes.primaryText}>{children}</h1>;
 }
 
-PrimaryText.propTypes = {};
+PrimaryText.propTypes = {
+	size: PropTypes.number,
+};
