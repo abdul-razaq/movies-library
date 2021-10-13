@@ -6,6 +6,7 @@ import classes from './four_oh_four.module';
 import FourOhFourImage from '../../../public/assets/images/four-oh-four.svg';
 
 import PrimaryButton from '../../components/UI/PrimaryButton';
+import PrimaryText from '../../components/customs/PrimaryText';
 
 export default function FourOhFour({}) {
 	return (
@@ -14,7 +15,7 @@ export default function FourOhFour({}) {
 				<figure className={classes.image}>
 					<img src={FourOhFourImage} alt="four-oh-four image"></img>
 				</figure>
-				<h1>Oops! Sorry, you took the wrong path.</h1>
+				<PrimaryText>Oops! Sorry, you took the wrong path.</PrimaryText>
 				<PrimaryButton to="/discover/popular" icon={<FaHome />} text={'home'} />
 			</div>
 		</section>
