@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { BounceLoader } from 'react-spinners';
+import StarRatings from 'react-star-ratings';
 
 import classes from './discover.module';
 
@@ -9,6 +10,7 @@ import fetchPopularMovies from '../../store/actions/movies';
 
 import NoData from '../../components/UI/NoData';
 import Center from '../../components/customs/Center';
+import PrimaryText from '../../components/customs/PrimaryText';
 
 export default function DiscoverScreen({}) {
 	const { category } = useParams();
@@ -24,12 +26,33 @@ export default function DiscoverScreen({}) {
 	}, [category]);
 
 	let content = (
-		<div>
-			<h1>DISCOVER SCREEN - Showing list of {category} movies</h1>
-			{movies.map(movie => (
-				<p>{movie.original_title}</p>
-			))}
-		</div>
+		<>
+			<div className={classes.discover__title}>
+				<h1>{category}</h1>
+				<h3>Movies</h3>
+			</div>
+			<section className={classes.content}>
+				{movies.map(movie => (
+					<div className={classes.poster}>
+						<header>
+							<img
+								src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
+								alt={`poster for ${movie.original_title}`}
+							/>
+						</header>
+						<footer>
+							<p>{movie.original_title}</p>
+							<StarRatings
+								rating={movie.vote_average}
+								starRatedColor="#F50057"
+								starDimension="1.6rem"
+								starSpacing="0"
+							/>
+						</footer>
+					</div>
+				))}
+			</section>
+		</>
 	);
 
 	if (loading)
@@ -39,10 +62,11 @@ export default function DiscoverScreen({}) {
 			</Center>
 		);
 
-	if (error) content = (
-		<Center>
-			<NoData text={error} />
-		</Center>
-	);
+	if (error)
+		content = (
+			<Center>
+				<NoData text={error} />
+			</Center>
+		);
 	return <section className={classes.discover}>{content}</section>;
 }

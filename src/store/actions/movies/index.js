@@ -5,7 +5,7 @@ export const actionTypes = {
 	SET_ERROR: 'SET_ERROR',
 	GET_POPULAR_MOVIES: 'GET_POPULAR_MOVIES',
 };
-
+// Use this format to declare actions: movieActions.discoverMovies(category).
 export default function fetchPopularMovies(category) {
 	return async function (dispatch, getState) {
 		try {

@@ -8,7 +8,7 @@
 	}
 }
 
-@mixin scrollbar-ui {
+@mixin scrollbar-ui-primary() {
 	&::-webkit-scrollbar {
 		width: 0.8rem;
 	}
@@ -20,6 +20,22 @@
 	&::-webkit-scrollbar-thumb {
 		border-radius: 1rem;
 		background: linear-gradient(to bottom, orangered, purple, orange);
+		box-shadow: var(--box-shadow-light);
+	}
+}
+
+@mixin scrollbar-ui-secondary() {
+	&::-webkit-scrollbar {
+		width: 0.8rem;
+	}
+
+	&::-webkit-scrollbar-track {
+		border-radius: 1rem;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		border-radius: 1rem;
+		background: #F50057;
 		box-shadow: var(--box-shadow-light);
 	}
 }

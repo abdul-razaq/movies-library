@@ -7,7 +7,7 @@
 	box-shadow: var(--horizontal-box-shadow-dark);
 	animation: moveInFromLeft 0.3s ease-in 1 backwards;
 	overflow-y: scroll;
-	@include scrollbar-ui;
+	@include scrollbar-ui-primary;
 
 	& form {
 		transform: translateX(-1.5rem);

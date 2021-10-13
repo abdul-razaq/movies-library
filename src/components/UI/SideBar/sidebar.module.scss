@@ -5,7 +5,7 @@
 	background: inherit;
 	box-shadow: var(--horizontal-box-shadow-light);
 	overflow-y: scroll;
-	@include scrollbar-ui;
+	@include scrollbar-ui-primary;
 
 	@include respond(tab-land) {
 		max-width: 20%;
