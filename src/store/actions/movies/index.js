@@ -26,7 +26,7 @@ export default function fetchPopularMovies(category) {
 			dispatch({
 				type: actionTypes.SET_ERROR,
 				payload: {
-					error: `unable to fetch ${category ? category : 'popular'} movies. check internet connection.`,
+					error: `unable to fetch ${category ? category : 'popular'} movies. check internet connection and try again.`,
 				},
 			});
 		} finally {

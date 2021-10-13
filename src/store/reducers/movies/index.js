@@ -4,6 +4,8 @@ const initialState = {
 	loading: false,
 	error: '',
 	movies: [],
+	page: 1,
+  total_pages: 0,
 };
 
 export default function moviesReducer(state = initialState, action) {
@@ -19,9 +21,12 @@ export default function moviesReducer(state = initialState, action) {
 				error: action.payload.error,
 			};
 		case actionTypes.GET_POPULAR_MOVIES:
+			const { page, results, total_pages } = action.payload.movies;
 			return {
 				...state,
-				movies: action.payload.movies,
+				movies: results,
+				page,
+				total_pages,
 			};
 		default:
 			return state;
