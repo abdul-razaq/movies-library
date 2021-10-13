@@ -8,6 +8,7 @@ import classes from './discover.module';
 import fetchPopularMovies from '../../store/actions/movies';
 
 import NoData from '../../components/UI/NoData';
+import Center from '../../components/customs/Center';
 
 export default function DiscoverScreen({}) {
 	const { category } = useParams();
@@ -33,11 +34,15 @@ export default function DiscoverScreen({}) {
 
 	if (loading)
 		content = (
-			<div className={classes.loading}>
+			<Center>
 				<BounceLoader loading={loading} color="#F50057" />
-			</div>
+			</Center>
 		);
 
-	if (error) content = <NoData text={error} />;
+	if (error) content = (
+		<Center>
+			<NoData text={error} />
+		</Center>
+	);
 	return <section className={classes.discover}>{content}</section>;
 }
