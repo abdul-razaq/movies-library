@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 
 import classes from './primary_button.module';
 
-export default function PrimaryButton({ to, icon, text }) {
+export default function PrimaryButton({ path, icon, text }) {
 	return (
-		<Link to={to} replace className={classes.primary_button}>
+		<Link to={path} className={classes.primary_button}>
 			{icon}
 			<span>{text}</span>
 		</Link>
@@ -14,7 +14,7 @@ export default function PrimaryButton({ to, icon, text }) {
 }
 
 PrimaryButton.propTypes = {
-	to: PropTypes.string.isRequired,
+	path: PropTypes.string.isRequired,
 	icon: PropTypes.object.isRequired,
 	text: PropTypes.string.isRequired,
 };

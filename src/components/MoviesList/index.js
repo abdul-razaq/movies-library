@@ -1,17 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FaArrowRight } from 'react-icons/fa';
 
 import classes from './movies_list.modules';
 
 import Poster from '../UI/Poster';
+// import SecondaryButton from '../UI/SecondaryButton';
 
-export default function MoviesList({ category, movies }) {
+export default function MoviesList({ category, movies, page, totalPages }) {
 	return (
-		<section className={classes.moviesList}>
-			<div className={classes.moviesList__title}>
-				<h1>{category}</h1>
-				<h3>Movies</h3>
-			</div>
+		<article className={classes.moviesList}>
+			<header>
+				<div className={classes.moviesList__title}>
+					<h1>{category}</h1>
+					<h3>Movies</h3>
+				</div>
+				<p>
+					Page: {page} of {totalPages}
+				</p>
+			</header>
 			<section className={classes.moviesList__content}>
 				{movies.map(({ poster_path, title, vote_average, id }) => (
 					<Poster
@@ -24,7 +31,11 @@ export default function MoviesList({ category, movies }) {
 					/>
 				))}
 			</section>
-		</section>
+			<SecondaryButton disabled={page === totalPages} onClick={() => {}}>
+				<span>Page {page <= totalPages ? page + 1 : totalPages}</span>
+				<FaArrowRight />
+			</SecondaryButton>
+		</article>
 	);
 }
 

@@ -1,6 +1,14 @@
 @import '../../../sass/mixins';
 
 .moviesList {
+	& header {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		font-size: 2rem;
+		font-weight: var(--font-weight-semi-bold);
+	}
+
 	&__title {
 		margin-bottom: 5rem;
 

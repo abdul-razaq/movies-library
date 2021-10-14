@@ -9,7 +9,7 @@ import fetchPopularMovies from '../../store/actions/movies';
 
 import NoData from '../../components/UI/NoData';
 import Center from '../../components/customs/Center';
-import MoviesList from '../../components/MoviesList'
+import MoviesList from '../../components/MoviesList';
 
 export default function DiscoverScreen({}) {
 	const { category } = useParams();
@@ -25,7 +25,12 @@ export default function DiscoverScreen({}) {
 	}, [category]);
 
 	let content = (
-		<MoviesList category={category} movies={movies} />
+		<MoviesList
+			category={category}
+			movies={movies}
+			page={page}
+			totalPages={total_pages}
+		/>
 	);
 
 	if (loading)

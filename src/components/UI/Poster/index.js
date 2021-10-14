@@ -15,7 +15,7 @@ export default function Poster({
 	onAddToWatching,
 }) {
 	return (
-		<div className={classes.poster}>
+		<article className={classes.poster}>
 			<header>
 				<FaEye size={20} onClick={onAddToWatching} />
 				<FaHeart size={20} onClick={onAddToFavorite} />
@@ -39,7 +39,7 @@ export default function Poster({
 					starSpacing="0"
 				/>
 			</footer>
-		</div>
+		</article>
 	);
 }
 

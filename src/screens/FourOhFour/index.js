@@ -16,7 +16,7 @@ export default function FourOhFour({}) {
 					<img src={FourOhFourImage} alt="four-oh-four image"></img>
 				</figure>
 				<PrimaryText>Oops! Sorry, you took the wrong path.</PrimaryText>
-				<PrimaryButton to="/discover/popular" icon={<FaHome />} text={'home'} />
+				<PrimaryButton path="/discover/popular" icon={<FaHome />} text={'home'} />
 			</div>
 		</section>
 	);
