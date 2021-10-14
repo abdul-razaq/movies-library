@@ -1,13 +1,21 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import {} from 'react-router-dom';
 import { FaArrowRight } from 'react-icons/fa';
+import PropTypes from 'prop-types';
 
 import classes from './movies_list.modules';
 
 import Poster from '../UI/Poster';
 import SecondaryButton from '../UI/SecondaryButton';
 
-export default function MoviesList({ category, movies, page, totalPages }) {
+export default function MoviesList({
+	category,
+	movies,
+	page,
+	nextPage,
+	totalPages,
+	onGoToNextPage,
+}) {
 	return (
 		<article className={classes.moviesList}>
 			<header>
@@ -31,8 +39,11 @@ export default function MoviesList({ category, movies, page, totalPages }) {
 					/>
 				))}
 			</section>
-			<SecondaryButton disabled={page === totalPages} onClick={() => {}}>
-				<span>Page {page <= totalPages ? page + 1 : totalPages}</span>
+			<SecondaryButton
+				disable={nextPage === totalPages}
+				onClick={onGoToNextPage}
+			>
+				<span>Page {nextPage}</span>
 				<FaArrowRight />
 			</SecondaryButton>
 		</article>

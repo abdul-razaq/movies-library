@@ -5,7 +5,8 @@ const initialState = {
 	error: '',
 	movies: [],
 	page: 1,
-  total_pages: 0,
+	nextPage: 0,
+  totalPages: 0,
 };
 
 export default function moviesReducer(state = initialState, action) {
@@ -26,7 +27,8 @@ export default function moviesReducer(state = initialState, action) {
 				...state,
 				movies: results,
 				page,
-				total_pages,
+				nextPage: page + 1,
+				totalPages: total_pages,
 			};
 		default:
 			return state;

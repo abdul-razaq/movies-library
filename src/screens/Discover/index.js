@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { BounceLoader } from 'react-spinners';
 
@@ -13,23 +13,43 @@ import MoviesList from '../../components/MoviesList';
 
 export default function DiscoverScreen({}) {
 	const { category } = useParams();
+	const { pathname, search } = useLocation();
+	const history = useHistory();
 
-	const { loading, error, movies, page, total_pages } = useSelector(
-		state => state.popularMovies,
-	);
+	const {
+		loading,
+		error,
+		movies,
+		page: initialPage,
+		nextPage,
+		totalPages,
+	} = useSelector(state => state.popularMovies);
+
+	const page = new window.URLSearchParams(search).get('page') ?? initialPage;
 
 	const dispatch = useDispatch();
 
+	console.log(category, pathname, search, history);
+
 	React.useEffect(() => {
-		if (!movies.length) dispatch(fetchPopularMovies(category));
-	}, [category]);
+		if (!movies.length)
+			dispatch(fetchPopularMovies(category, page));
+	}, [category, page]);
+
+	function handleGoToNextPage() {
+		// movieActions.updatePage();
+		history.push(`${pathname}?page=${nextPage}`);
+		dispatch(fetchPopularMovies(category, nextPage));
+	}
 
 	let content = (
 		<MoviesList
 			category={category}
 			movies={movies}
 			page={page}
-			totalPages={total_pages}
+			nextPage={nextPage}
+			totalPages={totalPages}
+			onGoToNextPage={handleGoToNextPage}
 		/>
 	);
 

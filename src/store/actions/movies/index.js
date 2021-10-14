@@ -1,4 +1,4 @@
-import { getPopularMovies } from '../../../api/themoviedb';
+import { getMovies } from '../../../api/themoviedb';
 
 export const actionTypes = {
 	SET_LOADING: 'SET_LOADING',
@@ -6,7 +6,7 @@ export const actionTypes = {
 	GET_POPULAR_MOVIES: 'GET_POPULAR_MOVIES',
 };
 // Use this format to declare actions: movieActions.discoverMovies(category).
-export default function fetchPopularMovies(category) {
+export default function fetchPopularMovies(category, page) {
 	return async function (dispatch, getState) {
 		try {
 			dispatch({
@@ -15,7 +15,7 @@ export default function fetchPopularMovies(category) {
 					loading: true,
 				},
 			});
-			const popularMovies = await getPopularMovies();
+			const popularMovies = await getMovies(category, page);
 			dispatch({
 				type: actionTypes.GET_POPULAR_MOVIES,
 				payload: {
