@@ -5,7 +5,7 @@ import { FaArrowRight } from 'react-icons/fa';
 import classes from './movies_list.modules';
 
 import Poster from '../UI/Poster';
-// import SecondaryButton from '../UI/SecondaryButton';
+import SecondaryButton from '../UI/SecondaryButton';
 
 export default function MoviesList({ category, movies, page, totalPages }) {
 	return (
