@@ -34,12 +34,12 @@ export default function DiscoverScreen({}) {
 			<section className={classes.content}>
 				{movies.map(movie => (
 					<div className={classes.poster}>
-						<header>
+						<figure>
 							<img
 								src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
 								alt={`poster for ${movie.original_title}`}
 							/>
-						</header>
+						</figure>
 						<footer>
 							<p>{movie.original_title}</p>
 							<StarRatings
