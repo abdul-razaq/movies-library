@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { BounceLoader } from 'react-spinners';
 import StarRatings from 'react-star-ratings';
+import { FaEye, FaHeart } from 'react-icons/fa';
 
 import classes from './discover.module';
 
@@ -10,7 +11,6 @@ import fetchPopularMovies from '../../store/actions/movies';
 
 import NoData from '../../components/UI/NoData';
 import Center from '../../components/customs/Center';
-import PrimaryText from '../../components/customs/PrimaryText';
 
 export default function DiscoverScreen({}) {
 	const { category } = useParams();
@@ -34,6 +34,12 @@ export default function DiscoverScreen({}) {
 			<section className={classes.content}>
 				{movies.map(movie => (
 					<div className={classes.poster}>
+						<header>
+							<FaEye size={20} onClick={() => console.log('added movie to watching')} />
+							<FaHeart size={20}
+								onClick={() => console.log('added movie to favorites')}
+							/>
+						</header>
 						<figure>
 							<img
 								src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}

@@ -35,7 +35,7 @@
 
 	&::-webkit-scrollbar-thumb {
 		border-radius: 1rem;
-		background: #F50057;
+		background: var(--color-tertiary);
 		box-shadow: var(--box-shadow-light);
 	}
 }

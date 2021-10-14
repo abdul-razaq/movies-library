@@ -30,6 +30,9 @@
 	--color-dark-grey-primary: #858585;
 	--color-dark-grey-secondary: #4b4b4b;
 
+	// Tertiary Colors
+	--color-tertiary: #F50057;
+
 	// FONTS
 	--root-font-family: 'Fira Sans', sans-serif;
 	--root-font-size: 1.6rem;
@@ -47,6 +50,7 @@
 	--box-shadow-dark: 4px 4px 5px rgba(0, 0, 0, 0.15);
 
 	// MISCELLANEOUS
+	--transparent-secondary: rgba(0, 0, 0, 0.75);
 }
 
 html {

@@ -7,6 +7,8 @@
 	@include scrollbar-ui-secondary;
 
 	&__title {
+    margin-bottom: 5rem;
+    
 		& h1 {
 			text-transform: uppercase;
 			font-size: 2.4rem;
@@ -51,6 +53,24 @@
   transition: all .3s ease-out;
   backface-visibility: hidden;
 
+  & header {
+    min-width: 100%;
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: var(--transparent-secondary);
+    color: var(--color-white);
+    padding: 1rem;
+    animation: moveInFromTop 0.3s ease-out 1 backwards;
+    display: none;
+
+    & svg {
+      
+    }
+  }
+
 	& figure {
 		min-height: 100%;
 		& img {
@@ -63,8 +83,12 @@
   &:hover {
     transform: translateY(-1.5rem) scale(1.1);
     box-shadow: var(--box-shadow-dark);
-    outline: 2.5px solid #F50057;
+    outline: 2.5px solid var(--color-tertiary);
     outline-offset: .5rem;
+  }
+
+  &:hover header {
+    display: flex;
   }
 
   &:hover footer {
@@ -75,7 +99,7 @@
 		position: absolute;
 		bottom: 0;
 		color: var(--color-white);
-		background-color: rgba(0, 0, 0, 0.75);
+		background-color: var(--transparent-secondary);
 		text-align: center;
 		min-width: 100%;
     padding: 1rem;
