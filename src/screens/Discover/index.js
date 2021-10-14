@@ -11,6 +11,7 @@ import fetchPopularMovies from '../../store/actions/movies';
 
 import NoData from '../../components/UI/NoData';
 import Center from '../../components/customs/Center';
+import Poster from '../../components/UI/Poster';
 
 export default function DiscoverScreen({}) {
 	const { category } = useParams();
@@ -32,30 +33,15 @@ export default function DiscoverScreen({}) {
 				<h3>Movies</h3>
 			</div>
 			<section className={classes.content}>
-				{movies.map(movie => (
-					<div className={classes.poster}>
-						<header>
-							<FaEye size={20} onClick={() => console.log('added movie to watching')} />
-							<FaHeart size={20}
-								onClick={() => console.log('added movie to favorites')}
-							/>
-						</header>
-						<figure>
-							<img
-								src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
-								alt={`poster for ${movie.original_title}`}
-							/>
-						</figure>
-						<footer>
-							<p>{movie.original_title}</p>
-							<StarRatings
-								rating={movie.vote_average}
-								starRatedColor="#F50057"
-								starDimension="1.6rem"
-								starSpacing="0"
-							/>
-						</footer>
-					</div>
+				{movies.map(({ poster_path, title, vote_average, id }) => (
+					<Poster
+						key={id}
+						image={poster_path}
+						title={title}
+						rating={vote_average}
+						onAddToWatching={() => console.log('movie added to watching list')}
+						onAddToFavorite={() => console.log('movie added to favorites list')}
+					/>
 				))}
 			</section>
 		</>
