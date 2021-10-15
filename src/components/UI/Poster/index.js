@@ -33,9 +33,9 @@ export default function Poster({
 			<footer>
 				<p>{title}</p>
 				<StarRatings
-					rating={rating}
+					rating={rating / 2}
 					starRatedColor="#F50057"
-					starDimension="1.6rem"
+					starDimension="1.8rem"
 					starSpacing="0"
 				/>
 			</footer>

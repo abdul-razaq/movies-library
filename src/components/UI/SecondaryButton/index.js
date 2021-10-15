@@ -8,7 +8,7 @@ export default function SecondaryButton({ children, className, disable, onClick 
 		<button
 			className={`${classes.secondary_button} ${className}`}
 			onClick={onClick}
-      disable={disable}
+      disabled={disable}
 		>
 			{children}
 		</button>

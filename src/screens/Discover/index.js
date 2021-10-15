@@ -5,51 +5,55 @@ import { BounceLoader } from 'react-spinners';
 
 import classes from './discover.module';
 
-import fetchPopularMovies from '../../store/actions/movies';
+import * as movieActions from '../../store/actions/discover';
 
 import NoData from '../../components/UI/NoData';
 import Center from '../../components/customs/Center';
 import MoviesList from '../../components/MoviesList';
 
 export default function DiscoverScreen({}) {
-	const { category } = useParams();
+	let { category } = useParams();
+	const discoverCategories = ['popular', 'top_rated', 'upcoming'];
+	if (discoverCategories.indexOf(category) === -1)
+		category = discoverCategories[0];
+
 	const { pathname, search } = useLocation();
+
 	const history = useHistory();
 
 	const {
 		loading,
 		error,
 		movies,
-		page: initialPage,
+		currentPage,
+		initialPage,
 		nextPage,
 		totalPages,
-	} = useSelector(state => state.popularMovies);
+	} = useSelector(state => state.discoverMovies);
 
 	const page = new window.URLSearchParams(search).get('page') ?? initialPage;
 
 	const dispatch = useDispatch();
 
-	console.log(category, pathname, search, history);
-
 	React.useEffect(() => {
-		if (!movies.length)
-			dispatch(fetchPopularMovies(category, page));
+		dispatch(movieActions.discoverMovies(category, page));
 	}, [category, page]);
 
 	function handleGoToNextPage() {
-		// movieActions.updatePage();
 		history.push(`${pathname}?page=${nextPage}`);
-		dispatch(fetchPopularMovies(category, nextPage));
 	}
 
 	let content = (
 		<MoviesList
-			category={category}
+			category={
+				category === 'top_rated' ? category.replace(/_/g, ' ') : category
+			}
 			movies={movies}
-			page={page}
+			page={currentPage}
 			nextPage={nextPage}
 			totalPages={totalPages}
 			onGoToNextPage={handleGoToNextPage}
+			onGoBack={history.goBack}
 		/>
 	);
 

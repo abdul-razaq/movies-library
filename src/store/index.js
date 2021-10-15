@@ -1,7 +1,7 @@
 import * as Redux from 'redux';
 
-import moviesReducer from './reducers/movies';
+import discoverMoviesReducer from './reducers/discover';
 
 export default Redux.combineReducers({
-	popularMovies: moviesReducer,
+	discoverMovies: discoverMoviesReducer,
 });

@@ -19,9 +19,12 @@ export async function getMovieGenres() {
 	}
 }
 
-export async function getMovies(category, page) {
+/**
+ * function to get discover movies
+ */
+export async function getDiscoverMovies(category, page) {
 	try {
-		const path = `${basePath}/discover/movie?api_key=${API_KEY}&include_adult=true&include_video=true&page=${page}`;
+		const path = `${basePath}/movie/${category}?api_key=${API_KEY}&page=${page}`;
 		const { data, status } = await axios.get(path);
 		if (status !== 200) throw new Error('error fetching popular movies');
 		return data;

@@ -64,7 +64,7 @@ export default function Navigation({}) {
 					<span>Popular</span>
 				</NavLink>
 				<NavLink
-					to="/discover/top-rated"
+					to="/discover/top_rated"
 					activeClassName={classes.active}
 					className={classes.link}
 				>

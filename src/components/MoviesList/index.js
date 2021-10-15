@@ -1,6 +1,6 @@
 import React from 'react';
 import {} from 'react-router-dom';
-import { FaArrowRight } from 'react-icons/fa';
+import { FaArrowRight, FaArrowLeft } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 
 import classes from './movies_list.modules';
@@ -15,6 +15,7 @@ export default function MoviesList({
 	nextPage,
 	totalPages,
 	onGoToNextPage,
+	onGoBack,
 }) {
 	return (
 		<article className={classes.moviesList}>
@@ -39,13 +40,16 @@ export default function MoviesList({
 					/>
 				))}
 			</section>
-			<SecondaryButton
-				disable={nextPage === totalPages}
-				onClick={onGoToNextPage}
-			>
-				<span>Page {nextPage}</span>
-				<FaArrowRight />
-			</SecondaryButton>
+			<footer>
+				<SecondaryButton onClick={onGoBack}>
+					<FaArrowLeft />
+					<span>Back</span>
+				</SecondaryButton>
+				<SecondaryButton onClick={onGoToNextPage}>
+					<span>Page {nextPage}</span>
+					<FaArrowRight />
+				</SecondaryButton>
+			</footer>
 		</article>
 	);
 }

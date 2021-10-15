@@ -40,4 +40,15 @@
 			grid-template-columns: repeat(auto-fit, minmax(16.725rem, 30rem));
 		}
 	}
+
+	& footer {
+		margin-top: 5rem;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		& button:first-of-type svg {
+			margin-right: 0.8rem;
+		}
+	}
 }
