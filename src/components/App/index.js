@@ -14,6 +14,8 @@ import FourOhFourScreen from '../../screens/FourOhFour';
 
 import Layout from '../Layout';
 
+import * as shelfActions from '../../store/actions/shelf';
+
 import classes from './app.module';
 
 export default function App({}) {
