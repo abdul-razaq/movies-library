@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import { ThemeProvider } from '../../contexts/theme';
 
@@ -24,6 +25,12 @@ export default function App({}) {
 	function toggleTheme() {
 		setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
 	}
+
+	const dispatch = useDispatch();
+
+	React.useEffect(() => {
+		dispatch(shelfActions.getShelfMovies());
+	}, []);
 
 	return (
 		<div className={classes[theme]}>
