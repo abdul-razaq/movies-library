@@ -6,7 +6,7 @@ export const actionTypes = {
 	GET_DISCOVER_MOVIES: 'GET_DISCOVER_MOVIES',
 };
 
-export function discoverMovies(category, page) {
+export default function discoverMovies(category, page) {
 	return async function (dispatch, getState) {
 		try {
 			dispatch({

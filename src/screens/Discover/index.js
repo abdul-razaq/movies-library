@@ -5,7 +5,7 @@ import { BounceLoader } from 'react-spinners';
 
 import classes from './discover.module';
 
-import * as movieActions from '../../store/actions/discover';
+import discoverMovies from '../../store/actions/movies/discover';
 
 import NoData from '../../components/UI/NoData';
 import Center from '../../components/customs/Center';
@@ -36,7 +36,7 @@ export default function DiscoverScreen({}) {
 	const dispatch = useDispatch();
 
 	React.useEffect(() => {
-		dispatch(movieActions.discoverMovies(category, page));
+		dispatch(discoverMovies(category, page));
 	}, [category, page]);
 
 	function handleGoToNextPage() {

@@ -1,4 +1,4 @@
-import { actionTypes } from '../../actions/discover';
+import { actionTypes } from '../../actions/movies/discover';
 
 const initialState = {
 	loading: false,
