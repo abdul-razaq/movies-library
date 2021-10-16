@@ -26,7 +26,7 @@ export async function getDiscoverMovies(category, page) {
 	try {
 		const path = `${basePath}/movie/${category}?api_key=${API_KEY}&page=${page}`;
 		const { data, status } = await axios.get(path);
-		if (status !== 200) throw new Error('error fetching popular movies');
+		if (status !== 200) throw new Error(`error fetching ${category} movies`);
 		return data;
 	} catch (error) {
 		throw error;
