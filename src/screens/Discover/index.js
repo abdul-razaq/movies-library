@@ -64,6 +64,14 @@ export default function DiscoverScreen({}) {
 			</Center>
 		);
 
+	if (!movies.length) {
+		content = (
+			<Center>
+				<NoData text="No data found." />
+			</Center>
+		);
+	}
+
 	if (error)
 		content = (
 			<Center>
