@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import { ThemeProvider } from '../../contexts/theme';
 
@@ -24,44 +24,45 @@ export default function App({}) {
 	}
 
 	return (
-		<Router>
-			<div className={classes[theme]}>
-				<ThemeProvider
-					value={{
-						theme,
-						toggleTheme,
-					}}
-				>
-					<Layout>
-						<Switch>
-							<Route exact path="/">
-								<DiscoverScreen />
-							</Route>
-							<Route path="/discover/:category">
-								<DiscoverScreen />
-							</Route>
-							<Route path="/genres/:genre">
-								<GenresScreen />
-							</Route>
-							<Route path="/shelf/:type">
-								<ShelfScreen />
-							</Route>
-							<Route path="/search">
-								<SearchScreen />
-							</Route>
-							<Route path="/cast/:castID">
-								<CastScreen />
-							</Route>
-							<Route path="/movie/:movieID">
-								<MovieScreen />
-							</Route>
-							<Route path="*">
-								<FourOhFourScreen />
-							</Route>
-						</Switch>
-					</Layout>
-				</ThemeProvider>
-			</div>
-		</Router>
+		<div className={classes[theme]}>
+			<ThemeProvider
+				value={{
+					theme,
+					toggleTheme,
+				}}
+			>
+				<Layout>
+					<Switch>
+						<Route exact path="/">
+							<DiscoverScreen />
+						</Route>
+						<Route path="/discover/:category">
+							<DiscoverScreen />
+						</Route>
+						<Route path="/genres/:genre">
+							<GenresScreen />
+						</Route>
+						<Route path="/shelf/:type">
+							<ShelfScreen />
+						</Route>
+						<Route path="/search">
+							<SearchScreen />
+						</Route>
+						<Route path="/cast/:castID">
+							<CastScreen />
+						</Route>
+						<Route path="/movie/:movieID">
+							<MovieScreen />
+						</Route>
+						<Route path="/error">
+							<FourOhFourScreen />
+						</Route>
+						<Route path="*">
+							<FourOhFourScreen />
+						</Route>
+					</Switch>
+				</Layout>
+			</ThemeProvider>
+		</div>
 	);
 }

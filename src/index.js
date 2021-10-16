@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import * as Redux from 'redux';
 import { Provider } from 'react-redux';
 import ReduxThunk from 'redux-thunk';
+import { BrowserRouter as Router } from 'react-router-dom';
 import rootReducer from './store';
 
 import App from './components/App';
@@ -15,7 +16,9 @@ const appStore = Redux.createStore(
 
 const rootApp = (
 	<Provider store={appStore}>
-		<App />
+		<Router>
+			<App />
+		</Router>
 	</Provider>
 );
 const rootElement = document.querySelector('#root');
