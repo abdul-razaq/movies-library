@@ -11,9 +11,8 @@ import classes from './shelf.module';
 export default function ShelfScreen({}) {
 	const { type } = useParams();
 
-	const { favoriteMovies, moviesWatching } = useSelector(state => state.shelf);
-
-	const shelf = { favorites: favoriteMovies, watching: moviesWatching };
+	const { favorites, watching } = useSelector(state => state.shelf);
+	const shelf = { favorites, watching };
 
 	return (
 		<section className={classes.shelf}>
@@ -24,7 +23,12 @@ export default function ShelfScreen({}) {
 					/>
 				</Center>
 			) : (
-				<MoviesList category={type.replace('s', '')} movies={shelf[type]} />
+				<MoviesList
+					category={
+						type === 'favorites' ? type.replace('s', '') : `currently ${type}`
+					}
+					movies={shelf[type]}
+				/>
 			)}
 		</section>
 	);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { FaArrowRight, FaArrowLeft } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 
@@ -7,6 +7,8 @@ import classes from './movies_list.modules';
 
 import Poster from '../UI/Poster';
 import SecondaryButton from '../UI/SecondaryButton';
+
+import * as shelfActions from '../../store/actions/shelf';
 
 export default function MoviesList({
 	category,
@@ -17,18 +19,12 @@ export default function MoviesList({
 	onGoToNextPage,
 	onGoBack,
 }) {
-	const { favoriteMovies, moviesWatching } = useSelector(state => state.shelf);
+	const { favorites, watching } = useSelector(state => state.shelf);
 
-	function handleToggleFavoritedMovie(movieId) {
-		console.log(
-			`added or removed movie with ${movieId} from list of favorited movies.`,
-		);
-	}
+	const dispatch = useDispatch();
 
-	function handleToggleWatchingMovie(movieId) {
-		console.log(
-			`added or removed movie with ${movieId} from list of movies watching.`,
-		);
+	function handleToggleShelfMovie(movie, shelfType) {
+		dispatch(shelfActions.toggleMovieInShelf(movie, shelfType));
 	}
 
 	return (
@@ -38,23 +34,24 @@ export default function MoviesList({
 					<h1>{category}</h1>
 					<h3>Movies</h3>
 				</div>
-				{page && totalPages && (
+				{page && totalPages ? (
 					<p>
 						Page: {page} of {totalPages}
+					</p>
+				) : (
+					<p>
+						Total Movies: {movies.length}
 					</p>
 				)}
 			</header>
 			<section className={classes.moviesList__content}>
-				{movies.map(({ poster_path, title, vote_average, id }) => (
+				{movies.map(movie => (
 					<Poster
-						key={id}
-						image={poster_path}
-						title={title}
-						rating={vote_average}
-						isFavorited={favoriteMovies.includes(id)}
-						isWatching={moviesWatching.includes(id)}
-						onToggleWatching={handleToggleWatchingMovie.bind(null, id)}
-						onToggleFavorited={handleToggleFavoritedMovie.bind(null, id)}
+						key={movie.id}
+						movie={movie}
+						isFavorited={favorites.map(mov => mov.id).includes(movie.id)}
+						isWatching={watching.map(mov => mov.id).includes(movie.id)}
+						onToggleMovieInShelf={handleToggleShelfMovie}
 					/>
 				))}
 			</section>
