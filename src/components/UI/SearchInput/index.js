@@ -56,4 +56,5 @@ export default function SearchInput({ width = 35, onSearchSubmit }) {
 
 SearchInput.propTypes = {
 	width: PropTypes.number,
+	onSearchSubmit: PropTypes.func.isRequired,
 };
