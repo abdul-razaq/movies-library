@@ -11,14 +11,24 @@ export default function Poster({
 	image,
 	title,
 	rating,
-	onAddToFavorite,
-	onAddToWatching,
+	isFavorited,
+	isWatching,
+	onToggleFavorited,
+	onToggleWatching,
 }) {
 	return (
 		<article className={classes.poster}>
 			<header>
-				<FaEye size={20} onClick={onAddToWatching} />
-				<FaHeart size={20} onClick={onAddToFavorite} />
+				<FaEye
+					size={20}
+					onClick={onToggleWatching}
+					color={isWatching ? 'var(--color-tertiary)' : 'var(--color-white)'}
+				/>
+				<FaHeart
+					size={20}
+					onClick={onToggleFavorited}
+					color={isFavorited ? 'var(--color-tertiary)' : 'var(--color-white)'}
+				/>
 			</header>
 			<figure>
 				<img
@@ -47,6 +57,8 @@ Poster.propTypes = {
 	image: PropTypes.string,
 	title: PropTypes.string.isRequired,
 	rating: PropTypes.number.isRequired,
-	onAddToFavorite: PropTypes.func.isRequired,
-	onAddToWatching: PropTypes.func.isRequired,
+	isFavorited: PropTypes.bool.isRequired,
+	isWatching: PropTypes.bool.isRequired,
+	onToggleFavorited: PropTypes.func.isRequired,
+	onToggleWatching: PropTypes.func.isRequired,
 };

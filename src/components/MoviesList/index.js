@@ -1,5 +1,5 @@
 import React from 'react';
-import {} from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { FaArrowRight, FaArrowLeft } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 
@@ -17,6 +17,18 @@ export default function MoviesList({
 	onGoToNextPage,
 	onGoBack,
 }) {
+	const { favoriteMovies, moviesWatching } = useSelector(state => state.shelf);
+
+	function handleToggleFavoritedMovie(movieId) {
+		console.log(`added or removed movie with ${movieId} from list of favorited movies.`)
+	}
+
+	function handleToggleWatchingMovie(movieId) {
+		console.log(
+			`added or removed movie with ${movieId} from list of movies watching.`,
+		);
+	}
+
 	return (
 		<article className={classes.moviesList}>
 			<header>
@@ -35,8 +47,10 @@ export default function MoviesList({
 						image={poster_path}
 						title={title}
 						rating={vote_average}
-						onAddToWatching={() => console.log('movie added to watching list')}
-						onAddToFavorite={() => console.log('movie added to favorites list')}
+						isFavorited={favoriteMovies.includes(id)}
+						isWatching={moviesWatching.includes(id)}
+						onToggleWatching={handleToggleWatchingMovie.bind(null, id)}
+						onToggleFavorited={handleToggleFavoritedMovie.bind(null, id)}
 					/>
 				))}
 			</section>
@@ -57,4 +71,9 @@ export default function MoviesList({
 MoviesList.propTypes = {
 	category: PropTypes.string.isRequired,
 	movies: PropTypes.arrayOf(PropTypes.object).isRequired,
+	page: PropTypes.number.isRequired,
+	nextPage: PropTypes.number.isRequired,
+	totalPages: PropTypes.number.isRequired,
+	onGoToNextPage: PropTypes.func.isRequired,
+	onGoBack: PropTypes.func.isRequired,
 };
