@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import classes from './sidedrawer.module';
@@ -12,15 +13,17 @@ import ThemeContext from '../../../contexts/theme';
 
 export default function SideDrawer({ onDismissSideDrawer }) {
 	const { theme } = React.useContext(ThemeContext);
+	const history = useHistory();
 
 	return (
 		<BackDrop onClick={onDismissSideDrawer}>
-			<aside
-				className={classes.sidedrawer}
-				style={styles.background(theme)}
-			>
+			<aside className={classes.sidedrawer} style={styles.background(theme)}>
 				<Logo />
-				<SearchInput />
+				<SearchInput
+					onSearchSubmit={searchValue =>
+						history.push(`/search?query=${searchValue}`)
+					}
+				/>
 				<Navigation />
 			</aside>
 		</BackDrop>

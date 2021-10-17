@@ -1,5 +1,4 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import { FaSearch } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 
@@ -7,19 +6,17 @@ import classes from './search_input.module';
 
 import SideDrawerContext from '../../../contexts/sidedrawer';
 
-export default function SearchInput({ width = 35 }) {
+export default function SearchInput({ width = 35, onSearchSubmit }) {
 	const [searchValue, setSearchValue] = React.useState('');
 	const [searchActive, setSearchActive] = React.useState(false);
 
 	const { dismissSideDrawer } = React.useContext(SideDrawerContext);
 
-	const history = useHistory();
-
 	function handleSearchSubmit(event) {
 		event.preventDefault();
 		setSearchActive(searchValue => !searchValue);
 		if (searchActive && searchValue.trim()) {
-			history.push(`/search?query=${searchValue}`);
+			onSearchSubmit(searchValue);
 			setSearchValue('');
 			dismissSideDrawer();
 		}

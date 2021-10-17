@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { FaMoon, FaSun } from 'react-icons/fa';
 import { useMediaQuery } from 'react-responsive';
 
@@ -14,6 +15,8 @@ export default function AppBar({ onOpenHamburger }) {
 
 	const isMobile = useMediaQuery({ query: `(max-width: 37.5em)` });
 
+	const history = useHistory();
+
 	function handleOpenHamburger() {
 		onOpenHamburger();
 	}
@@ -24,7 +27,9 @@ export default function AppBar({ onOpenHamburger }) {
 			className={classes.appbar}
 		>
 			{!isMobile ? (
-				<SearchInput />
+				<SearchInput
+					onSearchSubmit={(searchValue) => history.push(`/search?query=${searchValue}`)}
+				/>
 			) : (
 				<Hamburger onClick={handleOpenHamburger} />
 			)}
