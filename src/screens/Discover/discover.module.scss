@@ -1,8 +1,5 @@
 @import '../../../sass/mixins';
 
 .discover {
-	padding: var(--spacing-around-screen);
-	overflow-y: scroll;
-  overflow-x: hidden;
-	@include scrollbar-ui-secondary;
+	@include general-screen-style;
 }
