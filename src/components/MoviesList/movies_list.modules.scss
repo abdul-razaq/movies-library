@@ -29,7 +29,6 @@
 	&__content {
 		display: grid;
 		place-items: center;
-		justify-content: center;
 		grid-template-columns: repeat(auto-fit, minmax(16.725rem, max-content));
 		column-gap: 4rem;
 		row-gap: 6rem;
@@ -38,6 +37,10 @@
 
 		@include respond(tab-land) {
 			grid-template-columns: repeat(auto-fit, minmax(16.725rem, 30rem));
+		}
+
+		@include respond(phone) {
+			justify-content: center;
 		}
 	}
 

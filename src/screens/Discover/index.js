@@ -39,10 +39,6 @@ export default function DiscoverScreen({}) {
 		dispatch(discoverMovies(category, page));
 	}, [category, page]);
 
-	function handleGoToNextPage() {
-		history.push(`${pathname}?page=${nextPage}`);
-	}
-
 	let content = (
 		<MoviesList
 			category={
@@ -52,7 +48,7 @@ export default function DiscoverScreen({}) {
 			page={currentPage}
 			nextPage={nextPage}
 			totalPages={totalPages}
-			onGoToNextPage={handleGoToNextPage}
+			onGoToNextPage={() => history.push(`${pathname}?page=${nextPage}`)}
 			onGoBack={history.goBack}
 		/>
 	);
