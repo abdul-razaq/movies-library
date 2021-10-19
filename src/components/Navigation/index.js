@@ -37,7 +37,10 @@ export default function Navigation({}) {
 		return (
 			<NavLink
 				key={id}
-				to={`/genres/${name.toLowerCase()}`}
+				to={{
+					pathname: `/genres/${name.toLowerCase()}`,
+					state: { genreId: id },
+				}}
 				activeClassName={classes.active}
 				className={classes.link}
 			>

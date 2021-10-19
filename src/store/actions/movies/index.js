@@ -1,4 +1,4 @@
-import { getDiscoverMovies } from '../../../api/themoviedb';
+import { fetchMovies } from '../../../api/themoviedb';
 
 export const actionTypes = {
 	SET_LOADING: 'SET_LOADING',
@@ -6,7 +6,7 @@ export const actionTypes = {
 	GET_MOVIES: 'GET_MOVIES',
 };
 
-export function getMovies(category, page) {
+export function getMovies(category, page, genre, genreId) {
 	return async function (dispatch, getState) {
 		try {
 			dispatch({
@@ -15,7 +15,7 @@ export function getMovies(category, page) {
 					loading: true,
 				},
 			});
-			const movies = await getDiscoverMovies(category, page);
+			const movies = await fetchMovies(category, page, genre, genreId);
 			dispatch({
 				type: actionTypes.GET_MOVIES,
 				payload: {

@@ -12,12 +12,14 @@ import Center from '../../components/customs/Center';
 import MoviesList from '../../components/MoviesList';
 
 export default function DiscoverScreen({}) {
-	let { category } = useParams();
+	let { category, genre } = useParams();
 	const discoverCategories = ['popular', 'top_rated', 'upcoming'];
 	if (discoverCategories.indexOf(category) === -1)
 		category = discoverCategories[0];
 
-	const { pathname, search } = useLocation();
+	const { pathname, search, state } = useLocation();
+
+	const [genreId, setGenreId] = React.useState(state?.genreId);
 
 	const history = useHistory();
 
@@ -36,13 +38,13 @@ export default function DiscoverScreen({}) {
 	const dispatch = useDispatch();
 
 	React.useEffect(() => {
-		dispatch(movieActions.getMovies(category, page));
-	}, [category, page]);
+		dispatch(movieActions.getMovies(category, page, genre, genreId));
+	}, [category, page, genre, genreId]);
 
 	let content = (
 		<MoviesList
 			category={
-				category === 'top_rated' ? category.replace(/_/g, ' ') : category
+				genre ? genre : category === 'top_rated' ? category.replace(/_/g, ' ') : category
 			}
 			movies={movies}
 			page={currentPage}
