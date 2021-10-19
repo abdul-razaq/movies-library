@@ -6,9 +6,8 @@ import { ThemeProvider } from '../../contexts/theme';
 
 // SCREENS
 import CastScreen from '../../screens/Cast';
-import DiscoverScreen from '../../screens/Discover';
-import GenresScreen from '../../screens/Genres';
-import MovieScreen from '../../screens/Movie';
+import MoviesScreen from '../../screens/Movies';
+import MovieDetailsScreen from '../../screens/MovieDetails';
 import SearchScreen from '../../screens/Search';
 import ShelfScreen from '../../screens/Shelf';
 import FourOhFourScreen from '../../screens/FourOhFour';
@@ -43,13 +42,13 @@ export default function App({}) {
 				<Layout>
 					<Switch>
 						<Route exact path="/">
-							<DiscoverScreen />
+							<MoviesScreen />
 						</Route>
 						<Route path="/discover/:category">
-							<DiscoverScreen />
+							<MoviesScreen />
 						</Route>
 						<Route path="/genres/:genre">
-							<GenresScreen />
+							<MoviesScreen />
 						</Route>
 						<Route path="/shelf/:type">
 							<ShelfScreen />
@@ -61,7 +60,7 @@ export default function App({}) {
 							<CastScreen />
 						</Route>
 						<Route path="/movie/:movieID">
-							<MovieScreen />
+							<MovieDetailsScreen />
 						</Route>
 						<Route path="/error">
 							<FourOhFourScreen />

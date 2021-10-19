@@ -3,9 +3,9 @@ import { useParams, useLocation, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { BounceLoader } from 'react-spinners';
 
-import classes from './discover.module';
+import classes from './movies.module';
 
-import discoverMovies from '../../store/actions/movies/discover';
+import * as movieActions from '../../store/actions/movies';
 
 import NoData from '../../components/UI/NoData';
 import Center from '../../components/customs/Center';
@@ -29,14 +29,14 @@ export default function DiscoverScreen({}) {
 		initialPage,
 		nextPage,
 		totalPages,
-	} = useSelector(state => state.discoverMovies);
+	} = useSelector(state => state.movies);
 
 	const page = new window.URLSearchParams(search).get('page') ?? initialPage;
 
 	const dispatch = useDispatch();
 
 	React.useEffect(() => {
-		dispatch(discoverMovies(category, page));
+		dispatch(movieActions.getMovies(category, page));
 	}, [category, page]);
 
 	let content = (

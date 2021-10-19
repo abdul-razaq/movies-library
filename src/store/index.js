@@ -1,9 +1,9 @@
 import * as Redux from 'redux';
 
-import discoverMoviesReducer from './reducers/movies/discover';
+import moviesReducer from './reducers/movies';
 import shelfReducer from './reducers/shelf';
 
 export default Redux.combineReducers({
-	discoverMovies: discoverMoviesReducer,
+	movies: moviesReducer,
 	shelf: shelfReducer,
 });

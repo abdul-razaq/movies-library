@@ -1,4 +1,4 @@
-import { actionTypes } from '../../actions/movies/discover';
+import { actionTypes } from '../../actions/movies';
 
 const initialState = {
 	loading: false,
@@ -10,19 +10,19 @@ const initialState = {
 	totalPages: 0,
 };
 
-export default function discoverMoviesReducer(state = initialState, action) {
+export default function moviesReducer(state = initialState, action) {
 	switch (action.type) {
-		case actionTypes.SET_DISCOVER_LOADING:
+		case actionTypes.SET_LOADING:
 			return {
 				...state,
 				loading: action.payload.loading,
 			};
-		case actionTypes.SET_DISCOVER_ERROR:
+		case actionTypes.SET_ERROR:
 			return {
 				...state,
 				error: action.payload.error,
 			};
-		case actionTypes.GET_DISCOVER_MOVIES:
+		case actionTypes.GET_MOVIES:
 			const { page, results, total_pages } = action.payload.movies;
 			return {
 				...state,
