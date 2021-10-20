@@ -63,7 +63,7 @@ export function getMovies(category, page, genre, genreId) {
 			dispatch({
 				type: actionTypes.SET_ERROR,
 				payload: {
-					error: `unable to fetch ${category} movies. check internet connection and try again.`,
+					error: `unable to fetch ${category || genre} movies. check internet connection and try again.`,
 				},
 			});
 		} finally {

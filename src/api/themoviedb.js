@@ -31,7 +31,7 @@ export async function fetchMovies(category, page, genre, genreId, filter) {
 			: `${basePath}/movie/${category}?api_key=${API_KEY}&page=${page}`;
 	try {
 		const { data, status } = await axios.get(path);
-		if (status !== 200) throw new Error(`error fetching ${category} movies`);
+		if (status !== 200) throw new Error(`error fetching ${category || genre} movies`);
 		return data;
 	} catch (error) {
 		throw error;
