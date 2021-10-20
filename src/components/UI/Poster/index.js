@@ -14,7 +14,16 @@ export default function Poster({
 	onToggleMovieInShelf,
 }) {
 	return (
-		<article className={classes.poster}>
+		<article
+			className={classes.poster}
+			style={{
+				backgroundImage: `url(${
+					movie.poster_path
+						? `https://image.tmdb.org/t/p/w200/${movie.poster_path}`
+						: noPosterFallback
+				})`,
+			}}
+		>
 			<header>
 				<FaEye
 					size={20}
@@ -27,16 +36,6 @@ export default function Poster({
 					color={isFavorited ? 'var(--color-tertiary)' : 'var(--color-white)'}
 				/>
 			</header>
-			<figure>
-				<img
-					src={
-						movie.poster_path
-							? `https://image.tmdb.org/t/p/w200/${movie.poster_path}`
-							: noPosterFallback
-					}
-					alt={`poster for ${movie.title}`}
-				/>
-			</figure>
 			<footer>
 				<p>{movie.title}</p>
 				<StarRatings

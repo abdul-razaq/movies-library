@@ -2,8 +2,12 @@
 @import '../../../../sass/animations';
 
 .poster {
-	min-height: 100%;
-	max-width: 100%;
+	width: 200px;
+	height: 300px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	object-fit: cover;
 	border-radius: 1rem;
 	box-shadow: var(--box-shadow-light);
 	overflow: hidden;
@@ -11,6 +15,11 @@
 	position: relative;
 	transition: all 0.3s ease-out;
 	backface-visibility: hidden;
+
+	@include respond(big-screen) {
+		width: 240px;
+		height: 360px;
+	}
 
 	& header {
 		min-width: 100%;
@@ -30,7 +39,7 @@
 	}
 
 	& figure {
-		min-height: 100%;
+		max-height: 100%;
 		& img {
 			height: 100%;
 			width: 100%;

@@ -30,17 +30,22 @@
 		display: grid;
 		place-items: center;
 		grid-template-columns: repeat(auto-fit, minmax(16.725rem, max-content));
-		column-gap: 4rem;
+		column-gap: 6rem;
 		row-gap: 6rem;
 		grid-auto-flow: rows;
 		grid-auto-rows: max-content;
 
 		@include respond(tab-land) {
 			grid-template-columns: repeat(auto-fit, minmax(16.725rem, 30rem));
+			justify-content: center;
 		}
 
 		@include respond(phone) {
 			justify-content: center;
+		}
+
+		@include respond(big-screen) {
+			column-gap: 5.5rem;
 		}
 	}
 

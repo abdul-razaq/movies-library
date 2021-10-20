@@ -20,6 +20,7 @@ export default function SearchInput({ width = 35, onSearchSubmit }) {
 			setSearchValue('');
 			dismissSideDrawer();
 		}
+		setSearchValue('');
 	}
 
 	function handleSearchChange(event) {
@@ -46,7 +47,7 @@ export default function SearchInput({ width = 35, onSearchSubmit }) {
 				id="search"
 				placeholder="Search for movie..."
 				minLength={3}
-				maxLength={20}
+				maxLength={50}
 				value={searchValue}
 				onChange={handleSearchChange}
 			/>
