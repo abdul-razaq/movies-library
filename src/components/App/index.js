@@ -5,12 +5,11 @@ import { useDispatch } from 'react-redux';
 import { ThemeProvider } from '../../contexts/theme';
 
 // SCREENS
-import CastScreen from '../../screens/Cast';
 import MoviesScreen from '../../screens/Movies';
-import MovieDetailsScreen from '../../screens/MovieDetails';
-import SearchScreen from '../../screens/Search';
 import ShelfScreen from '../../screens/Shelf';
 import FourOhFourScreen from '../../screens/FourOhFour';
+import MovieDetailsScreen from '../../screens/MovieDetails';
+import CastScreen from '../../screens/Cast';
 
 import Layout from '../Layout';
 

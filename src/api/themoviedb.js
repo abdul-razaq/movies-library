@@ -40,7 +40,7 @@ export async function fetchMovies(
 	try {
 		const { data, status } = await axios.get(path);
 		if (status !== 200)
-			throw new Error(`error fetching ${category || genre} movies`);
+			throw new Error(`error fetching ${category || genre || query} movies`);
 		return data;
 	} catch (error) {
 		throw error;

@@ -63,7 +63,7 @@ export default function MoviesScreen({}) {
 			totalPages={totalPages}
 			onGoToNextPage={() =>
 				history.push(
-					`${pathname}?${query && `query=${query}`}&page=${nextPage}`,
+					`${pathname}${query ? `?query=${query}&` : '?'}page=${nextPage}`,
 				)
 			}
 			onGoBack={history.goBack}
