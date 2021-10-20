@@ -43,7 +43,7 @@ export function getGenres() {
 	};
 }
 
-export function getMovies(category, page, genre, genreId) {
+export function getMovies(category, page, genre, genreId, query) {
 	return async function (dispatch, getState) {
 		try {
 			dispatch({
@@ -52,7 +52,7 @@ export function getMovies(category, page, genre, genreId) {
 					loading: true,
 				},
 			});
-			const movies = await fetchMovies(category, page, genre, genreId);
+			const movies = await fetchMovies(category, page, genre, genreId, query);
 			dispatch({
 				type: actionTypes.GET_MOVIES,
 				payload: {
@@ -63,7 +63,11 @@ export function getMovies(category, page, genre, genreId) {
 			dispatch({
 				type: actionTypes.SET_ERROR,
 				payload: {
-					error: `unable to fetch ${category || genre} movies. check internet connection and try again.`,
+					error: query
+						? `Cannot find ${query}.`
+						: `unable to fetch ${
+								category || genre
+						  } movies. check internet connection and try again.`,
 				},
 			});
 		} finally {

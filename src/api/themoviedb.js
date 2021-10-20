@@ -22,16 +22,25 @@ export async function getMovieGenres() {
 /**
  * function to get discover movies
  */
-export async function fetchMovies(category, page, genre, genreId, filter) {
-	const path =
-		genre || genreId
-			? `${basePath}/discover/movie?api_key=${API_KEY}&with_genres=${genreId}&page=${page}&sort_by=${
-					filter ? filter : 'popularity.desc'
-			  }`
-			: `${basePath}/movie/${category}?api_key=${API_KEY}&page=${page}`;
+export async function fetchMovies(
+	category,
+	page,
+	genre,
+	genreId,
+	query,
+	filter,
+) {
+	const path = query
+		? `${basePath}/search/movie/?api_key=${API_KEY}&query=${query}&page=${page}`
+		: genre || genreId
+		? `${basePath}/discover/movie?api_key=${API_KEY}&with_genres=${genreId}&page=${page}&sort_by=${
+				filter ? filter : 'popularity.desc'
+		  }`
+		: `${basePath}/movie/${category}?api_key=${API_KEY}&page=${page}`;
 	try {
 		const { data, status } = await axios.get(path);
-		if (status !== 200) throw new Error(`error fetching ${category || genre} movies`);
+		if (status !== 200)
+			throw new Error(`error fetching ${category || genre} movies`);
 		return data;
 	} catch (error) {
 		throw error;
