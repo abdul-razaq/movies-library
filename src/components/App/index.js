@@ -54,7 +54,7 @@ export default function App({}) {
 							<ShelfScreen />
 						</Route>
 						<Route path="/search">
-							<SearchScreen />
+							<MoviesScreen />
 						</Route>
 						<Route path="/cast/:castID">
 							<CastScreen />
