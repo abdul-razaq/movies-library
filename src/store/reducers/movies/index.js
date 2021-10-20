@@ -8,6 +8,9 @@ const initialState = {
 	initialPage: 1,
 	nextPage: 0,
 	totalPages: 0,
+	genres: [],
+	genresLoading: false,
+	genresError: '',
 };
 
 export default function moviesReducer(state = initialState, action) {
@@ -30,6 +33,22 @@ export default function moviesReducer(state = initialState, action) {
 				currentPage: page,
 				nextPage: page >= total_pages ? 1 : page + 1,
 				totalPages: total_pages,
+			};
+		case actionTypes.SET_GENRES:
+			const { genres } = action.payload;
+			return {
+				...state,
+				genres,
+			};
+		case actionTypes.SET_GENRES_LOADING:
+			return {
+				...state,
+				genresLoading: action.payload.loading,
+			};
+		case actionTypes.SET_GENRES_ERROR:
+			return {
+				...state,
+				genresError: action.payload.error,
 			};
 		default:
 			return state;

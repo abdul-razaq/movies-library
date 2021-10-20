@@ -11,15 +11,14 @@ import NoData from '../../components/UI/NoData';
 import Center from '../../components/customs/Center';
 import MoviesList from '../../components/MoviesList';
 
-export default function DiscoverScreen({}) {
+const discoverCategories = ['popular', 'top_rated', 'upcoming'];
+
+export default function MoviesScreen({}) {
 	let { category, genre } = useParams();
-	const discoverCategories = ['popular', 'top_rated', 'upcoming'];
-	if (discoverCategories.indexOf(category) === -1)
+	if (category && discoverCategories.indexOf(category) === -1)
 		category = discoverCategories[0];
 
-	const { pathname, search, state } = useLocation();
-
-	const [genreId, setGenreId] = React.useState(state?.genreId);
+	const { pathname, search } = useLocation();
 
 	const history = useHistory();
 
@@ -31,7 +30,10 @@ export default function DiscoverScreen({}) {
 		initialPage,
 		nextPage,
 		totalPages,
+		genres,
 	} = useSelector(state => state.movies);
+
+	const genreId = genre && genres.find(gen => gen.name.toLowerCase() === genre)?.id;
 
 	const page = new window.URLSearchParams(search).get('page') ?? initialPage;
 
@@ -44,7 +46,11 @@ export default function DiscoverScreen({}) {
 	let content = (
 		<MoviesList
 			category={
-				genre ? genre : category === 'top_rated' ? category.replace(/_/g, ' ') : category
+				genre
+					? genre
+					: category === 'top_rated'
+					? category.replace(/_/g, ' ')
+					: category
 			}
 			movies={movies}
 			page={currentPage}
@@ -76,5 +82,5 @@ export default function DiscoverScreen({}) {
 				<NoData text={error} />
 			</Center>
 		);
-	return <section className={classes.discover}>{content}</section>;
+	return <section className={classes.movies}>{content}</section>;
 }

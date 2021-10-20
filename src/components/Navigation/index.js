@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import {
 	FaHeart,
 	FaChartBar,
@@ -11,36 +12,24 @@ import {
 
 import classes from './navigation.module';
 
-import { getMovieGenres } from '../../api/themoviedb';
+import * as movieActions from '../../store/actions/movies';
 
 export default function Navigation({}) {
-	const [genresLoading, setGenresLoading] = React.useState(false);
-	const [error, setError] = React.useState('');
-	const [genres, setGenres] = React.useState([]);
+	const dispatch = useDispatch();
+
+	const { genresLoading, genresError, genres } = useSelector(
+		state => state.movies,
+	);
 
 	React.useEffect(() => {
-		(async () => {
-			setGenresLoading(true);
-			setError('');
-			try {
-				const genres = await getMovieGenres();
-				setGenres(genres);
-			} catch (error) {
-				setError('unable to fetch movie genres!');
-			} finally {
-				setGenresLoading(false);
-			}
-		})();
+		!genres.length && dispatch(movieActions.getGenres());
 	}, []);
 
 	let genresContent = genres.map(({ id, name }) => {
 		return (
 			<NavLink
 				key={id}
-				to={{
-					pathname: `/genres/${name.toLowerCase()}`,
-					state: { genreId: id },
-				}}
+				to={`/genres/${name.toLowerCase()}`}
 				activeClassName={classes.active}
 				className={classes.link}
 			>
@@ -52,7 +41,7 @@ export default function Navigation({}) {
 
 	if (genresLoading)
 		genresContent = <p style={styles.center}>Loading Genres...</p>;
-	if (error) genresContent = <p style={styles.center}>{error}</p>;
+	if (genresError) genresContent = <p style={styles.center}>{genresError}</p>;
 
 	return (
 		<>
