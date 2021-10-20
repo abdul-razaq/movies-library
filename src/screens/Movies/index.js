@@ -33,20 +33,25 @@ export default function MoviesScreen({}) {
 		genres,
 	} = useSelector(state => state.movies);
 
-	const genreId = genre && genres.find(gen => gen.name.toLowerCase() === genre)?.id;
+	const genreId =
+		genre && genres.find(gen => gen.name.toLowerCase() === genre)?.id;
 
 	const page = new window.URLSearchParams(search).get('page') ?? initialPage;
+
+	const query = new window.URLSearchParams(search).get('query');
 
 	const dispatch = useDispatch();
 
 	React.useEffect(() => {
-		dispatch(movieActions.getMovies(category, page, genre, genreId));
-	}, [category, page, genre, genreId]);
+		dispatch(movieActions.getMovies(category, page, genre, genreId, query));
+	}, [category, page, genre, genreId, query]);
 
 	let content = (
 		<MoviesList
 			category={
-				genre
+				query
+					? query
+					: genre
 					? genre
 					: category === 'top_rated'
 					? category.replace(/_/g, ' ')
@@ -56,7 +61,11 @@ export default function MoviesScreen({}) {
 			page={currentPage}
 			nextPage={nextPage}
 			totalPages={totalPages}
-			onGoToNextPage={() => history.push(`${pathname}?page=${nextPage}`)}
+			onGoToNextPage={() =>
+				history.push(
+					`${pathname}?${query && `query=${query}`}&page=${nextPage}`,
+				)
+			}
 			onGoBack={history.goBack}
 		/>
 	);
