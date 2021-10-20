@@ -92,7 +92,7 @@ export default function Navigation({}) {
 					className={classes.link}
 				>
 					<FaEye />
-					<span>Watching</span>
+					<span>Watch Later</span>
 				</NavLink>
 			</nav>
 		</>

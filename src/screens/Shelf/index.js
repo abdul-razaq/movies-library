@@ -25,7 +25,7 @@ export default function ShelfScreen({}) {
 			) : (
 				<MoviesList
 					category={
-						type === 'favorites' ? type.replace('s', '') : `currently ${type}`
+						type === 'favorites' ? type.replace('s', '') : `watch later`
 					}
 					movies={shelf[type]}
 				/>
