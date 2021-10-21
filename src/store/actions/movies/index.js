@@ -1,11 +1,13 @@
 import { fetchMovies, getMovieGenres } from '../../../api/themoviedb';
 
 export const actionTypes = {
-	SET_LOADING: 'SET_LOADING',
+	SET_MOVIES_LOADING: 'SET_MOVIES_LOADING',
+	UNSET_MOVIES_LOADING: 'UNSET_MOVIES_LOADING',
 	SET_ERROR: 'SET_ERROR',
 	GET_MOVIES: 'GET_MOVIES',
 	SET_GENRES: 'SET_GENRES',
 	SET_GENRES_LOADING: 'SET_GENRES_LOADING',
+	UNSET_GENRES_LOADING: 'UNSET_GENRES_LOADING',
 	SET_GENRES_ERROR: 'SET_GENRES_ERROR',
 };
 
@@ -14,9 +16,6 @@ export function getGenres() {
 		try {
 			dispatch({
 				type: actionTypes.SET_GENRES_LOADING,
-				payload: {
-					loading: true,
-				},
 			});
 			const genres = await getMovieGenres();
 			dispatch({
@@ -34,10 +33,7 @@ export function getGenres() {
 			});
 		} finally {
 			dispatch({
-				type: actionTypes.SET_GENRES_LOADING,
-				payload: {
-					loading: false,
-				},
+				type: actionTypes.UNSET_GENRES_LOADING,
 			});
 		}
 	};
@@ -47,10 +43,7 @@ export function getMovies(category, page, genre, genreId, query) {
 	return async function (dispatch, getState) {
 		try {
 			dispatch({
-				type: actionTypes.SET_LOADING,
-				payload: {
-					loading: true,
-				},
+				type: actionTypes.SET_MOVIES_LOADING,
 			});
 			const movies = await fetchMovies(category, page, genre, genreId, query);
 			dispatch({
@@ -61,7 +54,7 @@ export function getMovies(category, page, genre, genreId, query) {
 			});
 		} catch (error) {
 			dispatch({
-				type: actionTypes.SET_ERROR,
+				type: actionTypes.SET_MOVIES_ERROR,
 				payload: {
 					error: query
 						? `Cannot find ${query}.`
@@ -72,10 +65,7 @@ export function getMovies(category, page, genre, genreId, query) {
 			});
 		} finally {
 			dispatch({
-				type: actionTypes.SET_LOADING,
-				payload: {
-					loading: false,
-				},
+				type: actionTypes.UNSET_MOVIES_LOADING,
 			});
 		}
 	};

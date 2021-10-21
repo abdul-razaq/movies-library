@@ -15,12 +15,17 @@ const initialState = {
 
 export default function moviesReducer(state = initialState, action) {
 	switch (action.type) {
-		case actionTypes.SET_LOADING:
+		case actionTypes.SET_MOVIES_LOADING:
 			return {
 				...state,
-				loading: action.payload.loading,
+				loading: true,
 			};
-		case actionTypes.SET_ERROR:
+		case actionTypes.UNSET_MOVIES_LOADING:
+			return {
+				...state,
+				loading: false,
+			};
+		case actionTypes.SET_MOVIES_ERROR:
 			return {
 				...state,
 				error: action.payload.error,
@@ -43,7 +48,12 @@ export default function moviesReducer(state = initialState, action) {
 		case actionTypes.SET_GENRES_LOADING:
 			return {
 				...state,
-				genresLoading: action.payload.loading,
+				genresLoading: true,
+			};
+		case actionTypes.UNSET_GENRES_LOADING:
+			return {
+				...state,
+				genresLoading: false,
 			};
 		case actionTypes.SET_GENRES_ERROR:
 			return {
