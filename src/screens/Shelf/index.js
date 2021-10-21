@@ -19,7 +19,7 @@ export default function ShelfScreen({}) {
 			{!shelf[type].length ? (
 				<Center>
 					<NoData
-						text={`You have not added any movie to your ${type} shelf. start by adding some.`}
+						text={`You have not added any movie to your ${type === 'favorites' ? type : 'Watch later'} shelf. start by adding some.`}
 					/>
 				</Center>
 			) : (

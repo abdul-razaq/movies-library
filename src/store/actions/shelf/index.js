@@ -35,7 +35,7 @@ export function toggleMovieInShelf(movie, shelfType) {
 	let currentShelf = shelf[shelfType];
 
 	if (shelf && !currentShelf.some(({ id }) => id === movie.id)) {
-		currentShelf = currentShelf.concat(movie);
+		currentShelf.unshift(movie);
 		window.localStorage.setItem(
 			'shelf',
 			JSON.stringify({ ...shelf, [shelfType]: currentShelf }),

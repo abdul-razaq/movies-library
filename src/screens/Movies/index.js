@@ -15,9 +15,11 @@ const discoverCategories = ['popular', 'top_rated', 'upcoming'];
 
 export default function MoviesScreen({}) {
 	let { category, genre } = useParams();
-	if (category && discoverCategories.indexOf(category) === -1)
+	if (category && discoverCategories.indexOf(category) === -1) {
 		category = discoverCategories[0];
-
+	} else if (!category) {
+		category = discoverCategories[0];
+	}
 	const { pathname, search } = useLocation();
 
 	const history = useHistory();
