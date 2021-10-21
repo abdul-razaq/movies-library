@@ -1,7 +1,7 @@
 import { actionTypes } from '../../actions/movies';
 
 const initialState = {
-	loading: false,
+	loading: true,
 	error: '',
 	movies: [],
 	currentPage: 1,

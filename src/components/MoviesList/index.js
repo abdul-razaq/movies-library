@@ -23,7 +23,8 @@ export default function MoviesList({
 
 	const dispatch = useDispatch();
 
-	function handleToggleShelfMovie(movie, shelfType) {
+	function handleToggleShelfMovie(event, movie, shelfType) {
+		event.stopPropagation();
 		dispatch(shelfActions.toggleMovieInShelf(movie, shelfType));
 	}
 
@@ -39,9 +40,7 @@ export default function MoviesList({
 						Page: {page} of {totalPages}
 					</p>
 				) : (
-					<p>
-						Total Movies: {movies.length}
-					</p>
+					<p>Total Movies: {movies.length}</p>
 				)}
 			</header>
 			<section className={classes.moviesList__content}>

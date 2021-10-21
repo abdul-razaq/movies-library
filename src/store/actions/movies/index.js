@@ -1,9 +1,9 @@
-import { fetchMovies, getMovieGenres } from '../../../api/themoviedb';
+import { fetchMovies, fetchGenres } from '../../../api/themoviedb';
 
 export const actionTypes = {
 	SET_MOVIES_LOADING: 'SET_MOVIES_LOADING',
 	UNSET_MOVIES_LOADING: 'UNSET_MOVIES_LOADING',
-	SET_ERROR: 'SET_ERROR',
+	SET_MOVIES_ERROR: 'SET_MOVIES_ERROR',
 	GET_MOVIES: 'GET_MOVIES',
 	SET_GENRES: 'SET_GENRES',
 	SET_GENRES_LOADING: 'SET_GENRES_LOADING',
@@ -17,7 +17,7 @@ export function getGenres() {
 			dispatch({
 				type: actionTypes.SET_GENRES_LOADING,
 			});
-			const genres = await getMovieGenres();
+			const genres = await fetchGenres();
 			dispatch({
 				type: actionTypes.SET_GENRES,
 				payload: {

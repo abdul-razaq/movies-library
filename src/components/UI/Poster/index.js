@@ -27,12 +27,12 @@ export default function Poster({
 			<header>
 				<FaEye
 					size={20}
-					onClick={onToggleMovieInShelf.bind(null, movie, 'watching')}
+					onClick={event => onToggleMovieInShelf(event, movie, 'watching')}
 					color={isWatching ? 'var(--color-tertiary)' : 'var(--color-white)'}
 				/>
 				<FaHeart
 					size={20}
-					onClick={onToggleMovieInShelf.bind(null, movie, 'favorites')}
+					onClick={event => onToggleMovieInShelf(event, movie, 'favorites')}
 					color={isFavorited ? 'var(--color-tertiary)' : 'var(--color-white)'}
 				/>
 			</header>

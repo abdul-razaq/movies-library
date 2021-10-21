@@ -6,7 +6,7 @@ const API_KEY = process.env.THE_MOVIE_DB_API_KEY;
 /**
  * function to get movie genres
  */
-export async function getMovieGenres() {
+export async function fetchGenres() {
 	try {
 		const {
 			data: { genres },
@@ -45,4 +45,12 @@ export async function fetchMovies(
 	} catch (error) {
 		throw error;
 	}
+}
+
+export async function fetchMovie(movieId) {
+	return movieId;
+}
+
+export async function fetchRecommendedMovies(movieId) {
+	return;
 }
