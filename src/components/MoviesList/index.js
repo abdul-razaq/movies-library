@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 import { FaArrowRight, FaArrowLeft } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 
@@ -23,9 +24,15 @@ export default function MoviesList({
 
 	const dispatch = useDispatch();
 
+	const history = useHistory();
+
 	function handleToggleShelfMovie(event, movie, shelfType) {
 		event.stopPropagation();
 		dispatch(shelfActions.toggleMovieInShelf(movie, shelfType));
+	}
+
+	function handlePosterClick(movieId) {
+		history.push(`/movie/${movieId}`);
 	}
 
 	return (
@@ -51,6 +58,7 @@ export default function MoviesList({
 						isFavorited={favorites.map(mov => mov.id).includes(movie.id)}
 						isWatching={watching.map(mov => mov.id).includes(movie.id)}
 						onToggleMovieInShelf={handleToggleShelfMovie}
+						onPosterClick={handlePosterClick.bind(null, movie.id)}
 					/>
 				))}
 			</section>

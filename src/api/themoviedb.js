@@ -48,7 +48,14 @@ export async function fetchMovies(
 }
 
 export async function fetchMovie(movieId) {
-	return movieId;
+	const path = `${basePath}/movie/${movieId}?api_key=${API_KEY}&append_to_response=credits,videos,recommendations`;
+	try {
+		const { data, status } = await axios.get(path);
+		if (status !== 200) throw new Error('unable to fetch movie details.');
+		return data;
+	} catch (error) {
+		throw error;
+	}
 }
 
 export async function fetchRecommendedMovies(movieId) {

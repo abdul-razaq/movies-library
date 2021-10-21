@@ -3,7 +3,7 @@ import { actionTypes } from '../../actions/movie';
 const initialState = {
 	loading: true,
 	error: '',
-	movie: {},
+	movieDetails: {},
 };
 
 export default function movieReducer(state = initialState, action) {
@@ -26,7 +26,7 @@ export default function movieReducer(state = initialState, action) {
 		case actionTypes.FETCH_MOVIE:
 			return {
 				...state,
-				movie: action.payload.movie,
+				movieDetails: action.payload.movie,
 			};
 		default:
 			return state;

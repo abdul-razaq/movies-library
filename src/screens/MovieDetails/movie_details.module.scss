@@ -1,0 +1,47 @@
+@import '../../../sass/mixins';
+@import '../../../sass/animations';
+
+.movieDetails {
+	@include general-screen-style;
+
+	& h1 {
+		text-transform: uppercase;
+		font-size: 2.4rem;
+		font-weight: var(--font-weight-semi-bold);
+	}
+
+	& h2 {
+		font-size: 2rem;
+		margin-bottom: 40px;
+	}
+}
+
+.backdrop {
+	height: 55rem;
+	min-width: 100%;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	box-shadow: var(--box-shadow-dark);
+	border-radius: 5rem;
+	overflow: hidden;
+	position: relative;
+
+	&__caption {
+		min-width: 100%;
+		background-color: var(--transparent-secondary);
+		color: var(--color-white);
+		position: absolute;
+		bottom: 0;
+		text-align: center;
+		line-height: 2;
+		font-size: 2rem;
+		padding: 5rem;
+		animation: moveInFromButtom .4s ease-out 1 backwards;
+		display: none;
+	}
+
+	&:hover &__caption {
+		display: block;
+	}
+}

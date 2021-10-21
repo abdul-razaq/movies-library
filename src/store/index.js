@@ -6,6 +6,6 @@ import shelfReducer from './reducers/shelf';
 
 export default Redux.combineReducers({
 	movies: moviesReducer,
-	movie: movieReducer,
+	movieDetails: movieReducer,
 	shelf: shelfReducer,
 });

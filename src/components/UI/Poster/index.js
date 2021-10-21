@@ -12,9 +12,11 @@ export default function Poster({
 	isFavorited,
 	isWatching,
 	onToggleMovieInShelf,
+	onPosterClick,
 }) {
 	return (
 		<article
+			onClick={onPosterClick}
 			className={classes.poster}
 			style={{
 				backgroundImage: `url(${
@@ -54,4 +56,5 @@ Poster.propTypes = {
 	isFavorited: PropTypes.bool.isRequired,
 	isWatching: PropTypes.bool.isRequired,
 	onToggleMovieInShelf: PropTypes.func.isRequired,
+	onPosterClick: PropTypes.func.isRequired,
 };
