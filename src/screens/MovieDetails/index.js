@@ -1,11 +1,14 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory, Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { BounceLoader } from 'react-spinners';
+import { FaArrowLeft } from 'react-icons/fa';
 
 import Center from '../../components/customs/Center';
 import NoData from '../../components/UI/NoData';
+import PrimaryButton from '../../components/UI/PrimaryButton';
+import SecondaryButton from '../../components/UI/SecondaryButton';
 
 import * as movieActions from '../../store/actions/movie';
 
@@ -19,6 +22,8 @@ export default function MovieDetailsScreen({}) {
 	const { loading, error, movieDetails } = useSelector(
 		state => state.movieDetails,
 	);
+
+	const history = useHistory();
 
 	const dispatch = useDispatch();
 
@@ -35,16 +40,22 @@ export default function MovieDetailsScreen({}) {
 			</Center>
 		);
 	} else if (error || !Object.keys(movieDetails).length) {
-		movieDetailsContent = (
-			<Center>
-				<NoData text={`Unable to fetch movie details.`} />
-			</Center>
-		);
+		movieDetailsContent = <Redirect to="/error" replace />;
 	} else {
 		movieDetailsContent = (
 			<>
-				<h1>{movieDetails.title}</h1>
-				<h2>{movieDetails.tagline}</h2>
+				<header>
+					<div>
+						<h1>{movieDetails.title}</h1>
+						<h2>{movieDetails.tagline}</h2>
+					</div>
+					<div>
+						<SecondaryButton onClick={history.goBack}>
+							<FaArrowLeft />
+							<span>Back</span>
+						</SecondaryButton>
+					</div>
+				</header>
 				<figure
 					className={classes.backdrop}
 					style={{
