@@ -51,7 +51,7 @@ export default function MovieBackdrop({
 }
 
 MovieBackdrop.propTypes = {
-	backdropImage: PropTypes.string.isRequired,
+	backdropImage: PropTypes.string,
 	onToggleMovieInShelf: PropTypes.func.isRequired,
 	onWatchTrailer: PropTypes.func.isRequired,
 	isFavoriteMovie: PropTypes.bool.isRequired,
