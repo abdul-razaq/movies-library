@@ -11,6 +11,8 @@ import SecondaryButton from '../UI/SecondaryButton';
 
 import * as shelfActions from '../../store/actions/shelf';
 
+import Movie from '../../models/Movie';
+
 export default function MoviesList({
 	category,
 	movies,
@@ -54,7 +56,7 @@ export default function MoviesList({
 				{movies.map(movie => (
 					<Poster
 						key={movie.id}
-						movie={movie}
+						movie={new Movie(movie)}
 						isFavorite={favorites.map(mov => mov.id).includes(movie.id)}
 						isWatching={watching.map(mov => mov.id).includes(movie.id)}
 						onToggleMovieInShelf={handleToggleShelfMovie}

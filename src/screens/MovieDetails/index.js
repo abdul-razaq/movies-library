@@ -3,7 +3,7 @@ import { useParams, useHistory, Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { BounceLoader } from 'react-spinners';
-import { FaArrowLeft } from 'react-icons/fa';
+import { FaArrowLeft, FaVideo, FaEye, FaHeart } from 'react-icons/fa';
 
 import Center from '../../components/customs/Center';
 import NoData from '../../components/UI/NoData';
@@ -11,8 +11,11 @@ import PrimaryButton from '../../components/UI/PrimaryButton';
 import SecondaryButton from '../../components/UI/SecondaryButton';
 
 import * as movieActions from '../../store/actions/movie';
+import * as shelfActions from '../../store/actions/shelf';
 
 import noPosterImage from '../../../public/assets/images/no-poster.png';
+
+import Movie from '../../models/Movie';
 
 import classes from './movie_details.module';
 
@@ -22,6 +25,7 @@ export default function MovieDetailsScreen({}) {
 	const { loading, error, movieDetails } = useSelector(
 		state => state.movieDetails,
 	);
+	const { favorites, watching } = useSelector(state => state.shelf);
 
 	const history = useHistory();
 
@@ -31,6 +35,12 @@ export default function MovieDetailsScreen({}) {
 		dispatch(movieActions.getMovie(movieID));
 	}, [movieID]);
 
+	function handleToggleMovieInShelf(event, shelfType) {
+		dispatch(
+			shelfActions.toggleMovieInShelf(new Movie(movieDetails), shelfType),
+		);
+	}
+
 	let movieDetailsContent;
 
 	if (loading) {
@@ -39,12 +49,18 @@ export default function MovieDetailsScreen({}) {
 				<BounceLoader loading={loading} color="#F50057" />
 			</Center>
 		);
-	} else if (error || !Object.keys(movieDetails).length) {
-		movieDetailsContent = <Redirect to="/error" replace />;
+	} else if (error) {
+		movieDetailsContent = <Redirect to="/error" />;
+	} else if (!Object.keys(movieDetails).length) {
+		movieDetailsContent = (
+			<Center>
+				<NoData text={error} />
+			</Center>
+		);
 	} else {
 		movieDetailsContent = (
 			<>
-				<header>
+				<header className={classes.movieDetails__header}>
 					<div>
 						<h1>{movieDetails.title}</h1>
 						<h2>{movieDetails.tagline}</h2>
@@ -64,6 +80,30 @@ export default function MovieDetailsScreen({}) {
 							: `url(${noPosterImage})`,
 					}}
 				>
+					<header className={classes.backdrop__header}>
+						<FaEye
+							className={classes.shelfIcon}
+							onClick={event => handleToggleMovieInShelf(event, 'watching')}
+							color={
+								watching.some(({ id }) => id === movieDetails.id)
+									? 'var(--color-tertiary)'
+									: 'var(--color-white)'
+							}
+						/>
+						<SecondaryButton className={classes.button} onClick={() => {}}>
+							<FaVideo />
+							<span>Watch Trailer</span>
+						</SecondaryButton>
+						<FaHeart
+							className={classes.shelfIcon}
+							onClick={event => handleToggleMovieInShelf(event, 'favorites')}
+							color={
+								favorites.some(({ id }) => id === movieDetails.id)
+									? 'var(--color-tertiary)'
+									: 'var(--color-white)'
+							}
+						/>
+					</header>
 					<figcaption className={classes.backdrop__caption}>
 						{movieDetails.overview}
 					</figcaption>

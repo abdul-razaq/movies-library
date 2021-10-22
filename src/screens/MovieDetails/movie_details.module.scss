@@ -4,7 +4,7 @@
 .movieDetails {
 	@include general-screen-style;
 
-	& header {
+	&__header {
 		display: flex;
 		align-items: baseline;
 		justify-content: space-between;
@@ -34,6 +34,11 @@
 	}
 }
 
+.button {
+	color: var(--color-white);
+	border-color: var(--color-white);
+}
+
 .backdrop {
 	height: 55rem;
 	min-width: 100%;
@@ -44,6 +49,22 @@
 	border-radius: 5rem;
 	overflow: hidden;
 	position: relative;
+
+	&__header {
+		background-color: var(--transparent-secondary);
+		display: flex;
+		align-items: center;
+		justify-content: space-around;
+		padding: 1rem;
+
+		& svg {
+			cursor: pointer;
+		}
+
+		& .shelfIcon {
+			font-size: 3.5rem;
+		}
+	}
 
 	&__caption {
 		min-width: 100%;
