@@ -12,7 +12,10 @@ export default function SearchInput({ width = 35, onSearchSubmit }) {
 
 	const { dismissSideDrawer } = React.useContext(SideDrawerContext);
 
+	const searchInputRef = React.useRef();
+
 	function handleSearchSubmit(event) {
+		searchInputRef.current.focus();
 		event.preventDefault();
 		setSearchActive(searchValue => !searchValue);
 		if (searchActive && searchValue.trim()) {
@@ -37,6 +40,7 @@ export default function SearchInput({ width = 35, onSearchSubmit }) {
 				<FaSearch />
 			</button>
 			<input
+				ref={searchInputRef}
 				style={{
 					width: searchActive ? `${width}rem` : 0,
 					paddingLeft: searchActive && '4.5rem',
