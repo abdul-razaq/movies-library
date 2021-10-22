@@ -58,6 +58,8 @@ export function getMovies(category, page, genre, genreId, query) {
 				payload: {
 					error: query
 						? `Cannot find ${query}.`
+						: error.message.includes('422')
+						? 'no data found. invalid parameters.'
 						: `unable to fetch ${
 								category || genre
 						  } movies. check internet connection and try again.`,

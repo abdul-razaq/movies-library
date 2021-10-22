@@ -20,7 +20,7 @@ export async function fetchGenres() {
 }
 
 /**
- * function to get discover movies
+ * function to fetch movies
  */
 export async function fetchMovies(
 	category,
@@ -47,6 +47,11 @@ export async function fetchMovies(
 	}
 }
 
+/**
+ * fetch a movie details by id
+ * @param {movieId} movieId id of the movie to fetch details for.
+ * @returns object
+ */
 export async function fetchMovie(movieId) {
 	const path = `${basePath}/movie/${movieId}?api_key=${API_KEY}&append_to_response=credits,videos,recommendations`;
 	try {

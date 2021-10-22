@@ -79,14 +79,6 @@ export default function MoviesScreen({}) {
 			</Center>
 		);
 
-	// if (!movies.length) {
-	// 	content = (
-	// 		<Center>
-	// 			<NoData text="No data found." />
-	// 		</Center>
-	// 	);
-	// }
-
 	if (error)
 		content = (
 			<Center>
