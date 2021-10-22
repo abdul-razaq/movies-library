@@ -3,17 +3,16 @@ import { useParams, useHistory, Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { BounceLoader } from 'react-spinners';
-import { FaArrowLeft, FaVideo, FaEye, FaHeart } from 'react-icons/fa';
+import { FaArrowLeft } from 'react-icons/fa';
 
 import Center from '../../components/customs/Center';
 import NoData from '../../components/UI/NoData';
 import PrimaryButton from '../../components/UI/PrimaryButton';
 import SecondaryButton from '../../components/UI/SecondaryButton';
+import MovieBackdrop from '../../components/UI/MovieBackdrop';
 
 import * as movieActions from '../../store/actions/movie';
 import * as shelfActions from '../../store/actions/shelf';
-
-import noPosterImage from '../../../public/assets/images/no-poster.png';
 
 import Movie from '../../models/Movie';
 
@@ -46,7 +45,7 @@ export default function MovieDetailsScreen({}) {
 	if (loading) {
 		movieDetailsContent = (
 			<Center>
-				<BounceLoader loading={loading} color="#F50057" />
+				<BounceLoader loading={loading} color="#F50057" speedMultiplier={1.8} />
 			</Center>
 		);
 	} else if (error) {
@@ -72,42 +71,14 @@ export default function MovieDetailsScreen({}) {
 						</SecondaryButton>
 					</div>
 				</header>
-				<figure
-					className={classes.backdrop}
-					style={{
-						backgroundImage: movieDetails.backdrop_path
-							? `url(https://image.tmdb.org/t/p/original${movieDetails.backdrop_path})`
-							: `url(${noPosterImage})`,
-					}}
-				>
-					<header className={classes.backdrop__header}>
-						<FaEye
-							className={classes.shelfIcon}
-							onClick={event => handleToggleMovieInShelf(event, 'watching')}
-							color={
-								watching.some(({ id }) => id === movieDetails.id)
-									? 'var(--color-tertiary)'
-									: 'var(--color-white)'
-							}
-						/>
-						<SecondaryButton className={classes.button} onClick={() => {}}>
-							<FaVideo />
-							<span>Watch Trailer</span>
-						</SecondaryButton>
-						<FaHeart
-							className={classes.shelfIcon}
-							onClick={event => handleToggleMovieInShelf(event, 'favorites')}
-							color={
-								favorites.some(({ id }) => id === movieDetails.id)
-									? 'var(--color-tertiary)'
-									: 'var(--color-white)'
-							}
-						/>
-					</header>
-					<figcaption className={classes.backdrop__caption}>
-						{movieDetails.overview}
-					</figcaption>
-				</figure>
+				<MovieBackdrop
+					onWatchTrailer={() => {}}
+					backdropImage={movieDetails.backdrop_path}
+					onToggleMovieInShelf={handleToggleMovieInShelf}
+					isFavoriteMovie={favorites.some(({ id }) => id === movieDetails.id)}
+					isWatchLaterMovie={watching.some(({ id }) => id === movieDetails.id)}
+					overview={movieDetails.overview}
+				/>
 			</>
 		);
 	}

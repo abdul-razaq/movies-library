@@ -75,7 +75,7 @@ export default function MoviesScreen({}) {
 	if (loading)
 		content = (
 			<Center>
-				<BounceLoader loading={loading} color="#F50057" />
+				<BounceLoader loading={loading} color="#F50057" speedMultiplier={1.8} />
 			</Center>
 		);
 
