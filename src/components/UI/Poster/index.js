@@ -9,7 +9,7 @@ import noPosterFallback from '../../../../public/assets/images/no-poster.svg';
 
 export default function Poster({
 	movie,
-	isFavorited,
+	isFavorite,
 	isWatching,
 	onToggleMovieInShelf,
 	onPosterClick,
@@ -35,7 +35,7 @@ export default function Poster({
 				<FaHeart
 					size={20}
 					onClick={event => onToggleMovieInShelf(event, movie, 'favorites')}
-					color={isFavorited ? 'var(--color-tertiary)' : 'var(--color-white)'}
+					color={isFavorite ? 'var(--color-tertiary)' : 'var(--color-white)'}
 				/>
 			</header>
 			<footer>
@@ -53,7 +53,7 @@ export default function Poster({
 
 Poster.propTypes = {
 	movie: PropTypes.object.isRequired,
-	isFavorited: PropTypes.bool.isRequired,
+	isFavorite: PropTypes.bool.isRequired,
 	isWatching: PropTypes.bool.isRequired,
 	onToggleMovieInShelf: PropTypes.func.isRequired,
 	onPosterClick: PropTypes.func.isRequired,

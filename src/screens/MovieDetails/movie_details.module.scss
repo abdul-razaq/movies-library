@@ -37,7 +37,10 @@
 		line-height: 2;
 		font-size: 2rem;
 		padding: 5rem;
-		animation: moveInFromButtom .4s ease-out 1 backwards;
+		@include respond(phone) {
+			padding: 2.5rem;
+		}
+		animation: moveInFromButtom 0.4s ease-out 1 backwards;
 		display: none;
 	}
 

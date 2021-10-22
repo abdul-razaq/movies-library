@@ -79,13 +79,13 @@ export default function MoviesScreen({}) {
 			</Center>
 		);
 
-	if (!movies.length) {
-		content = (
-			<Center>
-				<NoData text="No data found." />
-			</Center>
-		);
-	}
+	// if (!movies.length) {
+	// 	content = (
+	// 		<Center>
+	// 			<NoData text="No data found." />
+	// 		</Center>
+	// 	);
+	// }
 
 	if (error)
 		content = (
@@ -93,5 +93,6 @@ export default function MoviesScreen({}) {
 				<NoData text={error} />
 			</Center>
 		);
+
 	return <section className={classes.movies}>{content}</section>;
 }

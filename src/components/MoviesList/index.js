@@ -55,7 +55,7 @@ export default function MoviesList({
 					<Poster
 						key={movie.id}
 						movie={movie}
-						isFavorited={favorites.map(mov => mov.id).includes(movie.id)}
+						isFavorite={favorites.map(mov => mov.id).includes(movie.id)}
 						isWatching={watching.map(mov => mov.id).includes(movie.id)}
 						onToggleMovieInShelf={handleToggleShelfMovie}
 						onPosterClick={handlePosterClick.bind(null, movie.id)}
