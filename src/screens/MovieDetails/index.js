@@ -33,6 +33,7 @@ export default function MovieDetailsScreen({}) {
 		currentPage,
 		nextPage,
 		totalPages,
+		initialPage,
 	} = useSelector(state => state.movies);
 
 	const history = useHistory();
@@ -95,12 +96,17 @@ export default function MovieDetailsScreen({}) {
 						page={currentPage}
 						nextPage={nextPage}
 						totalPages={totalPages}
-						onGoBack={history.goBack}
+						onGoBack={() =>
+							dispatch(
+								movieActions.getRecommendedMovies(movieDetails.id, initialPage),
+							)
+						}
 						onGoToNextPage={() =>
 							dispatch(
 								movieActions.getRecommendedMovies(movieDetails.id, nextPage),
 							)
 						}
+						showBackButton={currentPage > initialPage}
 					/>
 				) : null}
 			</>
