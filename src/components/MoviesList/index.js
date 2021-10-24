@@ -70,10 +70,12 @@ export default function MoviesList({
 						<FaArrowLeft />
 						<span>Back</span>
 					</SecondaryButton>
-					<SecondaryButton onClick={onGoToNextPage}>
-						<span>Page {nextPage}</span>
-						<FaArrowRight />
-					</SecondaryButton>
+					{nextPage > 1 && (
+						<SecondaryButton onClick={onGoToNextPage}>
+							<span>Page {nextPage}</span>
+							<FaArrowRight />
+						</SecondaryButton>
+					)}
 				</footer>
 			)}
 		</article>
