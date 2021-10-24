@@ -1,4 +1,5 @@
 import { fetchMovie, fetchRecommendedMovies } from '../../../api/themoviedb';
+import { actionTypes as moviesActionsTypes } from '../movies';
 
 export const actionTypes = {
 	SET_MOVIE_LOADING: 'SET_MOVIE_LOADING',
@@ -18,8 +19,11 @@ export function getMovie(movieId) {
 					movie,
 				},
 			});
+			dispatch({
+				type: moviesActionsTypes.GET_MOVIES,
+				payload: { movies: movie.recommendations },
+			});
 		} catch (error) {
-			console.error('[fetchMovie] => ', error);
 			dispatch({ type: actionTypes.SET_MOVIE_ERROR, payload: { error } });
 		} finally {
 			dispatch({ type: actionTypes.UNSET_MOVIE_LOADING });
@@ -27,10 +31,19 @@ export function getMovie(movieId) {
 	};
 }
 
-export function getRecommendedMovies(movieId) {
+export function getRecommendedMovies(movieId, page) {
 	return async function (dispatch, getState) {
-		return {
-			type: actionTypes.FETCH_MOVIE,
-		};
+		try {
+			dispatch({ type: moviesActionsTypes.SET_MOVIES_LOADING });
+			const movies = await fetchRecommendedMovies(movieId, page);
+			dispatch({ type: moviesActionsTypes.GET_MOVIES, payload: { movies } });
+		} catch (error) {
+			dispatch({
+				type: moviesActionsTypes.SET_MOVIES_ERROR,
+				payload: { error },
+			});
+		} finally {
+			dispatch({ type: moviesActionsTypes.UNSET_MOVIES_LOADING });
+		}
 	};
 }
