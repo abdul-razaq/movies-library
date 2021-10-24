@@ -63,6 +63,13 @@ export async function fetchMovie(movieId) {
 	}
 }
 
-export async function fetchRecommendedMovies(movieId) {
-	return;
+export async function fetchRecommendedMovies(movieId, page) {
+	try {
+		const path = `${basePath}/movie/${movieId}/recommendations?api_key=${API_KEY}&page=${page}`;
+		const { data, status } = await axios.get(path);
+		if (status !== 200) throw new Error('unable to fetch recommended movies.');
+		return data;
+	} catch (error) {
+		throw error;
+	}
 }
