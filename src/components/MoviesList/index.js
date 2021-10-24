@@ -21,6 +21,7 @@ export default function MoviesList({
 	totalPages,
 	onGoToNextPage,
 	onGoBack,
+	showBackButton,
 }) {
 	const { favorites, watching } = useSelector(state => state.shelf);
 
@@ -66,10 +67,12 @@ export default function MoviesList({
 			</section>
 			{page && nextPage && (
 				<footer>
-					<SecondaryButton onClick={onGoBack}>
-						<FaArrowLeft />
-						<span>Back</span>
-					</SecondaryButton>
+					{showBackButton && (
+						<SecondaryButton onClick={onGoBack}>
+							<FaArrowLeft />
+							<span>Back</span>
+						</SecondaryButton>
+					)}
 					{nextPage > 1 && (
 						<SecondaryButton onClick={onGoToNextPage}>
 							<span>Page {nextPage}</span>
@@ -90,4 +93,5 @@ MoviesList.propTypes = {
 	totalPages: PropTypes.number,
 	onGoToNextPage: PropTypes.func,
 	onGoBack: PropTypes.func,
+	showBackButton: PropTypes.bool,
 };
