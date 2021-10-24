@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams, useHistory, Redirect, Link } from 'react-router-dom';
+import { useParams, useHistory, Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { BounceLoader } from 'react-spinners';
@@ -8,6 +8,7 @@ import { FaArrowLeft, FaFilm } from 'react-icons/fa';
 import Center from '../../components/customs/Center';
 import NoData from '../../components/UI/NoData';
 import PrimaryButton from '../../components/UI/PrimaryButton';
+import PrimaryLink from '../../components/UI/PrimaryLink';
 import SecondaryButton from '../../components/UI/SecondaryButton';
 import MovieBackdrop from '../../components/UI/MovieBackdrop';
 
@@ -85,11 +86,11 @@ export default function MovieDetailsScreen({}) {
 				<section className={classes.movieDetails__details}>
 					<h3>GENRES</h3>
 					<ul>
-						{movieDetails.genres.map(({ name }) => (
-								<Link to={`/genres/${name.toLowerCase()}`}>
-									<FaFilm />
-									<span>{name}</span>
-								</Link>
+						{movieDetails.genres.map(({ name, id }) => (
+							<PrimaryLink key={id} to={`/genres/${name.toLowerCase()}`}>
+								<FaFilm />
+								<span>{name}</span>
+							</PrimaryLink>
 						))}
 					</ul>
 				</section>

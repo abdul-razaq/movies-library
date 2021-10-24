@@ -39,24 +39,6 @@
 		& ul {
 			display: flex;
 			gap: 2rem;
-
-			& a {
-				display: flex;
-				align-items: center;
-				gap: 0.5rem;
-				color: currentColor;
-				border-bottom: 1px solid transparent;
-				transition: all 0.3s ease;
-
-				& svg {
-					margin-top: -1px;
-				}
-
-				&:hover {
-					border-bottom: 1px solid currentColor;
-					transform: translateY(-4px);
-				}
-			}
 		}
 	}
 }
