@@ -1,9 +1,9 @@
 import React from 'react';
-import { useParams, useHistory, Redirect } from 'react-router-dom';
+import { useParams, useHistory, Redirect, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { BounceLoader } from 'react-spinners';
-import { FaArrowLeft } from 'react-icons/fa';
+import { FaArrowLeft, FaFilm } from 'react-icons/fa';
 
 import Center from '../../components/customs/Center';
 import NoData from '../../components/UI/NoData';
@@ -26,15 +26,8 @@ export default function MovieDetailsScreen({}) {
 		state => state.movieDetails,
 	);
 	const { favorites, watching } = useSelector(state => state.shelf);
-	const {
-		loading: moviesLoading,
-		error: moviesError,
-		movies,
-		currentPage,
-		nextPage,
-		totalPages,
-		initialPage,
-	} = useSelector(state => state.movies);
+	const { movies, currentPage, nextPage, totalPages, initialPage } =
+		useSelector(state => state.movies);
 
 	const history = useHistory();
 
@@ -89,7 +82,18 @@ export default function MovieDetailsScreen({}) {
 					isWatchLaterMovie={watching.some(({ id }) => id === movieDetails.id)}
 					overview={movieDetails.overview}
 				/>
-				{movies.length ? (
+				<section className={classes.movieDetails__details}>
+					<h3>GENRES</h3>
+					<ul>
+						{movieDetails.genres.map(({ name }) => (
+								<Link to={`/genres/${name.toLowerCase()}`}>
+									<FaFilm />
+									<span>{name}</span>
+								</Link>
+						))}
+					</ul>
+				</section>
+				{movies.length && (
 					<MoviesList
 						category="Recommended"
 						movies={movies}
@@ -108,7 +112,7 @@ export default function MovieDetailsScreen({}) {
 						}
 						showBackButton={currentPage > initialPage}
 					/>
-				) : null}
+				)}
 			</>
 		);
 	}
