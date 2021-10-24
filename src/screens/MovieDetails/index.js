@@ -15,6 +15,7 @@ import * as movieActions from '../../store/actions/movie';
 import * as shelfActions from '../../store/actions/shelf';
 
 import Movie from '../../models/Movie';
+import MoviesList from '../../components/MoviesList';
 
 import classes from './movie_details.module';
 
@@ -25,6 +26,14 @@ export default function MovieDetailsScreen({}) {
 		state => state.movieDetails,
 	);
 	const { favorites, watching } = useSelector(state => state.shelf);
+	const {
+		loading: moviesLoading,
+		error: moviesError,
+		movies,
+		currentPage,
+		nextPage,
+		totalPages,
+	} = useSelector(state => state.movies);
 
 	const history = useHistory();
 
@@ -79,6 +88,21 @@ export default function MovieDetailsScreen({}) {
 					isWatchLaterMovie={watching.some(({ id }) => id === movieDetails.id)}
 					overview={movieDetails.overview}
 				/>
+				{movies.length ? (
+					<MoviesList
+						category="Recommended"
+						movies={movies}
+						page={currentPage}
+						nextPage={nextPage}
+						totalPages={totalPages}
+						onGoBack={history.goBack}
+						onGoToNextPage={() =>
+							dispatch(
+								movieActions.getRecommendedMovies(movieDetails.id, nextPage),
+							)
+						}
+					/>
+				) : null}
 			</>
 		);
 	}
