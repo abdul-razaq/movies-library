@@ -43,8 +43,26 @@
 @mixin general-screen-style {
 	padding: var(--spacing-around-screen);
 	overflow-y: scroll;
-  overflow-x: hidden;
+	overflow-x: hidden;
 	@include scrollbar-ui-secondary;
+}
+
+@mixin primary_link {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	color: currentColor;
+	border-bottom: 1px solid transparent;
+	transition: all 0.3s ease;
+
+	& svg {
+		margin-top: -1px;
+	}
+
+	&:hover {
+		border-bottom: 1px solid currentColor;
+		transform: translateY(-4px);
+	}
 }
 
 // MEDIA QUERY MANAGER

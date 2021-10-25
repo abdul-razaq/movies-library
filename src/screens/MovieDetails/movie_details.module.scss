@@ -33,10 +33,28 @@
 		font-size: 2rem;
 	}
 
-	&__details {
-		margin-bottom: 5rem;
+	&__title {
+		text-transform: uppercase;
+		font-weight: var(--font-weight-semi-bold);
+	}
+	& ul {
+		& li {
+			& span {
+				font-weight: var(--font-weight-semi-bold);
+			}
+		}
+	}
+	.primary_link {
+		text-transform: uppercase;
+		margin-right: 1.5rem;
+		font-weight: var(--font-weight-semi-bold);
+		@include primary_link;
+	}
 
-		& ul {
+	&__details {
+		margin: 5rem 0;
+
+		& ul:first-of-type {
 			display: flex;
 			gap: 2rem;
 		}

@@ -3,12 +3,12 @@ import { useParams, useHistory, Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { BounceLoader } from 'react-spinners';
-import { FaArrowLeft, FaFilm } from 'react-icons/fa';
+import { FaArrowLeft, FaFilm, FaLink, FaHome } from 'react-icons/fa';
 
 import Center from '../../components/customs/Center';
 import NoData from '../../components/UI/NoData';
-import PrimaryButton from '../../components/UI/PrimaryButton';
 import PrimaryLink from '../../components/UI/PrimaryLink';
+import PrimaryButton from '../../components/UI/PrimaryButton';
 import SecondaryButton from '../../components/UI/SecondaryButton';
 import MovieBackdrop from '../../components/UI/MovieBackdrop';
 
@@ -53,7 +53,15 @@ export default function MovieDetailsScreen({}) {
 			</Center>
 		);
 	} else if (error) {
-		movieDetailsContent = <Redirect to="/error" />;
+		error.message.includes('Network Error')
+			? (movieDetailsContent = (
+					<Center>
+						<NoData
+							text={`${error.message}. check internet connection and try again.`}
+						/>
+					</Center>
+			  ))
+			: (movieDetailsContent = <Redirect to="/error" />);
 	} else if (!Object.keys(movieDetails).length) {
 		movieDetailsContent = (
 			<Center>
@@ -84,7 +92,7 @@ export default function MovieDetailsScreen({}) {
 					overview={movieDetails.overview}
 				/>
 				<section className={classes.movieDetails__details}>
-					<h3>GENRES</h3>
+					<h3 className={classes.movieDetails__title}>Genres</h3>
 					<ul>
 						{movieDetails.genres.map(({ name, id }) => (
 							<PrimaryLink key={id} to={`/genres/${name.toLowerCase()}`}>
@@ -93,8 +101,69 @@ export default function MovieDetailsScreen({}) {
 							</PrimaryLink>
 						))}
 					</ul>
+					<h3 className={classes.movieDetails__title}>Details</h3>
+					<ul>
+						{movieDetails.budget ? (
+							<li>
+								<span>Budget: </span>$
+								{window.Number(movieDetails.budget).toLocaleString()}
+							</li>
+						) : null}
+						<li>
+							<span>Adult Movie: </span>
+							{movieDetails.adult ? 'Yes' : 'No'}
+						</li>
+						<li>
+							<span>Spoken Language(s): </span>
+							{movieDetails.spoken_languages
+								.map(lang => lang.english_name)
+								.join(', ')}
+						</li>
+						<li>
+							<span>Status: </span> {movieDetails.status}
+						</li>
+						<li>
+							<span>Runtime: </span>
+							{movieDetails.runtime} Mins.
+						</li>
+						<li>
+							<span>Release Date: </span>
+							{new Date(movieDetails.release_date).toDateString()}
+						</li>
+						<li>
+							<span>Production Countries: </span>
+							{movieDetails.production_countries
+								.map(country => country.name)
+								.join(', ')}
+						</li>
+					</ul>
+					<h3 className={classes.movieDetails__title}>Links</h3>
+					<ul>
+						{movieDetails.homepage ? (
+							<li>
+								<a
+									className={classes.primary_link}
+									href={movieDetails.homepage}
+									target={'_blank'}
+									rel="noopener noreferrer"
+								>
+									<FaLink size={15} />
+									<span>Website</span>
+								</a>
+								<a
+									className={classes.primary_link}
+									href={`https:www.imdb.com/title/${movieDetails.imdb_id}`}
+									target={'_blank'}
+									rel="noopener noreferrer"
+								>
+									<FaLink size={15} />
+									<span>IMDB</span>
+								</a>
+							</li>
+						) : null}
+					</ul>
 				</section>
-				{movies.length && (
+				{movies.length ? (
 					<MoviesList
 						category="Recommended"
 						movies={movies}
@@ -113,6 +182,14 @@ export default function MovieDetailsScreen({}) {
 						}
 						showBackButton={currentPage > initialPage}
 					/>
+				) : (
+					<Center>
+						<NoData text={'Sorry, there are no recommended movies.'} />
+						<PrimaryButton path="/discover/popular">
+							<FaHome />
+							<span>Home</span>
+						</PrimaryButton>
+					</Center>
 				)}
 			</>
 		);

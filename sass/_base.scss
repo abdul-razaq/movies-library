@@ -12,6 +12,11 @@
 	list-style-type: none;
 	box-sizing: inherit;
 	font-weight: inherit;
+	-webkit-user-select: none;
+	-webkit-touch-callout: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 :root {

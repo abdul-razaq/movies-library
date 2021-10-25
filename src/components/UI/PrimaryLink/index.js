@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom';
 
 import classes from './primary_link.module.scss';
 
-export default function PrimaryLink({ to, children }) {
+export default function PrimaryLink(props) {
 	return (
-		<Link className={classes.primary_link} to={to}>
-			{children}
+		<Link {...props} className={classes.primary_link} to={props.to}>
+			{props.children}
 		</Link>
 	);
 }
