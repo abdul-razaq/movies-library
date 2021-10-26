@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { BounceLoader } from 'react-spinners';
 import { FaArrowLeft, FaFilm, FaLink, FaHome } from 'react-icons/fa';
+import StarRatings from 'react-star-ratings';
 
 import Center from '../../components/customs/Center';
 import NoData from '../../components/UI/NoData';
@@ -162,7 +163,17 @@ export default function MovieDetailsScreen({}) {
 							</li>
 						) : null}
 					</ul>
+					<div className={classes.ratings}>
+						<StarRatings
+							rating={movieDetails.vote_average / 2}
+							starRatedColor="#F50057"
+							starDimension="2.1rem"
+							starSpacing="1"
+						/>
+						<span>{movieDetails.vote_average}</span>
+					</div>
 				</section>
+
 				{movies.length ? (
 					<MoviesList
 						category="Recommended"
