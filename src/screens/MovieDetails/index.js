@@ -7,6 +7,7 @@ import { FaArrowLeft, FaFilm, FaLink, FaHome } from 'react-icons/fa';
 import StarRatings from 'react-star-ratings';
 
 import Center from '../../components/customs/Center';
+import PrimaryText from '../../components/customs/PrimaryText';
 import NoData from '../../components/UI/NoData';
 import PrimaryLink from '../../components/UI/PrimaryLink';
 import PrimaryButton from '../../components/UI/PrimaryButton';
@@ -20,6 +21,8 @@ import Movie from '../../models/Movie';
 import MoviesList from '../../components/MoviesList';
 
 import classes from './movie_details.module';
+
+import NoPosterImage from '../../../public/assets/images/no-poster.svg';
 
 export default function MovieDetailsScreen({}) {
 	const { movieID } = useParams();
@@ -93,6 +96,7 @@ export default function MovieDetailsScreen({}) {
 					overview={movieDetails.overview}
 				/>
 				<section className={classes.movieDetails__details}>
+					<PrimaryText>{`Information about "${movieDetails.title}"`}</PrimaryText>
 					<h3 className={classes.movieDetails__title}>Genres</h3>
 					<ul>
 						{movieDetails.genres.map(({ name, id }) => (
@@ -171,6 +175,22 @@ export default function MovieDetailsScreen({}) {
 							starSpacing="1"
 						/>
 						<span>{movieDetails.vote_average}</span>
+					</div>
+
+					<h3 className={classes.movieDetails__title}>Production Companies</h3>
+					<div className={classes.logoBox}>
+						{movieDetails.production_companies.map(company => (
+							<div className={classes.logo}>
+								<img
+									src={
+										company.logo_path
+											? `https://image.tmdb.org/t/p/w154/${company.logo_path}`
+											: NoPosterImage
+									}
+									alt={company.name}
+								/>
+							</div>
+						))}
 					</div>
 				</section>
 
