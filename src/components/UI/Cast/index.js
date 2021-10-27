@@ -2,6 +2,7 @@ import React from 'react';
 
 import { FaArrowCircleRight, FaArrowCircleLeft } from 'react-icons/fa';
 import Slider from 'react-slick';
+import { useMediaQuery } from 'react-responsive';
 
 function NextArrow(props) {
 	const { className, style, onClick } = props;
@@ -29,24 +30,21 @@ function PrevArrow(props) {
 	);
 }
 
-const sliderSettings = {
-	dots: false,
-	infinite: true,
-	autoplay: true,
-	autoplaySpeed: 3000,
-	swipeToSlide: true,
-	speed: 500,
-	nextArrow: <NextArrow />,
-	prevArrow: <PrevArrow />,
-	slidesToShow: 5,
-	slidesToScroll: 1,
-	cssEase: 'linear',
-};
-
 export default function Cast({ children }) {
-	return (
-		<Slider {...sliderSettings}>
-			{children}
-		</Slider>
-	);
+	const isMobile = useMediaQuery({ query: `(max-width: 37.5em)` });
+
+	const sliderSettings = {
+		dots: false,
+		infinite: true,
+		autoplay: true,
+		autoplaySpeed: 3000,
+		swipeToSlide: true,
+		speed: 500,
+		nextArrow: <NextArrow />,
+		prevArrow: <PrevArrow />,
+		slidesToShow: isMobile ? 3 : 5,
+		slidesToScroll: 1,
+		cssEase: 'linear',
+	};
+	return <Slider {...sliderSettings}>{children}</Slider>;
 }
