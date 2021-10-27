@@ -1,10 +1,18 @@
 import React from 'react';
-import { useParams, useHistory, Redirect } from 'react-router-dom';
+import { useParams, useHistory, Redirect, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { BounceLoader } from 'react-spinners';
-import { FaArrowLeft, FaFilm, FaLink, FaHome } from 'react-icons/fa';
+import {
+	FaArrowLeft,
+	FaFilm,
+	FaLink,
+	FaHome,
+	FaArrowCircleRight,
+	FaArrowCircleLeft,
+} from 'react-icons/fa';
 import StarRatings from 'react-star-ratings';
+import Slider from 'react-slick';
 
 import Center from '../../components/customs/Center';
 import PrimaryText from '../../components/customs/PrimaryText';
@@ -22,6 +30,32 @@ import Movie from '../../models/Movie';
 import MoviesList from '../../components/MoviesList';
 
 import classes from './movie_details.module';
+
+function NextArrow(props) {
+	const { className, style, onClick } = props;
+	return (
+		<FaArrowCircleRight
+			className={className}
+			onClick={onClick}
+			color="currentColor"
+			size={16}
+			title="next cast arrow"
+		/>
+	);
+}
+
+function PrevArrow(props) {
+	const { className, style, onClick } = props;
+	return (
+		<FaArrowCircleLeft
+			className={className}
+			onClick={onClick}
+			color="currentColor"
+			size={16}
+			title="previous cast arrow"
+		/>
+	);
+}
 
 export default function MovieDetailsScreen({}) {
 	const { movieID } = useParams();
@@ -72,6 +106,19 @@ export default function MovieDetailsScreen({}) {
 			</Center>
 		);
 	} else {
+		const sliderSettings = {
+			dots: false,
+			infinite: true,
+			autoplay: true,
+			autoplaySpeed: 3000,
+			swipeToSlide: true,
+			speed: 500,
+			nextArrow: <NextArrow />,
+			prevArrow: <PrevArrow />,
+			slidesToShow: 5,
+			slidesToScroll: 1,
+			cssEase: 'linear',
+		};
 		movieDetailsContent = (
 			<>
 				<header className={classes.movieDetails__header}>
@@ -178,9 +225,22 @@ export default function MovieDetailsScreen({}) {
 
 					<h3 className={classes.movieDetails__title}>Production Companies</h3>
 					<div className={classes.logoBox}>
-						{movieDetails.production_companies.map(({ id, name, logo_path}) => (
-							<Avatar key={id} image={logo_path} name={name} />
-						))}
+						{movieDetails.production_companies.map(
+							({ id, name, logo_path }) => (
+								<Avatar key={id} image={logo_path} name={name} />
+							),
+						)}
+					</div>
+
+					<h3 className={classes.movieDetails__title}>Cast</h3>
+					<div className={classes.slider}>
+						<Slider {...sliderSettings}>
+							{movieDetails.credits.cast.map(({ id, profile_path, name }) => (
+								<Link key={id} to={`/cast/${id}`}>
+									<Avatar image={profile_path} name={name} />
+								</Link>
+							))}
+						</Slider>
 					</div>
 				</section>
 

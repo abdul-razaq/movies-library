@@ -9,7 +9,7 @@ export default function Avatar({ image, name }) {
 	return (
 		<div className={classes.avatar}>
 			<img
-				src={image ? `https://image.tmdb.org/t/p/w154/${image}` : NoProfile}
+				src={image ? `https://image.tmdb.org/t/p/w45/${image}` : NoProfile}
 				alt={name}
 			/>
 		</div>
