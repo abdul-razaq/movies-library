@@ -3,12 +3,7 @@ import { useParams, useHistory, Redirect, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { BounceLoader } from 'react-spinners';
-import {
-	FaArrowLeft,
-	FaFilm,
-	FaLink,
-	FaHome,
-} from 'react-icons/fa';
+import { FaArrowLeft, FaFilm, FaLink, FaHome } from 'react-icons/fa';
 import StarRatings from 'react-star-ratings';
 
 import Center from '../../components/customs/Center';
@@ -101,105 +96,126 @@ export default function MovieDetailsScreen({}) {
 					overview={movieDetails.overview}
 				/>
 				<section className={classes.movieDetails__details}>
-					<PrimaryText>{`Information about "${movieDetails.title}"`}</PrimaryText>
-					<h3 className={classes.movieDetails__title}>Genres</h3>
-					<ul>
-						{movieDetails.genres.map(({ name, id }) => (
-							<PrimaryLink key={id} to={`/genres/${name.toLowerCase()}`}>
-								<FaFilm />
-								<span>{name}</span>
-							</PrimaryLink>
-						))}
-					</ul>
-					<h3 className={classes.movieDetails__title}>Details</h3>
-					<ul>
-						{movieDetails.budget ? (
-							<li>
-								<span>Budget: </span>$
-								{window.Number(movieDetails.budget).toLocaleString()}
-							</li>
-						) : null}
-						<li>
-							<span>Adult Movie: </span>
-							{movieDetails.adult ? 'Yes' : 'No'}
-						</li>
-						<li>
-							<span>Spoken Language(s): </span>
-							{movieDetails.spoken_languages
-								.map(lang => lang.english_name)
-								.join(', ')}
-						</li>
-						<li>
-							<span>Status: </span> {movieDetails.status}
-						</li>
-						<li>
-							<span>Runtime: </span>
-							{movieDetails.runtime} Mins.
-						</li>
-						<li>
-							<span>Release Date: </span>
-							{new Date(movieDetails.release_date).toDateString()}
-						</li>
-						<li>
-							<span>Production Countries: </span>
-							{movieDetails.production_countries
-								.map(country => country.name)
-								.join(', ')}
-						</li>
-					</ul>
-					<h3 className={classes.movieDetails__title}>Links</h3>
-					<ul>
-						{movieDetails.homepage ? (
-							<li>
-								<a
-									className={classes.primary_link}
-									href={movieDetails.homepage}
-									target={'_blank'}
-									rel="noopener noreferrer"
-								>
-									<FaLink size={15} />
-									<span>Website</span>
-								</a>
-								<a
-									className={classes.primary_link}
-									href={`https:www.imdb.com/title/${movieDetails.imdb_id}`}
-									target={'_blank'}
-									rel="noopener noreferrer"
-								>
-									<FaLink size={15} />
-									<span>IMDB</span>
-								</a>
-							</li>
-						) : null}
-					</ul>
-					<div className={classes.ratings}>
-						<StarRatings
-							rating={movieDetails.vote_average / 2}
-							starRatedColor="#F50057"
-							starDimension="2.1rem"
-							starSpacing="1"
-						/>
-						<span>{movieDetails.vote_average}</span>
-					</div>
-
-					<h3 className={classes.movieDetails__title}>Production Companies</h3>
-					<div className={classes.logoBox}>
-						{movieDetails.production_companies.map(
-							({ id, name, logo_path }) => (
-								<Avatar key={id} image={logo_path} name={name} />
-							),
-						)}
-					</div>
-
-					<h3 className={classes.movieDetails__title}>Cast</h3>
-					<div className={classes.cast}>
-						<Cast>
-							{movieDetails.credits.cast.map(({id, profile_path, name}) => (
-							<Link key={id} to={`/cast/${id}`}>
-								<Avatar image={profile_path} name={name} />
-							</Link>
+					<PrimaryText
+						style={{ textAlign: 'center', marginBottom: '1.5rem' }}
+					>Movie Information</PrimaryText>
+					<div className={classes.detailsBox}>
+						<h3 className={classes.movieDetails__title}>Genres</h3>
+						<ul>
+							{movieDetails.genres.map(({ name, id }) => (
+								<PrimaryLink key={id} to={`/genres/${name.toLowerCase()}`}>
+									<FaFilm />
+									<span>{name}</span>
+								</PrimaryLink>
 							))}
-						</Cast>
+						</ul>
+					</div>
+					{/* <div className={classes.detailsBox}>
+							<h3 className={classes.movieDetails__title}>Details</h3>
+							<ul>
+								{movieDetails.budget ? (
+									<li>
+										<span>Budget: </span>$
+										{window.Number(movieDetails.budget).toLocaleString()}
+									</li>
+								) : null}
+								<li>
+									<span>Adult Movie: </span>
+									{movieDetails.adult ? 'Yes' : 'No'}
+								</li>
+								<li>
+									<span>Spoken Language(s): </span>
+									{movieDetails.spoken_languages
+										.map(lang => lang.english_name)
+										.join(', ')}
+								</li>
+								<li>
+									<span>Status: </span> {movieDetails.status}
+								</li>
+								<li>
+									<span>Runtime: </span>
+									{movieDetails.runtime} Mins.
+								</li>
+								<li>
+									<span>Release Date: </span>
+									{new Date(movieDetails.release_date).toDateString()}
+								</li>
+								<li>
+									<span>Production Countries: </span>
+									{movieDetails.production_countries
+										.map(country => country.name)
+										.join(', ')}
+								</li>
+							</ul>
+						</div> */}
+					<div className={classes.detailsBox}>
+						<h3 className={classes.movieDetails__title}>Links</h3>
+						<ul>
+							{movieDetails.homepage ? (
+								<li>
+									<a
+										className={classes.primary_link}
+										href={movieDetails.homepage}
+										target={'_blank'}
+										rel="noopener noreferrer"
+									>
+										<FaLink size={15} />
+										<span>Website</span>
+									</a>
+									<a
+										className={classes.primary_link}
+										href={`https:www.imdb.com/title/${movieDetails.imdb_id}`}
+										target={'_blank'}
+										rel="noopener noreferrer"
+									>
+										<FaLink size={15} />
+										<span>IMDB</span>
+									</a>
+								</li>
+							) : null}
+						</ul>
+					</div>
+					<div className={classes.detailsBox}>
+						<h3 className={classes.movieDetails__title}>Rating</h3>
+						<div className={classes.ratings}>
+							<StarRatings
+								rating={movieDetails.vote_average / 2}
+								starRatedColor="#F50057"
+								starDimension="2.1rem"
+								starSpacing="1"
+							/>
+							<span>{movieDetails.vote_average}</span>
+						</div>
+					</div>
+					<div className={classes.detailsBox}>
+						<h3 className={classes.movieDetails__title}>
+							Production Companies
+						</h3>
+						<div className={classes.logoBox}>
+							{movieDetails.production_companies.map(
+								({ id, name, logo_path }) => (
+									<Avatar key={id} image={logo_path} name={name} />
+								),
+							)}
+						</div>
+					</div>
+					<div className={classes.detailsBox}>
+						{movieDetails.credits.cast.length ? (
+							<>
+								<h3 className={classes.movieDetails__title}>Cast</h3>
+								<div className={classes.cast}>
+									<Cast>
+										{movieDetails.credits.cast.map(
+											({ id, profile_path, name }) => (
+												<Link key={id} to={`/cast/${id}`}>
+													<Avatar image={profile_path} name={name} />
+												</Link>
+											),
+										)}
+									</Cast>
+								</div>
+							</>
+						) : null}
 					</div>
 				</section>
 
