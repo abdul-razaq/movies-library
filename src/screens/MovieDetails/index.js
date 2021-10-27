@@ -8,11 +8,8 @@ import {
 	FaFilm,
 	FaLink,
 	FaHome,
-	FaArrowCircleRight,
-	FaArrowCircleLeft,
 } from 'react-icons/fa';
 import StarRatings from 'react-star-ratings';
-import Slider from 'react-slick';
 
 import Center from '../../components/customs/Center';
 import PrimaryText from '../../components/customs/PrimaryText';
@@ -22,6 +19,7 @@ import PrimaryButton from '../../components/UI/PrimaryButton';
 import SecondaryButton from '../../components/UI/SecondaryButton';
 import MovieBackdrop from '../../components/UI/MovieBackdrop';
 import Avatar from '../../components/UI/Avatar';
+import Cast from '../../components/UI/Cast';
 
 import * as movieActions from '../../store/actions/movie';
 import * as shelfActions from '../../store/actions/shelf';
@@ -30,32 +28,6 @@ import Movie from '../../models/Movie';
 import MoviesList from '../../components/MoviesList';
 
 import classes from './movie_details.module';
-
-function NextArrow(props) {
-	const { className, style, onClick } = props;
-	return (
-		<FaArrowCircleRight
-			className={className}
-			onClick={onClick}
-			color="currentColor"
-			size={16}
-			title="next cast arrow"
-		/>
-	);
-}
-
-function PrevArrow(props) {
-	const { className, style, onClick } = props;
-	return (
-		<FaArrowCircleLeft
-			className={className}
-			onClick={onClick}
-			color="currentColor"
-			size={16}
-			title="previous cast arrow"
-		/>
-	);
-}
 
 export default function MovieDetailsScreen({}) {
 	const { movieID } = useParams();
@@ -106,19 +78,6 @@ export default function MovieDetailsScreen({}) {
 			</Center>
 		);
 	} else {
-		const sliderSettings = {
-			dots: false,
-			infinite: true,
-			autoplay: true,
-			autoplaySpeed: 3000,
-			swipeToSlide: true,
-			speed: 500,
-			nextArrow: <NextArrow />,
-			prevArrow: <PrevArrow />,
-			slidesToShow: 5,
-			slidesToScroll: 1,
-			cssEase: 'linear',
-		};
 		movieDetailsContent = (
 			<>
 				<header className={classes.movieDetails__header}>
@@ -233,14 +192,14 @@ export default function MovieDetailsScreen({}) {
 					</div>
 
 					<h3 className={classes.movieDetails__title}>Cast</h3>
-					<div className={classes.slider}>
-						<Slider {...sliderSettings}>
-							{movieDetails.credits.cast.map(({ id, profile_path, name }) => (
-								<Link key={id} to={`/cast/${id}`}>
-									<Avatar image={profile_path} name={name} />
-								</Link>
+					<div className={classes.cast}>
+						<Cast>
+							{movieDetails.credits.cast.map(({id, profile_path, name}) => (
+							<Link key={id} to={`/cast/${id}`}>
+								<Avatar image={profile_path} name={name} />
+							</Link>
 							))}
-						</Slider>
+						</Cast>
 					</div>
 				</section>
 
