@@ -32,6 +32,7 @@ function PrevArrow(props) {
 
 export default function Cast({ children }) {
 	const isMobile = useMediaQuery({ query: `(max-width: 37.5em)` });
+	const isTablet = useMediaQuery({ query: `(max-width: 75em)` });
 
 	const sliderSettings = {
 		dots: false,
@@ -42,7 +43,7 @@ export default function Cast({ children }) {
 		speed: 500,
 		nextArrow: <NextArrow />,
 		prevArrow: <PrevArrow />,
-		slidesToShow: isMobile ? 3 : 5,
+		slidesToShow: isMobile ? 3 : isTablet ? 4 : 5,
 		slidesToScroll: 1,
 		cssEase: 'linear',
 	};
