@@ -15,6 +15,7 @@ export default function MovieBackdrop({
 	isWatchLaterMovie,
 	onWatchTrailer,
 	overview,
+	showTrailerButton,
 }) {
 	return (
 		<figure
@@ -33,10 +34,12 @@ export default function MovieBackdrop({
 						isWatchLaterMovie ? 'var(--color-tertiary)' : 'var(--color-white)'
 					}
 				/>
-				<SecondaryButton className={classes.button} onClick={onWatchTrailer}>
-					<FaVideo />
-					<span>Watch Trailer</span>
-				</SecondaryButton>
+				{showTrailerButton && (
+					<SecondaryButton className={classes.button} onClick={onWatchTrailer}>
+						<FaVideo />
+						<span>Watch Trailer</span>
+					</SecondaryButton>
+				)}
 				<FaHeart
 					className={classes.shelfIcon}
 					onClick={event => onToggleMovieInShelf(event, 'favorites')}

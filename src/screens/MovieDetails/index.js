@@ -1,10 +1,11 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { useParams, useHistory, Redirect, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-
 import { BounceLoader } from 'react-spinners';
 import { FaArrowLeft, FaFilm, FaLink, FaHome } from 'react-icons/fa';
 import StarRatings from 'react-star-ratings';
+import ModalVideo from 'react-modal-video';
 
 import Center from '../../components/customs/Center';
 import PrimaryText from '../../components/customs/PrimaryText';
@@ -15,12 +16,11 @@ import SecondaryButton from '../../components/UI/SecondaryButton';
 import MovieBackdrop from '../../components/UI/MovieBackdrop';
 import Avatar from '../../components/UI/Avatar';
 import Cast from '../../components/UI/Cast';
+import Movie from '../../models/Movie';
+import MoviesList from '../../components/MoviesList';
 
 import * as movieActions from '../../store/actions/movie';
 import * as shelfActions from '../../store/actions/shelf';
-
-import Movie from '../../models/Movie';
-import MoviesList from '../../components/MoviesList';
 
 import classes from './movie_details.module';
 
@@ -37,6 +37,8 @@ export default function MovieDetailsScreen({}) {
 	const history = useHistory();
 
 	const dispatch = useDispatch();
+
+	const [isWatchingTrailer, setIsWatchingTrailer] = React.useState(true);
 
 	React.useEffect(() => {
 		dispatch(movieActions.getMovie(movieID));
@@ -73,8 +75,21 @@ export default function MovieDetailsScreen({}) {
 			</Center>
 		);
 	} else {
+		const trailerVideo = movieDetails.videos.results.find(
+			video => video.type === 'Trailer' && video.site === 'YouTube',
+		)?.key;
 		movieDetailsContent = (
 			<>
+				{isWatchingTrailer &&
+					ReactDOM.createPortal(
+						<ModalVideo
+							channel="youtube"
+							isOpen={isWatchingTrailer}
+							videoId={trailerVideo}
+							onClose={() => setIsWatchingTrailer(false)}
+						/>,
+						document.getElementById('root'),
+					)}
 				<header className={classes.movieDetails__header}>
 					<div>
 						<h1>{movieDetails.title}</h1>
@@ -88,7 +103,8 @@ export default function MovieDetailsScreen({}) {
 					</div>
 				</header>
 				<MovieBackdrop
-					onWatchTrailer={() => {}}
+					showTrailerButton={!!trailerVideo}
+					onWatchTrailer={() => setIsWatchingTrailer(true)}
 					backdropImage={movieDetails.backdrop_path}
 					onToggleMovieInShelf={handleToggleMovieInShelf}
 					isFavoriteMovie={favorites.some(({ id }) => id === movieDetails.id)}
