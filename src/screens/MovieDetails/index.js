@@ -96,9 +96,9 @@ export default function MovieDetailsScreen({}) {
 					overview={movieDetails.overview}
 				/>
 				<section className={classes.movieDetails__details}>
-					<PrimaryText
-						style={{ textAlign: 'center', marginBottom: '1.5rem' }}
-					>Movie Information</PrimaryText>
+					<PrimaryText style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
+						Movie Information
+					</PrimaryText>
 					<div className={classes.detailsBox}>
 						<h3 className={classes.movieDetails__title}>Genres</h3>
 						<ul>
@@ -110,48 +110,57 @@ export default function MovieDetailsScreen({}) {
 							))}
 						</ul>
 					</div>
-					{/* <div className={classes.detailsBox}>
-							<h3 className={classes.movieDetails__title}>Details</h3>
-							<ul>
-								{movieDetails.budget ? (
-									<li>
-										<span>Budget: </span>$
-										{window.Number(movieDetails.budget).toLocaleString()}
-									</li>
-								) : null}
-								<li>
-									<span>Adult Movie: </span>
-									{movieDetails.adult ? 'Yes' : 'No'}
-								</li>
-								<li>
-									<span>Spoken Language(s): </span>
-									{movieDetails.spoken_languages
-										.map(lang => lang.english_name)
-										.join(', ')}
-								</li>
-								<li>
-									<span>Status: </span> {movieDetails.status}
-								</li>
-								<li>
-									<span>Runtime: </span>
-									{movieDetails.runtime} Mins.
-								</li>
-								<li>
-									<span>Release Date: </span>
-									{new Date(movieDetails.release_date).toDateString()}
-								</li>
-								<li>
-									<span>Production Countries: </span>
-									{movieDetails.production_countries
-										.map(country => country.name)
-										.join(', ')}
-								</li>
-							</ul>
-						</div> */}
+					<div className={classes.detailsBox}>
+						<h3 className={classes.movieDetails__title}>
+							Production Countries
+						</h3>
+						<ul>
+							<li>
+								{movieDetails.production_countries
+									.map(country => country.name)
+									.join(', ')}
+							</li>
+						</ul>
+					</div>
+					{movieDetails.budget ? (
+						<div className={classes.detailsBox}>
+							<h3 className={classes.movieDetails__title}>Budget</h3>
+
+							<p>
+								${window.Number(movieDetails.budget).toLocaleString()}
+							</p>
+						</div>
+					) : null}
+					{movieDetails.runtime > 0 ? (
+						<div className={classes.detailsBox}>
+							<h3 className={classes.movieDetails__title}>Runtime</h3>
+							<p>{movieDetails.runtime} Min.</p>
+						</div>
+					) : null}
+					<div className={classes.detailsBox}>
+						<h3 className={classes.movieDetails__title}>Adult Movie</h3>
+						<p>{movieDetails.adult ? 'Yes' : 'No'}</p>
+					</div>
+					<div className={classes.detailsBox}>
+						<h3 className={classes.movieDetails__title}>Spoken Language(s)</h3>
+						<p>
+							{movieDetails.spoken_languages
+								.map(lang => lang.english_name)
+								.join(', ')}
+						</p>
+					</div>
+					<div className={classes.detailsBox}>
+						<h3 className={classes.movieDetails__title}>Movie Status</h3>
+						<p>{movieDetails.status}</p>
+					</div>
+					<div className={classes.detailsBox}>
+						<h3 className={classes.movieDetails__title}>Release Date</h3>
+						<p>{new Date(movieDetails.release_date).toDateString()}</p>
+					</div>
 					<div className={classes.detailsBox}>
 						<h3 className={classes.movieDetails__title}>Links</h3>
 						<ul>
-							{movieDetails.homepage ? (
+							{movieDetails.homepage && movieDetails.imdb_id ? (
 								<li>
 									<a
 										className={classes.primary_link}
@@ -159,7 +168,7 @@ export default function MovieDetailsScreen({}) {
 										target={'_blank'}
 										rel="noopener noreferrer"
 									>
-										<FaLink size={15} />
+										<FaLink size={10} />
 										<span>Website</span>
 									</a>
 									<a
@@ -168,7 +177,7 @@ export default function MovieDetailsScreen({}) {
 										target={'_blank'}
 										rel="noopener noreferrer"
 									>
-										<FaLink size={15} />
+										<FaLink size={10} />
 										<span>IMDB</span>
 									</a>
 								</li>
@@ -185,18 +194,6 @@ export default function MovieDetailsScreen({}) {
 								starSpacing="1"
 							/>
 							<span>{movieDetails.vote_average}</span>
-						</div>
-					</div>
-					<div className={classes.detailsBox}>
-						<h3 className={classes.movieDetails__title}>
-							Production Companies
-						</h3>
-						<div className={classes.logoBox}>
-							{movieDetails.production_companies.map(
-								({ id, name, logo_path }) => (
-									<Avatar key={id} image={logo_path} name={name} />
-								),
-							)}
 						</div>
 					</div>
 					<div className={classes.detailsBox}>
