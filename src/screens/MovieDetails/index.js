@@ -114,7 +114,7 @@ export default function MovieDetailsScreen({}) {
 						<h3 className={classes.movieDetails__title}>
 							Production Countries
 						</h3>
-						<ul>
+						<ul style={{ justifyContent: 'center' }}>
 							<li>
 								{movieDetails.production_countries
 									.map(country => country.name)
@@ -126,9 +126,7 @@ export default function MovieDetailsScreen({}) {
 						<div className={classes.detailsBox}>
 							<h3 className={classes.movieDetails__title}>Budget</h3>
 
-							<p>
-								${window.Number(movieDetails.budget).toLocaleString()}
-							</p>
+							<p>${window.Number(movieDetails.budget).toLocaleString()}</p>
 						</div>
 					) : null}
 					{movieDetails.runtime > 0 ? (
