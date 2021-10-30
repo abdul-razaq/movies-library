@@ -102,3 +102,12 @@
 		width: 30rem;
 	}
 }
+
+.genres {
+	@include respond(phone) {
+		font-size: 2rem;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+}

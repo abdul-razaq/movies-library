@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 import { BounceLoader } from 'react-spinners';
 import StarRatings from 'react-star-ratings';
 import ModalVideo from 'react-modal-video';
@@ -7,7 +7,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useHistory, Redirect, Link } from 'react-router-dom';
 import { FaArrowLeft, FaFilm, FaLink, FaHome } from 'react-icons/fa';
 import { Helmet } from 'react-helmet';
-import { Element, scroller, animateScroll as scroll } from 'react-scroll';
 
 import Center from '../../components/customs/Center';
 import PrimaryText from '../../components/customs/PrimaryText';
@@ -43,11 +42,11 @@ export default function MovieDetailsScreen({}) {
 
 	const [isWatchingTrailer, setIsWatchingTrailer] = React.useState(false);
 
+	const elRef = React.useRef(null);
+	const topRef = React.useRef(null);
+
 	React.useEffect(() => {
-		scroll.scrollToTop({
-			smooth: true,
-			delay: 500,
-		});
+		scrollToTop();
 		dispatch(movieActions.getMovie(movieID));
 
 		return () => {
@@ -73,10 +72,17 @@ export default function MovieDetailsScreen({}) {
 	}
 
 	function scrollToElement() {
-		scroller.scrollTo('scrollToElement', {
-			duration: 1500,
-			smooth: 'easeInOutQuart',
-			offset: -50,
+		elRef.current.scrollIntoView({
+			behavior: 'smooth',
+			block: 'start',
+		});
+	}
+
+	function scrollToTop() {
+		topRef.current.scrollTo({
+			top: 0,
+			left: 0,
+			behavior: 'smooth',
 		});
 	}
 
@@ -110,16 +116,14 @@ export default function MovieDetailsScreen({}) {
 		)?.key;
 		movieDetailsContent = (
 			<>
-				{isWatchingTrailer &&
-					ReactDOM.createPortal(
-						<ModalVideo
-							channel="youtube"
-							isOpen={isWatchingTrailer}
-							videoId={trailerVideo}
-							onClose={() => setIsWatchingTrailer(false)}
-						/>,
-						document.getElementById('root'),
-					)}
+				{isWatchingTrailer && (
+					<ModalVideo
+						channel="youtube"
+						isOpen={isWatchingTrailer}
+						videoId={trailerVideo}
+						onClose={() => setIsWatchingTrailer(false)}
+					/>
+				)}
 				<header className={classes.movieDetails__header}>
 					<div>
 						<h1>{movieDetails.title}</h1>
@@ -147,7 +151,7 @@ export default function MovieDetailsScreen({}) {
 					</PrimaryText>
 					<div className={classes.detailsBox}>
 						<h3 className={classes.movieDetails__title}>Genres</h3>
-						<ul>
+						<ul className={classes.genres}>
 							{movieDetails.genres.map(({ name, id }) => (
 								<PrimaryLink key={id} to={`/genres/${name.toLowerCase()}`}>
 									<FaFilm />
@@ -197,6 +201,7 @@ export default function MovieDetailsScreen({}) {
 						<h3 className={classes.movieDetails__title}>Movie Status</h3>
 						<p>{movieDetails.status}</p>
 					</div>
+					<div ref={elRef}></div>
 					<div className={classes.detailsBox}>
 						<h3 className={classes.movieDetails__title}>Release Date</h3>
 						<p>{new Date(movieDetails.release_date).toDateString()}</p>
@@ -259,6 +264,7 @@ export default function MovieDetailsScreen({}) {
 						) : null}
 					</div>
 				</section>
+
 				{movies.length ? (
 					<MoviesList
 						category="Recommended"
@@ -288,7 +294,9 @@ export default function MovieDetailsScreen({}) {
 			<Helmet>
 				<title>{`${movieDetails.title} - Movies Library`}</title>
 			</Helmet>
-			<section className={classes.movieDetails}>{movieDetailsContent}</section>
+			<section ref={topRef} className={classes.movieDetails}>
+				{movieDetailsContent}
+			</section>
 		</>
 	);
 }
