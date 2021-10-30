@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useHistory, Redirect, Link } from 'react-router-dom';
 import { FaArrowLeft, FaFilm, FaLink, FaHome } from 'react-icons/fa';
 import { Helmet } from 'react-helmet';
-// import { Element, scroller, animateScroll as scroll } from 'react-scroll';
+import { Element, scroller, animateScroll as scroll } from 'react-scroll';
 
 import Center from '../../components/customs/Center';
 import PrimaryText from '../../components/customs/PrimaryText';
@@ -273,12 +273,10 @@ export default function MovieDetailsScreen({}) {
 				) : (
 					<Center>
 						<NoData text={'Sorry, there are no recommended movies.'} />
-						<div>
-							<PrimaryButton path="/discover/popular">
-								<FaHome />
-								<span>Home</span>
-							</PrimaryButton>
-						</div>
+						<PrimaryButton path="/discover/popular">
+							<FaHome />
+							<span>Home</span>
+						</PrimaryButton>
 					</Center>
 				)}
 			</>
