@@ -92,7 +92,9 @@ export default function MoviesScreen({}) {
 		<>
 			<Helmet>
 				<title>{`${
-					genre?.toUpperCase() || category?.replace('_', ' ')?.toUpperCase()
+					query?.toUpperCase() ||
+					genre?.toUpperCase() ||
+					category?.replace('_', ' ')?.toUpperCase()
 				} movies - Movies Library`}</title>
 			</Helmet>
 			<section className={classes.movies}>{content}</section>
