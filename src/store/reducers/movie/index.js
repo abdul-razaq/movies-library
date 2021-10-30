@@ -28,6 +28,11 @@ export default function movieReducer(state = initialState, action) {
 				...state,
 				movieDetails: action.payload.movie,
 			};
+		case actionTypes.CLEAR_MOVIE_DETAILS:
+			return {
+				...state,
+				movieDetails: {},
+			};
 		default:
 			return state;
 	}

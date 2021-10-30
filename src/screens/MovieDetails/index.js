@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useHistory, Redirect, Link } from 'react-router-dom';
 import { FaArrowLeft, FaFilm, FaLink, FaHome } from 'react-icons/fa';
 import { Helmet } from 'react-helmet';
+// import { Element, scroller, animateScroll as scroll } from 'react-scroll';
 
 import Center from '../../components/customs/Center';
 import PrimaryText from '../../components/customs/PrimaryText';
@@ -21,6 +22,7 @@ import Movie from '../../models/Movie';
 import MoviesList from '../../components/MoviesList';
 
 import * as movieActions from '../../store/actions/movie';
+import * as moviesActions from '../../store/actions/movies';
 import * as shelfActions from '../../store/actions/shelf';
 
 import classes from './movie_details.module';
@@ -42,13 +44,40 @@ export default function MovieDetailsScreen({}) {
 	const [isWatchingTrailer, setIsWatchingTrailer] = React.useState(false);
 
 	React.useEffect(() => {
+		scroll.scrollToTop({
+			smooth: true,
+			delay: 500,
+		});
 		dispatch(movieActions.getMovie(movieID));
+
+		return () => {
+			dispatch({ type: movieActions.actionTypes.CLEAR_MOVIE_DETAILS });
+			dispatch({ type: moviesActions.actionTypes.CLEAR_RECOMMENDED_MOVIES });
+		};
 	}, [movieID]);
 
 	function handleToggleMovieInShelf(event, shelfType) {
 		dispatch(
 			shelfActions.toggleMovieInShelf(new Movie(movieDetails), shelfType),
 		);
+	}
+
+	function handleGoBack() {
+		scrollToElement();
+		dispatch(movieActions.getRecommendedMovies(movieDetails.id, initialPage));
+	}
+
+	function handleGoToNextPage() {
+		scrollToElement();
+		dispatch(movieActions.getRecommendedMovies(movieDetails.id, nextPage));
+	}
+
+	function scrollToElement() {
+		scroller.scrollTo('scrollToElement', {
+			duration: 1500,
+			smooth: 'easeInOutQuart',
+			offset: -50,
+		});
 	}
 
 	let movieDetailsContent;
@@ -230,7 +259,6 @@ export default function MovieDetailsScreen({}) {
 						) : null}
 					</div>
 				</section>
-
 				{movies.length ? (
 					<MoviesList
 						category="Recommended"
@@ -238,25 +266,19 @@ export default function MovieDetailsScreen({}) {
 						page={currentPage}
 						nextPage={nextPage}
 						totalPages={totalPages}
-						onGoBack={() =>
-							dispatch(
-								movieActions.getRecommendedMovies(movieDetails.id, initialPage),
-							)
-						}
-						onGoToNextPage={() =>
-							dispatch(
-								movieActions.getRecommendedMovies(movieDetails.id, nextPage),
-							)
-						}
+						onGoBack={handleGoBack}
+						onGoToNextPage={handleGoToNextPage}
 						showBackButton={currentPage > initialPage}
 					/>
 				) : (
 					<Center>
 						<NoData text={'Sorry, there are no recommended movies.'} />
-						<PrimaryButton path="/discover/popular">
-							<FaHome />
-							<span>Home</span>
-						</PrimaryButton>
+						<div>
+							<PrimaryButton path="/discover/popular">
+								<FaHome />
+								<span>Home</span>
+							</PrimaryButton>
+						</div>
 					</Center>
 				)}
 			</>

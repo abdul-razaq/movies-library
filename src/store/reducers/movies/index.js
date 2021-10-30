@@ -60,6 +60,16 @@ export default function moviesReducer(state = initialState, action) {
 				...state,
 				genresError: action.payload.error,
 			};
+		case actionTypes.CLEAR_RECOMMENDED_MOVIES:
+			return {
+				...state,
+				error: '',
+				movies: [],
+				currentPage: 1,
+				initialPage: 1,
+				nextPage: 0,
+				totalPages: 0,
+			};
 		default:
 			return state;
 	}
