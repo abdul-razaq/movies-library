@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams, useLocation, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { BounceLoader } from 'react-spinners';
+import { Helmet } from 'react-helmet';
 
 import classes from './movies.module';
 
@@ -87,5 +88,14 @@ export default function MoviesScreen({}) {
 			</Center>
 		);
 
-	return <section className={classes.movies}>{content}</section>;
+	return (
+		<>
+			<Helmet>
+				<title>{`${
+					genre?.toUpperCase() || category?.replace('_', ' ')?.toUpperCase()
+				} movies - Movies Library`}</title>
+			</Helmet>
+			<section className={classes.movies}>{content}</section>
+		</>
+	);
 }

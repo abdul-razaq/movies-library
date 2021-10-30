@@ -38,7 +38,7 @@ export default function MovieDetailsScreen({}) {
 
 	const dispatch = useDispatch();
 
-	const [isWatchingTrailer, setIsWatchingTrailer] = React.useState(true);
+	const [isWatchingTrailer, setIsWatchingTrailer] = React.useState(false);
 
 	React.useEffect(() => {
 		dispatch(movieActions.getMovie(movieID));
