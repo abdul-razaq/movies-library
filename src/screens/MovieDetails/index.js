@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { useParams, useHistory, Redirect, Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
 import { BounceLoader } from 'react-spinners';
-import { FaArrowLeft, FaFilm, FaLink, FaHome } from 'react-icons/fa';
 import StarRatings from 'react-star-ratings';
 import ModalVideo from 'react-modal-video';
+import { useSelector, useDispatch } from 'react-redux';
+import { useParams, useHistory, Redirect, Link } from 'react-router-dom';
+import { FaArrowLeft, FaFilm, FaLink, FaHome } from 'react-icons/fa';
+import { Helmet } from 'react-helmet';
 
 import Center from '../../components/customs/Center';
 import PrimaryText from '../../components/customs/PrimaryText';
@@ -263,6 +264,11 @@ export default function MovieDetailsScreen({}) {
 	}
 
 	return (
-		<section className={classes.movieDetails}>{movieDetailsContent}</section>
+		<>
+			<Helmet>
+				<title>{`${movieDetails.title} - Movies Library`}</title>
+			</Helmet>
+			<section className={classes.movieDetails}>{movieDetailsContent}</section>
+		</>
 	);
 }
