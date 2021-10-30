@@ -8,10 +8,24 @@ import classes from './movies_list.modules';
 
 import Poster from '../UI/Poster';
 import SecondaryButton from '../UI/SecondaryButton';
+import DropDown from '../UI/DropDown';
 
 import * as shelfActions from '../../store/actions/shelf';
 
 import Movie from '../../models/Movie';
+
+const filterOptions = [
+	{ value: 'popularity.desc', label: 'Popularity' },
+	{ value: 'original_title.asc', label: 'Title' },
+	{
+		value: 'release_date.desc',
+		label: 'Release Date',
+	},
+	{
+		value: 'vote_average.desc',
+		label: 'Votes Average',
+	},
+];
 
 export default function MoviesList({
 	category,
@@ -22,6 +36,7 @@ export default function MoviesList({
 	onGoToNextPage,
 	onGoBack,
 	showBackButton,
+	onChangeFilter,
 }) {
 	const { favorites, watching } = useSelector(state => state.shelf);
 
@@ -36,6 +51,11 @@ export default function MoviesList({
 
 	function handlePosterClick(movieId) {
 		history.push(`/movie/${movieId}`);
+	}
+
+	function handleFilterSelect(selectedFilter) {
+		console.log(selectedFilter);
+		onChangeFilter(selectedFilter);
 	}
 
 	return (
@@ -53,6 +73,7 @@ export default function MoviesList({
 					<p>Total Movies: {movies.length}</p>
 				)}
 			</header>
+			<DropDown options={filterOptions} onSelect={handleFilterSelect} />
 			<section className={classes.moviesList__content}>
 				{movies.map(movie => (
 					<Poster

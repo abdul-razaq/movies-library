@@ -202,10 +202,12 @@ export default function MovieDetailsScreen({}) {
 						<p>{movieDetails.status}</p>
 					</div>
 					<div ref={elRef}></div>
-					<div className={classes.detailsBox}>
-						<h3 className={classes.movieDetails__title}>Release Date</h3>
-						<p>{new Date(movieDetails.release_date).toDateString()}</p>
-					</div>
+					{movieDetails.release_date ? (
+						<div className={classes.detailsBox}>
+							<h3 className={classes.movieDetails__title}>Release Date</h3>
+							<p>{new Date(movieDetails.release_date).toDateString()}</p>
+						</div>
+					) : null}
 					<div className={classes.detailsBox}>
 						<h3 className={classes.movieDetails__title}>Links</h3>
 						<ul>

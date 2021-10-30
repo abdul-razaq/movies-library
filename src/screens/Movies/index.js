@@ -23,6 +23,8 @@ export default function MoviesScreen({}) {
 	}
 	const { pathname, search } = useLocation();
 
+	const [currentFilter, setCurrentFilter] = React.useState('popularity.desc');
+
 	const history = useHistory();
 
 	const {
@@ -45,9 +47,22 @@ export default function MoviesScreen({}) {
 
 	const dispatch = useDispatch();
 
+	function handleFilterChange(selectedFilter) {
+		setCurrentFilter(selectedFilter);
+	}
+
 	React.useEffect(() => {
-		dispatch(movieActions.getMovies(category, page, genre, genreId, query));
-	}, [category, page, genre, genreId, query]);
+		dispatch(
+			movieActions.getMovies(
+				category,
+				page,
+				genre,
+				genreId,
+				query,
+				currentFilter,
+			),
+		);
+	}, [category, page, genre, genreId, query, currentFilter]);
 
 	let content = (
 		<MoviesList
@@ -71,6 +86,7 @@ export default function MoviesScreen({}) {
 			}
 			onGoBack={history.goBack}
 			showBackButton={true}
+			onChangeFilter={handleFilterChange}
 		/>
 	);
 

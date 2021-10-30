@@ -1,0 +1,27 @@
+.dropdown {
+  max-width: 25rem;
+  border-radius: 5px;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: var(--box-shadow-dark);
+  color: currentColor;
+
+  .select {
+    min-width: 100%;
+    margin-bottom: 4px;
+    background-color: rgb(46, 42, 41);
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .options {
+    min-width: 100%;
+    padding: 10px;
+
+    & :not(:last-child) {
+      margin-bottom: 15px;
+    }
+  }
+}

@@ -40,13 +40,20 @@ export function getGenres() {
 	};
 }
 
-export function getMovies(category, page, genre, genreId, query) {
+export function getMovies(category, page, genre, genreId, query, filter) {
 	return async function (dispatch, getState) {
 		try {
 			dispatch({
 				type: actionTypes.SET_MOVIES_LOADING,
 			});
-			const movies = await fetchMovies(category, page, genre, genreId, query);
+			const movies = await fetchMovies(
+				category,
+				page,
+				genre,
+				genreId,
+				query,
+				filter,
+			);
 			dispatch({
 				type: actionTypes.GET_MOVIES,
 				payload: {
