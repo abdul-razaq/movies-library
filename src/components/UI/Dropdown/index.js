@@ -5,13 +5,13 @@ import ThemeContext from '../../../contexts/theme';
 
 import classes from './dropdown.module';
 
-export default function DropDown({ label, options, onSelect }) {
+export default function DropDown({ options, onSelect }) {
 	const [showDropdown, setShowDropdown] = React.useState(false);
 
 	const { theme } = React.useContext(ThemeContext);
 
-	function handleFilterSelect(filter) {
-		onSelect(filter);
+	function handleFilterSelect(selectedFilter) {
+		onSelect(selectedFilter);
 		setShowDropdown(false);
 	}
 
@@ -46,7 +46,7 @@ export default function DropDown({ label, options, onSelect }) {
 			>
 				{options.map(option => (
 					<li
-						onClick={handleFilterSelect.bind(null, option.value)}
+						onClick={handleFilterSelect.bind(null, option)}
 						key={option.label}
 					>
 						{option.label}

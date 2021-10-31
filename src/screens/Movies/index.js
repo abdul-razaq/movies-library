@@ -48,7 +48,7 @@ export default function MoviesScreen({}) {
 	const dispatch = useDispatch();
 
 	function handleFilterChange(selectedFilter) {
-		setCurrentFilter(selectedFilter);
+		setCurrentFilter(selectedFilter.value);
 	}
 
 	React.useEffect(() => {
@@ -87,6 +87,7 @@ export default function MoviesScreen({}) {
 			onGoBack={history.goBack}
 			showBackButton={true}
 			onChangeFilter={handleFilterChange}
+			genre={!!genre}
 		/>
 	);
 

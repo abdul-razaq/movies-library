@@ -37,6 +37,7 @@ export default function MoviesList({
 	onGoBack,
 	showBackButton,
 	onChangeFilter,
+	genre,
 }) {
 	const { favorites, watching } = useSelector(state => state.shelf);
 
@@ -54,7 +55,6 @@ export default function MoviesList({
 	}
 
 	function handleFilterSelect(selectedFilter) {
-		console.log(selectedFilter);
 		onChangeFilter(selectedFilter);
 	}
 
@@ -73,7 +73,9 @@ export default function MoviesList({
 					<p>Total Movies: {movies.length}</p>
 				)}
 			</header>
-			<DropDown options={filterOptions} onSelect={handleFilterSelect} />
+			{genre && (
+				<DropDown options={filterOptions} onSelect={handleFilterSelect} />
+			)}
 			<section className={classes.moviesList__content}>
 				{movies.map(movie => (
 					<Poster

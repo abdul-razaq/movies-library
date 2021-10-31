@@ -5,6 +5,7 @@
   overflow: hidden;
   box-shadow: var(--box-shadow-dark);
   color: currentColor;
+  // margin-left: auto;
 
   .select {
     min-width: 100%;
@@ -20,8 +21,14 @@
     min-width: 100%;
     padding: 10px;
 
-    & :not(:last-child) {
-      margin-bottom: 15px;
+    & li {
+      padding: .5rem;
+      transition: all .2s ease-out;
+    }
+
+    & li:hover {
+      background-color: var(--color-tertiary);
+      color: var(--color-white);
     }
   }
 }

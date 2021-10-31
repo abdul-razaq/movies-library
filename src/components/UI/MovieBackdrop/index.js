@@ -48,7 +48,7 @@ export default function MovieBackdrop({
 					}
 				/>
 			</header>
-			<figcaption className={classes.backdrop__caption}>{overview}</figcaption>
+			<figcaption className={classes.backdrop__caption}>{overview ? overview : "There is no overview at the moment..."}</figcaption>
 		</figure>
 	);
 }
@@ -59,5 +59,5 @@ MovieBackdrop.propTypes = {
 	onWatchTrailer: PropTypes.func.isRequired,
 	isFavoriteMovie: PropTypes.bool.isRequired,
 	isWatchLaterMovie: PropTypes.bool.isRequired,
-	overview: PropTypes.string.isRequired,
+	overview: PropTypes.string,
 };
