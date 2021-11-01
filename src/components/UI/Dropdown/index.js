@@ -5,7 +5,7 @@ import ThemeContext from '../../../contexts/theme';
 
 import classes from './dropdown.module';
 
-export default function DropDown({ options, onSelect }) {
+export default function DropDown({ label, options, onSelect }) {
 	const [showDropdown, setShowDropdown] = React.useState(false);
 
 	const { theme } = React.useContext(ThemeContext);
@@ -27,21 +27,17 @@ export default function DropDown({ options, onSelect }) {
 				className={classes.select}
 				onClick={() => setShowDropdown(v => !v)}
 			>
-				<span>Filter Movies</span>
+				<span>{label}</span>
 				<span>{showDropdown ? '\u25B2' : '\u25BC'}</span>
 			</div>
 			<ul
-				// style={{
-				// 	// display: `${showDropdown ? 'block' : 'none'}`,
-				// 	transition: 'all .4s ease-out',
-				// 	transform: `${showDropdown ? 'translateY(0)' : 'translateY(-100%)'}`,
-				// }}
 				className={classes.options}
 				style={{
 					backgroundColor:
 						theme === 'light'
 							? 'var(--color-light-secondary)'
 							: 'var(--color-dark-secondary)',
+          display: showDropdown ? 'block' : 'none',
 				}}
 			>
 				{options.map(option => (

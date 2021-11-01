@@ -24,6 +24,8 @@ export default function MoviesScreen({}) {
 	const { pathname, search } = useLocation();
 
 	const [currentFilter, setCurrentFilter] = React.useState('popularity.desc');
+	
+	const [filterLabel, setFilterLabel] = React.useState('Filter Movies');
 
 	const history = useHistory();
 
@@ -47,8 +49,9 @@ export default function MoviesScreen({}) {
 
 	const dispatch = useDispatch();
 
-	function handleFilterChange(selectedFilter) {
-		setCurrentFilter(selectedFilter.value);
+	function handleFilterChange({ label, value }) {
+		setFilterLabel(label);
+		setCurrentFilter(value);
 	}
 
 	React.useEffect(() => {
@@ -66,6 +69,7 @@ export default function MoviesScreen({}) {
 
 	let content = (
 		<MoviesList
+			filterLabel={filterLabel}
 			category={
 				query
 					? query
