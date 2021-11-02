@@ -6,22 +6,34 @@ import ThemeContext from '../../../contexts/theme';
 import classes from './dropdown.module';
 
 function renderDropdown(
-	theme,
 	label,
 	showDropdown,
 	options,
 	handleFilterSelect,
 	setShowDropdown,
 ) {
+	const { theme } = React.useContext(ThemeContext);
+
 	return (
 		<div className={classes.dropdown}>
-			{renderSelect(theme, label, showDropdown, setShowDropdown)}
-			{renderOptions(theme, options, showDropdown, handleFilterSelect)}
+			<Select
+				theme={theme}
+				label={label}
+				showDropdown={showDropdown}
+				setShowDropdown={setShowDropdown}
+			/>
+
+			<Options
+				theme={theme}
+				options={options}
+				showDropdown={showDropdown}
+				handleFilterSelect={handleFilterSelect}
+			/>
 		</div>
 	);
 }
 
-function renderSelect(theme, label, showDropdown, setShowDropdown) {
+React.memo(function Select({ theme, label, showDropdown, setShowDropdown }) {
 	return (
 		<div
 			style={styles.select(theme)}
@@ -32,9 +44,14 @@ function renderSelect(theme, label, showDropdown, setShowDropdown) {
 			<span>{showDropdown ? '\u25B2' : '\u25BC'}</span>
 		</div>
 	);
-}
+});
 
-function renderOptions(theme, options, showDropdown, handleFilterSelect) {
+React.memo(function Options({
+	theme,
+	options,
+	showDropdown,
+	handleFilterSelect,
+}) {
 	return (
 		<ul className={classes.options} style={styles.options(theme, showDropdown)}>
 			{options.map(option => (
@@ -44,12 +61,10 @@ function renderOptions(theme, options, showDropdown, handleFilterSelect) {
 			))}
 		</ul>
 	);
-}
+});
 
 export default function DropDown({ label, options, onSelect }) {
 	const [showDropdown, setShowDropdown] = React.useState(false);
-
-	const { theme } = React.useContext(ThemeContext);
 
 	function handleFilterSelect(selectedFilter) {
 		onSelect(selectedFilter);
@@ -57,7 +72,6 @@ export default function DropDown({ label, options, onSelect }) {
 	}
 
 	return renderDropdown(
-		theme,
 		label,
 		showDropdown,
 		options,
