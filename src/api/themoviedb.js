@@ -73,3 +73,19 @@ export async function fetchRecommendedMovies(movieId, page) {
 		throw error;
 	}
 }
+
+/**
+ * fetch a cast details
+ * @param {string} castId cast to fetch
+ * @returns cast details
+ */
+export async function fetchCastDetails(castId) {
+	try {
+		const path = `${basePath}/person/${castId}?api_key=${API_KEY}&append_to_response=movie_credits`;
+		const { data, status } = await axios.get(path);
+		if (status !== 200) throw new Error('unable to fetch cast details');
+		return data;
+	} catch (error) {
+		throw error;
+	}
+}
