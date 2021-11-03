@@ -1,5 +1,4 @@
 import React from 'react';
-// import ReactDOM from 'react-dom';
 import { BounceLoader } from 'react-spinners';
 import StarRatings from 'react-star-ratings';
 import ModalVideo from 'react-modal-video';
