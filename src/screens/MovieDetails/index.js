@@ -50,7 +50,8 @@ export default function MovieDetailsScreen({}) {
 
 		return () => {
 			dispatch({ type: movieActions.actionTypes.CLEAR_MOVIE_DETAILS });
-			dispatch({ type: moviesActions.actionTypes.CLEAR_RECOMMENDED_MOVIES });
+			dispatch({ type: moviesActions.actionTypes.CLEAR_MOVIES });
+			dispatch({ type: movieActions.actionTypes.UNSET_MOVIE_ERROR });
 		};
 	}, [movieID]);
 

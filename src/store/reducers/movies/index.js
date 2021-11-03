@@ -60,7 +60,7 @@ export default function moviesReducer(state = initialState, action) {
 				...state,
 				genresError: action.payload.error,
 			};
-		case actionTypes.CLEAR_RECOMMENDED_MOVIES:
+		case actionTypes.CLEAR_MOVIES:
 			return {
 				...state,
 				error: '',
