@@ -2,4 +2,65 @@
 
 .cast {
 	@include general-screen-style;
+
+	.castDetails {
+		min-height: 70%;
+		max-width: 90%;
+		margin: 0 auto;
+		display: flex;
+		gap: 5rem;
+
+		@include respond(phone) {
+			flex-direction: column-reverse;
+		}
+	}
+
+	.castPoster {
+		min-height: 100%;
+		flex-basis: 35%;
+		overflow: hidden;
+		border-radius: 1.3rem;
+		box-shadow: var(--box-shadow-light);
+
+		& img {
+			height: 100%;
+			width: 100%;
+			display: block;
+		}
+	}
+
+	.heading {
+		margin-bottom: 2rem;
+		& h1 {
+			font-size: 3rem;
+			font-weight: var(--font-weight-light);
+      margin-bottom: .6rem;
+		}
+	}
+
+	.details {
+		flex: 1;
+
+		& article {
+			& h3 {
+        font-size: 2rem;
+        margin-bottom: .5rem;
+        text-transform: uppercase;
+        font-weight: var(--font-weight-semi-bold);
+        letter-spacing: 1px;
+			}
+
+			& p {
+        font-size: 2rem;
+        max-height: 25rem;
+        overflow-y: scroll;
+        line-height: 2;
+        margin-bottom: 1rem;
+        @include scrollbar-ui-secondary;
+			}
+		}
+
+		& footer {
+		}
+	}
 }
