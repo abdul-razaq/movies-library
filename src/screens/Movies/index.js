@@ -24,7 +24,7 @@ export default function MoviesScreen({}) {
 	const { pathname, search } = useLocation();
 
 	const [currentFilter, setCurrentFilter] = React.useState('popularity.desc');
-	
+
 	const [filterLabel, setFilterLabel] = React.useState('Filter Movies');
 
 	const history = useHistory();
