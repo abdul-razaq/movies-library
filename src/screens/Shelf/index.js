@@ -44,7 +44,7 @@ export default function ShelfScreen({}) {
 					movies={shelf[type]}
 				/>
 			)}
-			<div onClick={handleScrollToTop}>
+			<div onClick={handleScrollToTop} className={classes.scrollToTop}>
 				<SecondaryButton>
 					<FaArrowUp />
 					<span>Back to top</span>
