@@ -13,6 +13,7 @@ import DropDown from '../UI/DropDown';
 import * as shelfActions from '../../store/actions/shelf';
 
 import Movie from '../../models/Movie';
+import Heading from '../customs/Heading';
 
 const filterOptions = [
 	{ value: 'popularity.desc', label: 'Popularity' },
@@ -62,10 +63,11 @@ export default function MoviesList({
 	return (
 		<article className={classes.moviesList}>
 			<header>
-				<div className={classes.moviesList__title}>
-					<h1>{category}</h1>
-					<h3>Movies</h3>
-				</div>
+				<Heading
+					title={category}
+					subtitle={'Movies'}
+					className={classes.moviesList__title}
+				/>
 				{page && totalPages ? (
 					<p>
 						Page: {page} of {totalPages}
