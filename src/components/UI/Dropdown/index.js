@@ -33,7 +33,7 @@ function renderDropdown(
 	);
 }
 
-React.memo(function Select({ theme, label, showDropdown, setShowDropdown }) {
+const Select = React.memo(({ theme, label, showDropdown, setShowDropdown }) => {
 	return (
 		<div
 			style={styles.select(theme)}
@@ -46,22 +46,25 @@ React.memo(function Select({ theme, label, showDropdown, setShowDropdown }) {
 	);
 });
 
-React.memo(function Options({
-	theme,
-	options,
-	showDropdown,
-	handleFilterSelect,
-}) {
-	return (
-		<ul className={classes.options} style={styles.options(theme, showDropdown)}>
-			{options.map(option => (
-				<li onClick={handleFilterSelect.bind(null, option)} key={option.label}>
-					{option.label}
-				</li>
-			))}
-		</ul>
-	);
-});
+const Options = React.memo(
+	({ theme, options, showDropdown, handleFilterSelect }) => {
+		return (
+			<ul
+				className={classes.options}
+				style={styles.options(theme, showDropdown)}
+			>
+				{options.map(option => (
+					<li
+						onClick={handleFilterSelect.bind(null, option)}
+						key={option.label}
+					>
+						{option.label}
+					</li>
+				))}
+			</ul>
+		);
+	},
+);
 
 export default function DropDown({ label, options, onSelect }) {
 	const [showDropdown, setShowDropdown] = React.useState(false);
