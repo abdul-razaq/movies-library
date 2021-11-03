@@ -2,4 +2,10 @@
 
 .shelf {
 	@include general-screen-style;
+
+	& div:last-child {
+		margin-top: 5rem;
+		display: flex;
+		justify-content: flex-end;
+	}
 }

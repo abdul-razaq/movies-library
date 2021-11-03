@@ -1,10 +1,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { FaArrowUp } from 'react-icons/fa';
 
 import MoviesList from '../../components/MoviesList';
 import Center from '../../components/customs/Center';
 import NoData from '../../components/UI/NoData';
+import PrimaryButton from '../../components/UI/PrimaryButton';
 
 import classes from './shelf.module';
 
@@ -14,12 +16,24 @@ export default function ShelfScreen({}) {
 	const { favorites, watching } = useSelector(state => state.shelf);
 	const shelf = { favorites, watching };
 
+	const topRef = React.useRef(null);
+
+	function handleScrollToTop() {
+		topRef.current.scrollTo({
+			top: 0,
+			left: 0,
+			behavior: 'smooth',
+		});
+	}
+
 	return (
-		<section className={classes.shelf}>
+		<section ref={topRef} className={classes.shelf}>
 			{!shelf[type].length ? (
 				<Center>
 					<NoData
-						text={`You have not added any movie to your ${type === 'favorites' ? type : 'Watch later'} shelf. start by adding some.`}
+						text={`You have not added any movie to your ${
+							type === 'favorites' ? type : 'Watch later'
+						} shelf. start by adding some.`}
 					/>
 				</Center>
 			) : (
@@ -30,6 +44,12 @@ export default function ShelfScreen({}) {
 					movies={shelf[type]}
 				/>
 			)}
+			<div onClick={handleScrollToTop}>
+				<PrimaryButton>
+					<FaArrowUp />
+					<span>Back to top</span>
+				</PrimaryButton>
+			</div>
 		</section>
 	);
 }
