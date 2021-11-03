@@ -18,5 +18,5 @@ export default function SecondaryButton({ children, className, disable, onClick 
 SecondaryButton.propTypes = {
   className: PropTypes.string,
   disable: PropTypes.bool,
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func
 };

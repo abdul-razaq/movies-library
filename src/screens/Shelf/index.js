@@ -6,7 +6,7 @@ import { FaArrowUp } from 'react-icons/fa';
 import MoviesList from '../../components/MoviesList';
 import Center from '../../components/customs/Center';
 import NoData from '../../components/UI/NoData';
-import PrimaryButton from '../../components/UI/PrimaryButton';
+import SecondaryButton from '../../components/UI/SecondaryButton';
 
 import classes from './shelf.module';
 
@@ -45,10 +45,10 @@ export default function ShelfScreen({}) {
 				/>
 			)}
 			<div onClick={handleScrollToTop}>
-				<PrimaryButton>
+				<SecondaryButton>
 					<FaArrowUp />
 					<span>Back to top</span>
-				</PrimaryButton>
+				</SecondaryButton>
 			</div>
 		</section>
 	);
