@@ -12,6 +12,7 @@ import Heading from '../../components/customs/Heading';
 import SecondaryButton from '../../components/UI/SecondaryButton';
 import Error from '../../components/customs/Error';
 import Loading from '../../components/customs/Loading';
+import MoviesList from '../../components/MoviesList';
 
 import noPosterImage from '../../../public/assets/images/no-poster.svg';
 
@@ -124,6 +125,24 @@ export default function CastScreen({}) {
 						</footer>
 					</figcaption>
 				</article>
+				{movies.length ? (
+					<MoviesList
+						category="Featured In"
+						movies={movies}
+						// page={currentPage}
+						// nextPage={nextPage}
+						// totalPages={totalPages}
+						// onGoBack={handleGoBack}
+						// onGoToNextPage={handleGoToNextPage}
+						// showBackButton={currentPage > initialPage}
+					/>
+				) : (
+					<Center>
+						<NoData
+							text={`Sorry, ${name} has not featured in any other movie.`}
+						/>
+					</Center>
+				)}
 			</>
 		);
 	}

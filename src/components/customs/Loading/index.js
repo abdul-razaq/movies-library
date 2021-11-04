@@ -17,7 +17,7 @@ export default function Loading({
 }
 
 Loading.propTypes = {
-	isLoading: PropTypes.boolean,
+	isLoading: PropTypes.bool,
 	color: PropTypes.string,
 	speed: PropTypes.number,
 };

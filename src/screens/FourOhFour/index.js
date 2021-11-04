@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaHome } from 'react-icons/fa';
+import { useLocation } from 'react-router-dom';
 
 import classes from './four_oh_four.module';
 
@@ -9,13 +10,21 @@ import PrimaryButton from '../../components/UI/PrimaryButton';
 import PrimaryText from '../../components/customs/PrimaryText';
 
 export default function FourOhFour({}) {
+	const {
+		state: { text },
+	} = useLocation();
+
 	return (
 		<section className={classes.fourOhfour}>
 			<div>
 				<figure className={classes.image}>
 					<img src={FourOhFourImage} alt="four-oh-four image"></img>
 				</figure>
-				<PrimaryText>Oops! Sorry, you took the wrong path.</PrimaryText>
+				<PrimaryText>
+					{text
+						? `Sorry, cannot find ${text}`
+						: 'Oops! Sorry, you took the wrong path.'}
+				</PrimaryText>
 				<PrimaryButton path="/discover/popular">
 					<FaHome />
 					<span>Home</span>

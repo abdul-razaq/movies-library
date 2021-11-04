@@ -94,6 +94,15 @@ export default function MoviesScreen({}) {
 		/>
 	);
 
+	if (query && !movies.length) {
+		history.push({
+			pathname: '/not-found',
+			state: {
+				text: query,
+			},
+		});
+	}
+
 	if (loading) content = <Loading />;
 
 	if (error) content = <Error text={error} />;
