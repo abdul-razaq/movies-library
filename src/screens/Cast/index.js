@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { FaLink, FaArrowLeft } from 'react-icons/fa';
+import { Helmet } from 'react-helmet';
 
 import * as castActions from '../../store/actions/cast';
 import * as moviesActions from '../../store/actions/movies';
@@ -39,14 +40,17 @@ export default function CastScreen({}) {
 	if (loading) {
 		content = <p>Loading...</p>;
 	} else if (error) {
-		content = <p>Error...</p>;
+		content = (
+			<Center>
+				<NoData text={error} />
+			</Center>
+		);
 	} else {
 		const {
 			biography,
 			birthday,
 			gender,
 			homepage,
-			id,
 			imdb_id,
 			name,
 			place_of_birth,
@@ -54,6 +58,9 @@ export default function CastScreen({}) {
 		} = castDetails;
 		content = (
 			<>
+				<Helmet>
+					<title>{`${name} - Movies Library`}</title>
+				</Helmet>
 				<article className={classes.castDetails}>
 					<figure className={classes.castPoster}>
 						<img
