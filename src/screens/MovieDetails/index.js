@@ -219,7 +219,7 @@ export default function MovieDetailsScreen({}) {
 										target={'_blank'}
 										rel="noopener noreferrer"
 									>
-										<FaLink size={10} />
+										<FaLink size={16} />
 										<span>Website</span>
 									</a>
 									<a
@@ -228,7 +228,7 @@ export default function MovieDetailsScreen({}) {
 										target={'_blank'}
 										rel="noopener noreferrer"
 									>
-										<FaLink size={10} />
+										<FaLink size={16} />
 										<span>IMDB</span>
 									</a>
 								</li>

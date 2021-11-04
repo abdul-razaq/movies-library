@@ -47,6 +47,10 @@
 	overflow-y: scroll;
 	overflow-x: hidden;
 	@include scrollbar-ui-secondary;
+
+	@include respond(phone) {
+		padding: var(--spacing-around-screen-mobile);
+	}
 }
 
 @mixin primary_link {

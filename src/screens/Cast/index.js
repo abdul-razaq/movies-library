@@ -11,6 +11,8 @@ import Heading from '../../components/customs/Heading';
 import PrimaryLink from '../../components/UI/PrimaryLink';
 import SecondaryButton from '../../components/UI/SecondaryButton';
 
+import noPosterImage from '../../../public/assets/images/no-poster.svg';
+
 import classes from './cast.module';
 
 export default function CastScreen({}) {
@@ -55,7 +57,11 @@ export default function CastScreen({}) {
 				<article className={classes.castDetails}>
 					<figure className={classes.castPoster}>
 						<img
-							src={`https://image.tmdb.org/t/p/w500/${profile_path}`}
+							src={
+								profile_path
+									? `https://image.tmdb.org/t/p/w500/${profile_path}`
+									: noPosterImage
+							}
 							alt={`poster for ${name}`}
 						/>
 					</figure>
@@ -87,14 +93,26 @@ export default function CastScreen({}) {
 						</article>
 
 						<footer>
-							<PrimaryLink to={homepage}>
-								<FaLink />
-								<span>Website</span>
-							</PrimaryLink>
-							<PrimaryLink to={`https://www.imdb.com/name/${imdb_id}`}>
-								<FaLink />
+							{homepage && (
+								<a
+									className={classes.primary_link}
+									href={homepage}
+									target={'_blank'}
+									rel="noopener noreferrer"
+								>
+									<FaLink size={16} />
+									<span>Website</span>
+								</a>
+							)}
+							<a
+								className={classes.primary_link}
+								href={`https://www.imdb.com/name/${imdb_id}`}
+								target={'_blank'}
+								rel="noopener noreferrer"
+							>
+								<FaLink size={16} />
 								<span>IMDB</span>
-							</PrimaryLink>
+							</a>
 							<SecondaryButton onClick={history.goBack}>
 								<FaArrowLeft />
 								<span>Back</span>
