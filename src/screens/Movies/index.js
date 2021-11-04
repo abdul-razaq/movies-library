@@ -7,9 +7,9 @@ import classes from './movies.module';
 
 import * as movieActions from '../../store/actions/movies';
 
-import NoData from '../../components/UI/NoData';
 import MoviesList from '../../components/MoviesList';
 import Loading from '../../components/customs/Loading';
+import Error from '../../components/customs/Error';
 
 const discoverCategories = ['popular', 'top_rated', 'upcoming'];
 
@@ -94,17 +94,9 @@ export default function MoviesScreen({}) {
 		/>
 	);
 
-	if (loading)
-		content = (
-			<Loading />
-		);
+	if (loading) content = <Loading />;
 
-	if (error)
-		content = (
-			<Center>
-				<NoData text={error} />
-			</Center>
-		);
+	if (error) content = <Error text={error} />;
 
 	return (
 		<>

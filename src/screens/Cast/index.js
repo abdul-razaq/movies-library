@@ -9,8 +9,9 @@ import * as castActions from '../../store/actions/cast';
 import * as moviesActions from '../../store/actions/movies';
 
 import Heading from '../../components/customs/Heading';
-import PrimaryLink from '../../components/UI/PrimaryLink';
 import SecondaryButton from '../../components/UI/SecondaryButton';
+import Error from '../../components/customs/Error';
+import Loading from '../../components/customs/Loading';
 
 import noPosterImage from '../../../public/assets/images/no-poster.svg';
 
@@ -38,13 +39,9 @@ export default function CastScreen({}) {
 	let content;
 
 	if (loading) {
-		content = <p>Loading...</p>;
+		content = <Loading />;
 	} else if (error) {
-		content = (
-			<Center>
-				<NoData text={error} />
-			</Center>
-		);
+		content = <Error text={error} />;
 	} else {
 		const {
 			biography,

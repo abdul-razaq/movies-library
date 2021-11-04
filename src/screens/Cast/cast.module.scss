@@ -10,7 +10,12 @@
 		display: flex;
 		gap: 5rem;
 
-		@include respond(phone) {
+		@include respond(tab-land) {
+			max-width: 100%;
+		}
+
+		@include respond(tab-port) {
+			max-width: 90%;
 			flex-direction: column-reverse;
 		}
 	}
@@ -21,6 +26,10 @@
 		overflow: hidden;
 		border-radius: 1.3rem;
 		box-shadow: var(--box-shadow-light);
+
+		@include respond(tab-land) {
+			flex-basis: 50%;
+		}
 
 		& img {
 			height: 100%;
@@ -34,7 +43,7 @@
 		& h1 {
 			font-size: 3rem;
 			font-weight: var(--font-weight-light);
-      margin-bottom: .6rem;
+			margin-bottom: 0.6rem;
 		}
 	}
 
@@ -43,39 +52,43 @@
 
 		& article {
 			& h3 {
-        font-size: 2rem;
-        margin-bottom: .5rem;
-        text-transform: uppercase;
-        font-weight: var(--font-weight-semi-bold);
-        letter-spacing: 1px;
+				font-size: 2rem;
+				margin-bottom: 0.5rem;
+				text-transform: uppercase;
+				font-weight: var(--font-weight-semi-bold);
+				letter-spacing: 1px;
 			}
 
 			& p {
-        font-size: 2rem;
-        max-height: 25rem;
-        overflow-y: scroll;
-        line-height: 2;
-        margin-bottom: 1rem;
-        @include scrollbar-ui-secondary;
+				font-size: 2rem;
+				max-height: 25rem;
+				overflow-y: scroll;
+				line-height: 2;
+				margin-bottom: 1rem;
+				@include scrollbar-ui-secondary;
+
+				@include respond(tab-land) {
+					max-height: 40rem;
+				}
 			}
 		}
 
 		& footer {
-      display: flex;
-      align-items: center;
-      gap: 3rem;
+			display: flex;
+			align-items: center;
+			gap: 3rem;
 
-      & a {
-        font-size: 2rem;
-      }
+			& a {
+				font-size: 2rem;
+			}
 
-      & a:last-of-type {
-        margin-right: auto;
-      }
+			& a:last-of-type {
+				margin-right: auto;
+			}
 		}
 	}
 }
 
 .primary_link {
-  @include primary_link;
+	@include primary_link;
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-import { BounceLoader } from 'react-spinners';
 import StarRatings from 'react-star-ratings';
 import ModalVideo from 'react-modal-video';
 import { useSelector, useDispatch } from 'react-redux';
@@ -18,6 +17,8 @@ import Avatar from '../../components/UI/Avatar';
 import Cast from '../../components/UI/Cast';
 import Movie from '../../models/Movie';
 import MoviesList from '../../components/MoviesList';
+import Loading from '../../components/customs/Loading';
+import Error from '../../components/customs/Error';
 
 import * as movieActions from '../../store/actions/movie';
 import * as moviesActions from '../../store/actions/movies';
@@ -89,27 +90,17 @@ export default function MovieDetailsScreen({}) {
 	let movieDetailsContent;
 
 	if (loading) {
-		movieDetailsContent = (
-			<Center>
-				<BounceLoader loading={loading} color="#F50057" speedMultiplier={1.8} />
-			</Center>
-		);
+		movieDetailsContent = <Loading />;
 	} else if (error) {
 		error.message.includes('Network Error')
 			? (movieDetailsContent = (
-					<Center>
-						<NoData
-							text={`${error.message}. check internet connection and try again.`}
-						/>
-					</Center>
+					<Error
+						text={`${error.message}. check internet connection and try again.`}
+					/>
 			  ))
 			: (movieDetailsContent = <Redirect to="/error" />);
 	} else if (!Object.keys(movieDetails).length) {
-		movieDetailsContent = (
-			<Center>
-				<NoData text={error} />
-			</Center>
-		);
+		movieDetailsContent = <Error text={error} />;
 	} else {
 		const trailerVideo = movieDetails.videos.results.find(
 			video => video.type === 'Trailer' && video.site === 'YouTube',
