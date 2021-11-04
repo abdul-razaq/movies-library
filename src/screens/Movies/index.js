@@ -1,7 +1,6 @@
 import React from 'react';
 import { useParams, useLocation, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { BounceLoader } from 'react-spinners';
 import { Helmet } from 'react-helmet';
 
 import classes from './movies.module';
@@ -9,8 +8,8 @@ import classes from './movies.module';
 import * as movieActions from '../../store/actions/movies';
 
 import NoData from '../../components/UI/NoData';
-import Center from '../../components/customs/Center';
 import MoviesList from '../../components/MoviesList';
+import Loading from '../../components/customs/Loading';
 
 const discoverCategories = ['popular', 'top_rated', 'upcoming'];
 
@@ -97,9 +96,7 @@ export default function MoviesScreen({}) {
 
 	if (loading)
 		content = (
-			<Center>
-				<BounceLoader loading={loading} color="#F50057" speedMultiplier={1.8} />
-			</Center>
+			<Loading />
 		);
 
 	if (error)
