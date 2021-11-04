@@ -272,10 +272,6 @@ export default function MovieDetailsScreen({}) {
 				) : (
 					<Center>
 						<NoData text={'Sorry, there are no recommended movies.'} />
-						<PrimaryButton path="/discover/popular">
-							<FaHome />
-							<span>Home</span>
-						</PrimaryButton>
 					</Center>
 				)}
 			</>
