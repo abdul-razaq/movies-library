@@ -10,9 +10,7 @@ import PrimaryButton from '../../components/UI/PrimaryButton';
 import PrimaryText from '../../components/customs/PrimaryText';
 
 export default function FourOhFour({}) {
-	const {
-		state: { text },
-	} = useLocation();
+	const text = useLocation()?.state?.text;
 
 	return (
 		<section className={classes.fourOhfour}>

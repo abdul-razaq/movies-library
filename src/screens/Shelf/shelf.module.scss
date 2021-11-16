@@ -2,10 +2,4 @@
 
 .shelf {
 	@include general-screen-style;
-
-	& .scrollToTop {
-		margin-top: 5rem;
-		display: flex;
-		justify-content: flex-end;
-	}
 }

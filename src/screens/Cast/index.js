@@ -12,7 +12,9 @@ import Heading from '../../components/customs/Heading';
 import SecondaryButton from '../../components/UI/SecondaryButton';
 import Error from '../../components/customs/Error';
 import Loading from '../../components/customs/Loading';
+import Center from '../../components/customs/Center';
 import MoviesList from '../../components/MoviesList';
+import NoData from '../../components/UI/NoData';
 
 import noPosterImage from '../../../public/assets/images/no-poster.svg';
 
@@ -28,12 +30,12 @@ export default function CastScreen({}) {
 	const { loading, error, castDetails } = useSelector(state => state.cast);
 	const { movies } = useSelector(state => state.movies);
 
-	React.useState(() => {
+	React.useEffect(() => {
 		dispatch(castActions.getCastDetails(castID));
 		return () => {
-			dispatch(castActions.actionTypes.CLEAR_CAST_DETAILS);
-			dispatch(castActions.actionTypes.UNSET_CAST_ERROR);
-			dispatch(moviesActions.actionTypes.CLEAR_MOVIES);
+			dispatch({ type: castActions.actionTypes.CLEAR_CAST_DETAILS });
+			dispatch({ type: castActions.actionTypes.UNSET_CAST_ERROR });
+			dispatch({ type: moviesActions.actionTypes.CLEAR_MOVIES });
 		};
 	}, [castID]);
 
@@ -129,12 +131,6 @@ export default function CastScreen({}) {
 					<MoviesList
 						category="Featured In"
 						movies={movies}
-						// page={currentPage}
-						// nextPage={nextPage}
-						// totalPages={totalPages}
-						// onGoBack={handleGoBack}
-						// onGoToNextPage={handleGoToNextPage}
-						// showBackButton={currentPage > initialPage}
 					/>
 				) : (
 					<Center>
