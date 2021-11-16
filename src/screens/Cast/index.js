@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { FaLink, FaArrowLeft } from 'react-icons/fa';
+import { FaLink, FaArrowLeft, FaArrowUp } from 'react-icons/fa';
 import { Helmet } from 'react-helmet';
 
 import * as castActions from '../../store/actions/cast';
@@ -23,6 +23,8 @@ import classes from './cast.module';
 export default function CastScreen({}) {
 	const { castID } = useParams();
 
+	const topRef = React.useRef(null);
+
 	const dispatch = useDispatch();
 
 	const history = useHistory();
@@ -38,6 +40,14 @@ export default function CastScreen({}) {
 			dispatch({ type: moviesActions.actionTypes.CLEAR_MOVIES });
 		};
 	}, [castID]);
+
+	function handleScrollToTop() {
+		topRef.current.scrollTo({
+			top: 0,
+			left: 0,
+			behavior: 'smooth',
+		});
+	}
 
 	let content;
 
@@ -128,10 +138,15 @@ export default function CastScreen({}) {
 					</figcaption>
 				</article>
 				{movies.length ? (
-					<MoviesList
-						category="Featured In"
-						movies={movies}
-					/>
+					<>
+						<MoviesList category="Featured In" movies={movies} />
+						<div className={classes.scrollToTop}>
+							<SecondaryButton onClick={handleScrollToTop}>
+								<FaArrowUp />
+								<span>Scroll to top</span>
+							</SecondaryButton>
+						</div>
+					</>
 				) : (
 					<Center>
 						<NoData
@@ -143,5 +158,5 @@ export default function CastScreen({}) {
 		);
 	}
 
-	return <section className={classes.cast}>{content}</section>;
+	return <section ref={topRef} className={classes.cast}>{content}</section>;
 }

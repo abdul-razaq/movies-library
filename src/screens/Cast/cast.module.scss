@@ -93,3 +93,9 @@
 .primary_link {
 	@include primary_link;
 }
+
+.scrollToTop {
+	margin-top: 5rem;
+	display: flex;
+	justify-content: flex-end;
+}
