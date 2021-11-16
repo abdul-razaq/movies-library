@@ -78,7 +78,7 @@ module.exports = {
 		new webpack.ProvidePlugin({
 			process: 'process/browser',
 		}),
-		new DotEnv(),
+		new DotEnv({ systemvars: true }),
 	],
 	mode: isDevelopment ? 'development' : 'production',
 	resolve: {
