@@ -8,7 +8,7 @@ import classes from './movies_list.modules';
 
 import Poster from '../UI/Poster';
 import SecondaryButton from '../UI/SecondaryButton';
-import DropDown from '../UI/DropDown';
+import DropDown from '../UI/Dropdown';
 
 import * as shelfActions from '../../store/actions/shelf';
 
