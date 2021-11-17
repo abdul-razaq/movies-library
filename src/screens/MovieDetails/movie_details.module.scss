@@ -116,9 +116,6 @@
          & a {
              display: inline-flex;
              align-items: center;
-
-             & a:not(:last-child) {
-               margin-right: 1.5rem;
-             }
+             margin-right: 1.5rem;
           }
 }
