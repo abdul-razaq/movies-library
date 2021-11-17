@@ -117,7 +117,7 @@ export default function CastScreen({}) {
 									target={'_blank'}
 									rel="noopener noreferrer"
 								>
-									<FaLink size={16} />
+									<FaLink size={10} />
 									<span>Website</span>
 								</a>
 							)}
@@ -127,7 +127,7 @@ export default function CastScreen({}) {
 								target={'_blank'}
 								rel="noopener noreferrer"
 							>
-								<FaLink size={16} />
+								<FaLink size={10} />
 								<span>IMDB</span>
 							</a>
 							<SecondaryButton onClick={history.goBack}>
