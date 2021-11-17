@@ -31,7 +31,7 @@ export async function fetchMovies(
 	filter,
 ) {
 	const path = query
-		? `https://api.themoviedb.org/3/search/movie/?api_key=${API_KEY}&query=${query}&page=${page}`
+		? `${basePath}/search/movie/?api_key=${API_KEY}&query=${query}&page=${page}`
 		: genre || genreId
 		? `${basePath}/discover/movie?api_key=${API_KEY}&with_genres=${genreId}&page=${page}&sort_by=${
 				filter ? filter : 'popularity.desc'
