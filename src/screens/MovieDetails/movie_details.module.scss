@@ -113,7 +113,8 @@
          }
 
          & a {
-             display: inline-block;
+             display: inline-flex;
+             align-items: center;
              margin-right: 2rem;
           }
 }
