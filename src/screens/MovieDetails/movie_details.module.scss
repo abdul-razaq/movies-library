@@ -110,5 +110,10 @@
 		flex-wrap: wrap;
 		justify-content: center;
                 gap: 2rem;
-	}
+         }
+
+         & a {
+             display: inline-block;
+             margin-right: 2rem;
+          }
 }
